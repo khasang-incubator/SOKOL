@@ -60,9 +60,15 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
                 "from Request f WHERE f.assignedTo.login = ?");
         query.setParameter(0, userName);
         List<Object[]> scoreQuery = query.list();
-        score.setCountNew((long) scoreQuery.get(0)[0]);
-        score.setCountInProgress((long) scoreQuery.get(0)[1]);
-        score.setCountClosed((long) scoreQuery.get(0)[2]);
+        if (scoreQuery.get(0)[0] != null) {
+            score.setCountNew((long) scoreQuery.get(0)[0]);
+        }
+        if (scoreQuery.get(0)[1] != null) {
+            score.setCountInProgress((long) scoreQuery.get(0)[1]);
+        }
+        if (scoreQuery.get(0)[2] != null) {
+            score.setCountClosed((long) scoreQuery.get(0)[2]);
+        }
         return score;
     }
 
