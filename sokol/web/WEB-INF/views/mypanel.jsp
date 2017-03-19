@@ -1,5 +1,5 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -26,7 +26,7 @@
 </script>
 <!--
 <a href="#" class="btn btn-primary" id="create_request" onclick="onCreateRequest()">Создать запрос</a>
- -->
+-->
 <!-- ================================= -->
 <div class="container">
     <!-- SCREEN  -->
@@ -34,7 +34,7 @@
     <div class="mypanel-wrapper">
         <div class="row">
             <div class="col col-md-6 mypanel-col">
-                <span class="col-header">ВХОДЯЩИЕ</span>
+                <span class="col-header" title="Запросы, назначенные мне в работу">ВХОДЯЩИЕ</span>
 
                 <div class="panel panel-sokol">
                     <div class="panel-heading">КОЛИЧЕСТВО ЗАПРОСОВ</div>
@@ -61,7 +61,7 @@
                         <a href="#" class="graph-btn active">ЗА НЕДЕЛЮ</a>
                         <a href="#" class="graph-btn">ЗА МЕСЯЦ</a>
                         <a href="#" class="graph-btn">ЗА ГОД</a>
-                        <img src="img/graph.png" width="100%" />
+                        <img src="img/graph.png" width="100%"/>
                     </div>
                 </div>
 
@@ -90,7 +90,7 @@
             </div>
 
             <div class="col col-md-6  mypanel-col right">
-                <span class="col-header">ИСХОДЯЩИЕ</span>
+                <span class="col-header" title="Запросы, созданные мной">ИСХОДЯЩИЕ</span>
 
                 <div class="panel panel-sokol">
                     <div class="panel-heading">КОЛИЧЕСТВО ЗАПРОСОВ</div>
@@ -117,7 +117,7 @@
                         <a href="#" class="graph-btn active">ЗА НЕДЕЛЮ</a>
                         <a href="#" class="graph-btn">ЗА МЕСЯЦ</a>
                         <a href="#" class="graph-btn">ЗА ГОД</a>
-                        <img src="img/graph.png" width="100%" />
+                        <img src="img/graph.png" width="100%"/>
                     </div>
                 </div>
 
