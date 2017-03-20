@@ -52,9 +52,10 @@ public class RequestTypeController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String editRequestType(@PathVariable int id, Model model) {
-        model.addAttribute("requestType", requestTypeDao.getById(id));
+        RequestType requestType = requestTypeDao.getById(id);
+        model.addAttribute("requestType", requestType);
         model.addAttribute("departments", departmentDao.getAll());
-        model.addAttribute("headerTitle", "Редактирование типа запроса");
+        model.addAttribute("headerTitle", String.format("Тип запроса: %s", requestType.getTitle()));
         configureCancelUrl(model);
         return REQUEST_TYPE_VIEW;
     }
