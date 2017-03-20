@@ -26,8 +26,10 @@
                         <p class="form-control-static">${request.requestId}</p>
                     </div>
                     <div class="col-sm-4">
-                        <a href="/requestList/assignedTo?idRequest=${request.requestId}"
-                           class="btn-close pull-right">ВЗЯТЬ В РАБОТУ</a>
+                        <c:if test="${request.status.requestStatusId == '1' && request.assignedTo.id == null}"> <%--статус "новый" и запрос никому не назначе--%>
+                            <a href="/requestList/assignedTo?idRequest=${request.requestId}"
+                               class="btn-close pull-right">ВЗЯТЬ В РАБОТУ</a>
+                        </c:if>
                     </div>
                 </div>
 
