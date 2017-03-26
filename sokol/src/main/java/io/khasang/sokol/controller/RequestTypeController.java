@@ -46,13 +46,16 @@ public class RequestTypeController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String showRequestTypes(Model model) {
         model.addAttribute("requestTypes", requestTypeDao.getAll());
+        model.addAttribute("headerTitle", "Типы запросов");
         return REQUEST_TYPE_LIST_VIEW;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String editRequestType(@PathVariable int id, Model model) {
-        model.addAttribute("requestType", requestTypeDao.getById(id));
+        RequestType requestType = requestTypeDao.getById(id);
+        model.addAttribute("requestType", requestType);
         model.addAttribute("departments", departmentDao.getAll());
+        model.addAttribute("headerTitle", String.format("Тип запроса: %s", requestType.getTitle()));
         configureCancelUrl(model);
         return REQUEST_TYPE_VIEW;
     }
@@ -73,6 +76,7 @@ public class RequestTypeController {
     public String newRequestType(Model model) {
         model.addAttribute("requestType", new RequestType());
         model.addAttribute("departments", departmentDao.getAll());
+        model.addAttribute("headerTitle", "Новый тип запроса");
         configureCancelUrl(model);
         return REQUEST_TYPE_VIEW;
     }

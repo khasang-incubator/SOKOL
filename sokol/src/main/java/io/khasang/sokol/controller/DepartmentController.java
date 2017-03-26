@@ -41,13 +41,16 @@ public class DepartmentController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String showAll(final Model model) {
         model.addAttribute("departmentList", departmentDao.getAll());
+        model.addAttribute("headerTitle", "Департаменты");
         return LIST_VIEW;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(final Model model, @PathVariable int id) {
+        Department department = departmentDao.getById(id);
         model.addAttribute("cancelUrl", LIST_MAP);
-        model.addAttribute("department", departmentDao.getById(id));
+        model.addAttribute("department", department);
+        model.addAttribute("headerTitle", String.format("Департамент: %s", department.getTitle()));
         return FORM_VIEW;
     }
 
@@ -64,6 +67,7 @@ public class DepartmentController {
     public String showNew(Model model) {
         model.addAttribute("department", new Department());
         model.addAttribute("cancelUrl", LIST_MAP);
+        model.addAttribute("headerTitle", "Новый департамент");
         return FORM_VIEW;
     }
 

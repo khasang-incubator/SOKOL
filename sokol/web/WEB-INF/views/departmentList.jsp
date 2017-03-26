@@ -45,8 +45,9 @@
                     <td><c:out value="${list.id}"/></td>
                     <td><a href="/department/${list.id}"> <c:out value="${list.title}"/></a></td>
                     <td><c:out value="${list.createdDate}"/></td>
-                    <td class="del-cell"><a class="del-btn" href="return confirm_delete(${list.id})"></a></td>
-
+                    <%--<td class="del-cell"><a class="del-btn" href="return confirm_delete(${list.id})"></a></td>--%>
+                    <td class="del-cell"><a class="del-btn" href="/department/delete/${list.id}"
+                                            onclick="return confirmDeletion(${list.id})"></a></td>
                 </tr>
             </c:forEach>
             </tbody>

@@ -82,8 +82,8 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-htmlunit-driver', version: '2.52.0'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-ie-driver', version: '2.53.0'
     // postgre
-    compile 'org.postgresql:postgresql:9.4.1208'
-    testCompile 'org.postgresql:postgresql:9.4.1208'
+    compile 'org.postgresql:postgresql:9.4.1212'
+    testCompile 'org.postgresql:postgresql:9.4.1212'
     // support orm classes
     compile 'org.springframework:spring-orm:4.2.5.RELEASE'
     testCompile 'org.springframework:spring-orm:4.2.5.RELEASE'

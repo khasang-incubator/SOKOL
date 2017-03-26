@@ -10,9 +10,15 @@
         }
         return true;
     }
+
+    function confirmAction(id) {
+        if (confirm("Вы действительно хотите удалить № " + id + " ?")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 </script>
-
-
 
 
 <c:url var="root_url" value="/"/>
@@ -46,7 +52,9 @@
                     <td><c:out value="${list.id}"/></td>
                     <td><a href="/requestType/${list.id}"> <c:out value="${list.title}"/></a></td>
                     <td><c:out value="${list.description}"/></td>
-                    <td class="del-cell"><a class="del-btn" href="return confirm_delete(${list.id})"></a></td>
+                    <td class="del-cell"><a class="del-btn" href="/requestType/delete/${list.id}"
+                                            onclick="return confirmDeletion(${list.id})"></a></td>
+                        <%--<td class="del-cell"><a class="del-btn" href="return confirm_delete(${list.id})"></a></td>--%>
                 </tr>
             </c:forEach>
             </tbody>
