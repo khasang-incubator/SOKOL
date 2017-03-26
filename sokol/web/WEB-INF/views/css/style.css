@@ -349,6 +349,7 @@ body{
 {
 	border-color: #83b0bd;
 }
+.form-body .btn-work,
 .form-body .btn-close,
 .form-body .btn-save{
 	background-color: #a3c822;
@@ -365,10 +366,15 @@ body{
 	background-color: #6ebbcd;
 }
 
+.form-body .btn-work{
+	background-color: #6ebbcd;
+}
+
 .form-body .btn-close:hover{
 	background-color: #4094a9;
 	text-decoration: none;
 }
+
 
 
 .mypanel-wrapper{

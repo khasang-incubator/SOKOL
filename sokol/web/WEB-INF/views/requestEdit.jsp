@@ -25,12 +25,6 @@
                     <div class="col-sm-4">
                         <p class="form-control-static">${request.requestId}</p>
                     </div>
-                    <div class="col-sm-4">
-                        <c:if test="${request.status.requestStatusId == '1' && request.assignedTo.id == null}"> <%--статус "новый" и запрос никому не назначе--%>
-                            <a href="/requestList/assignedTo?idRequest=${request.requestId}"
-                               class="btn-close pull-right">ВЗЯТЬ В РАБОТУ</a>
-                        </c:if>
-                    </div>
                 </div>
 
                 <div class="form-group">
@@ -167,7 +161,6 @@
                     </div>
                 </div>
 
-
                 <div class="form-group">
                     <label for="inputDescription" class="control-label col-sm-3">Описание</label>
                     <div class="col-sm-8">
@@ -176,13 +169,16 @@
                     </div>
                 </div>
 
-
                 <div class="form-group">
                     <div class="control-label col-sm-3"></div>
                     <div class="col-sm-8">
-                        <a href="#" onclick="document.forms['requestForm'].submit();" class="btn-save pull-left">СОХРАНИТЬ</a>
+                        <c:if test="${request.status.requestStatusId == '1' && request.assignedTo.id == null}"> <%--статус "новый" и запрос никому не назначе--%>
+                            <a href="/requestList/assignedTo?idRequest=${request.requestId}"
+                               class="btn-work pull-left">ВЗЯТЬ В РАБОТУ</a>
+                        </c:if>
                         <a href="/requestList/list?pagenumber=${pagenumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}"
                            class="btn-close pull-right">ЗАКРЫТЬ</a>
+                        <a href="#" onclick="document.forms['requestForm'].submit();" class="btn-save pull-right">СОХРАНИТЬ</a>
                     </div>
                 </div>
             </div>
