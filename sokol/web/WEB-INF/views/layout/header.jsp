@@ -2,11 +2,10 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-  <sec:authentication var="user" property="principal" />
+<sec:authentication var="user" property="principal"/>
 
 
-
-<!-- Header  -->
+<!-- Header -->
 <c:url var="root_url" value="/"/>
 <nav class="navbar navbar-default navbar-static-top topnav header" role="navigation">
     <div class="container topnav">
@@ -23,37 +22,37 @@
                     </li>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
-
-
-
                     <li class="profile-photo">
                         <img src="${root_url}img/nophoto.png"/>
                     </li>
-                    <li>
-                        <a href="#">${user.getUsername()}</a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">${user.getUsername()}
+                            <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Справка</a></li>
+                            <li><a href="/exit">Выход</a></li>
+                        </ul>
                     </li>
-
                 </sec:authorize>
-
-
             </ul>
             <a class="navbar-brand" href="#"><img src="${root_url}img/Logo1.png"/></a>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="/">Главная</a></li>
                     <sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
-                    <li><a href="/requestList/list?pagenumber=1&sortBy=id&sortOrder=desc">Запросы</a></li>
+                        <li><a href="/requestList/list?pagenumber=1&sortBy=id&sortOrder=desc">Запросы</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Настройки<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <!-- <li class="divider"></li> -->
-                            <li><a href="/department/list">Департаменты</a></li>
-                            <li><a href="/users/list">Пользователи</a></li>
-                            <li><a href="/requestType/list">Типы запросов</a></li>
-                        </ul>
-                    </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Настройки<b
+                                    class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <!-- <li class="divider"></li> -->
+                                <li><a href="/department/list">Департаменты</a></li>
+                                <li><a href="/users/list">Пользователи</a></li>
+                                <li><a href="/requestType/list">Типы запросов</a></li>
+                            </ul>
+                        </li>
                     </sec:authorize>
                 </ul>
             </div>
