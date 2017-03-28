@@ -30,6 +30,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.logging.Logger;
@@ -64,6 +65,12 @@ public class AppController {
         }
         if (authentication.getName() != "anonymousUser")
             return "redirect:/mypanel";
+        return "index";
+    }
+
+    @RequestMapping(value = "/exit", method = RequestMethod.GET)
+    public String exit(SessionStatus status) {
+        status.setComplete();
         return "index";
     }
 
