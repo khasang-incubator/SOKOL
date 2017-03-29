@@ -30,7 +30,7 @@
                             <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Справка</a></li>
-                            <li><a href="/exit">Выход</a></li>
+                            <li><a href="/j_spring_security_logout">Выход</a></li>
                         </ul>
                     </li>
                 </sec:authorize>

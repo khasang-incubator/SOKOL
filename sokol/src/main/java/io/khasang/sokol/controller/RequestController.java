@@ -129,6 +129,7 @@ public class RequestController {
         SecurityContext context = SecurityContextHolder.getContext();
         User user = userDao.getByLogin(context.getAuthentication().getName());
         request.setAssignedTo(user);
+        request.setAssignedDate(new Date());
         requestDao.saveOrUpdate(request);
         return "redirect:/requestList/list?pagenumber=1&sortBy=id&sortOrder=";
     }

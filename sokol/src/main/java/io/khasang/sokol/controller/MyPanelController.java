@@ -21,7 +21,9 @@ import io.khasang.sokol.dao.RoleDao;
 import io.khasang.sokol.dao.UserDao;
 import io.khasang.sokol.entity.MyPanelScore;
 import io.khasang.sokol.entity.Request;
+import io.khasang.sokol.entity.RequestGraphData;
 import io.khasang.sokol.model.CreateTable;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,6 +31,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -53,12 +58,41 @@ public class MyPanelController {
         List<Request> forMeRequests = requestDao.getRequestsForMe(userName);
         MyPanelScore scoreIn = requestDao.getScoreIn(userName);
         MyPanelScore scoreOut = requestDao.getScoreOut(userName);
+        List<RequestGraphData> graphDatasIn = requestDao.getGraphDataIn(userName);
+        List<RequestGraphData> graphDatasOut = requestDao.getGraphDataOut(userName);
 
         model.addAttribute("scoreIn", scoreIn);
         model.addAttribute("scoreOut", scoreOut);
+
+        initGraphData(graphDatasIn, model,  "graphDataIn_Date", "graphDataIn_Count");
+        initGraphData(graphDatasOut, model,  "graphDataOut_Date", "graphDataOut_Count");
+
         model.addAttribute("myRequests", myRequests);
         model.addAttribute("forMeRequests", forMeRequests);
         model.addAttribute("headerTitle", "МОЯ ПАНЕЛЬ");
         return "mypanel";
+    }
+
+    void initGraphData(List<RequestGraphData> data, Model model, String attrNameDate, String attrNameCount)
+    {
+        StringBuilder sbDate = new StringBuilder();
+        StringBuilder sbCount = new StringBuilder();
+
+        Boolean theFirstLoop = true;
+
+        for (RequestGraphData item :
+                data) {
+            if(!theFirstLoop){
+                sbDate.append(",");
+                sbCount.append(",");
+            }
+            sbDate.append(new StringBuffer().append("\'")
+                    .append(new SimpleDateFormat("dd.MM.yyyy").format(item.getRequestDate()))
+                    .append("\'").toString());
+            sbCount.append(item.getRequestCount());
+            theFirstLoop = false;
+        }
+        model.addAttribute(attrNameDate, sbDate.toString());
+        model.addAttribute(attrNameCount, sbCount.toString());
     }
 }

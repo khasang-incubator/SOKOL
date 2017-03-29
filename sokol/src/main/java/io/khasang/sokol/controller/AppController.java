@@ -47,8 +47,8 @@ public class AppController {
     RoleDao roleDao;
 
     @RequestMapping("/")
-    public String hello(Model model) {
-//        model.addAttribute("hello", messageService.getInfo());
+    public String index(Model model) {
+//        model.addAttribute("index", messageService.getInfo());
         // get security context from thread local
 
         SecurityContext context = SecurityContextHolder.getContext();
@@ -65,12 +65,6 @@ public class AppController {
         }
         if (authentication.getName() != "anonymousUser")
             return "redirect:/mypanel";
-        return "index";
-    }
-
-    @RequestMapping(value = "/exit", method = RequestMethod.GET)
-    public String exit(SessionStatus status) {
-        status.setComplete();
         return "index";
     }
 

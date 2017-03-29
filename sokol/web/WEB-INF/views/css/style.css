@@ -357,6 +357,7 @@ body{
 	padding: 10px 15px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
+	margin-left: 5px;
 }
 .form-body .btn-save:hover{
 	background-color: #8fb50b;

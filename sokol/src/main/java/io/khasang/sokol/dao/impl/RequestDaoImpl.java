@@ -19,10 +19,7 @@ package io.khasang.sokol.dao.impl;
 import io.khasang.sokol.dao.RequestDao;
 import io.khasang.sokol.dao.RequestStatusDao;
 import io.khasang.sokol.dao.UserDao;
-import io.khasang.sokol.entity.MyPanelScore;
-import io.khasang.sokol.entity.Request;
-import io.khasang.sokol.entity.RequestStatus;
-import io.khasang.sokol.entity.User;
+import io.khasang.sokol.entity.*;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
@@ -30,7 +27,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -92,6 +92,36 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
             score.setCountClosed((long) scoreQuery.get(0)[2]);
         }
          return score;
+    }
+
+    @Override
+    public List<RequestGraphData> getGraphDataIn(String userName) {
+        Session session = getSession();
+        Query query = session.createQuery("Select date_trunc('day',f.assignedDate) ," +
+                "count(f.requestId) " +
+                "from Request f WHERE f.assignedTo.login = ? " +
+                " group by date_trunc('day',f.assignedDate) order by 1 ");
+        query.setParameter(0, userName);
+
+        List<Object[]> scoreQuery = query.list();
+        List<RequestGraphData> res = new ArrayList<RequestGraphData>();
+
+        scoreQuery.forEach(x -> res.add(new RequestGraphData((Date)x[0], ((Long) x[1]).intValue()) ));
+        return res;
+    }
+
+    @Override
+    public List<RequestGraphData> getGraphDataOut(String userName) {
+        Session session = getSession();
+        Query query = session.createQuery("Select date_trunc('day',f.createdDate) ," +
+                "count(f.requestId) " +
+                "from Request f WHERE f.createdBy = ? " +
+                " group by date_trunc('day',f.createdDate)  order by 1 ");
+        query.setParameter(0, userName);
+        List<Object[]> scoreQuery = query.list();
+        List<RequestGraphData> res = new ArrayList<RequestGraphData>();
+        scoreQuery.forEach(x -> res.add(new RequestGraphData((Date)x[0], ((Long) x[1]).intValue()) ));
+        return res;
     }
 
     @Override

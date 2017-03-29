@@ -17,6 +17,7 @@
 package io.khasang.sokol.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "REQUESTS")
@@ -37,6 +38,9 @@ public class Request extends AuditableEntity {
     @ManyToOne
     @JoinColumn(name = "ASSIGNED_TO")
     private User assignedTo;
+    @Column(name = "ASSIGNED_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date assignedDate;
     @ManyToOne
     @JoinColumn(name = "REQUEST_STATUS_ID")
     private RequestStatus status;
@@ -143,6 +147,14 @@ public class Request extends AuditableEntity {
 
     public void setFile_name(String file_name) {
         this.file_name = file_name;
+    }
+
+    public Date getAssignedDate() {
+        return assignedDate;
+    }
+
+    public void setAssignedDate(Date assignedDate) {
+        this.assignedDate = assignedDate;
     }
 }
 

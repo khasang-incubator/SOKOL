@@ -18,6 +18,7 @@ package io.khasang.sokol.dao;
 
 import io.khasang.sokol.entity.MyPanelScore;
 import io.khasang.sokol.entity.Request;
+import io.khasang.sokol.entity.RequestGraphData;
 
 import java.util.List;
 
@@ -33,6 +34,10 @@ public interface RequestDao extends GenericDao<Request, Integer> {
     MyPanelScore getScoreIn(String userName);
 
     MyPanelScore getScoreOut(String userName);
+
+    List<RequestGraphData> getGraphDataIn(String userName);
+
+    List<RequestGraphData> getGraphDataOut(String userName);
 
     Integer getCountLineOfTable();
 }
