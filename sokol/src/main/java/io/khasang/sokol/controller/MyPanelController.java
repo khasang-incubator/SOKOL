@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -65,7 +66,7 @@ public class MyPanelController {
         model.addAttribute("scoreOut", scoreOut);
 
         initGraphData(graphDatasIn, model,  "graphDataIn_Date", "graphDataIn_Count");
-        initGraphData(graphDatasOut, model,  "graphDataOut_Date", "graphDataOut_Count");
+       initGraphData(graphDatasOut, model,  "graphDataOut_Date", "graphDataOut_Count");
 
         model.addAttribute("myRequests", myRequests);
         model.addAttribute("forMeRequests", forMeRequests);
@@ -86,11 +87,21 @@ public class MyPanelController {
                 sbDate.append(",");
                 sbCount.append(",");
             }
-            sbDate.append(new StringBuffer().append("\'")
-                    .append(new SimpleDateFormat("dd.MM.yyyy").format(item.getRequestDate()))
-                    .append("\'").toString());
-            sbCount.append(item.getRequestCount());
-            theFirstLoop = false;
+            Date requestDate = item.getRequestDate();
+            if (requestDate !=null) {
+                sbDate.append("\'")
+                      .append(new SimpleDateFormat("dd.MM.yyyy").format(requestDate))
+                      .append("\'");
+                sbCount.append(item.getRequestCount());
+                theFirstLoop = false;
+            }
+/*            if (requestDate !=null) {
+                sbDate.append(new StringBuffer().append("\'")
+                        .append(new SimpleDateFormat("dd.MM.yyyy").format(requestDate))
+                        .append("\'").toString());
+                sbCount.append(item.getRequestCount());
+                theFirstLoop = false;
+            }*/
         }
         model.addAttribute(attrNameDate, sbDate.toString());
         model.addAttribute(attrNameCount, sbCount.toString());

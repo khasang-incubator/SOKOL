@@ -14,7 +14,7 @@
     <c:if test="${not empty msg}">
         <div class="msg">${msg}</div>
     </c:if>
-<s:url var="authUrl" value="/j_spring_security_check"/>
+<s:url var="authUrl" value="/static/j_spring_security_check"/>
     <form class="form-signin" action="${authUrl}" method="post">
         <h2 class="form-signin-heading">СОКОЛ</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
