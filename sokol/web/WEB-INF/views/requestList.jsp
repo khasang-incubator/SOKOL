@@ -13,6 +13,16 @@
     }
 </script>
 
+
+<script type="text/javascript">
+    function onSearchClick(){
+        var searchStr = $("#idSearch").val();
+        document.location = "/requestList/found?pagenumber=1&sortBy=id&sortOrder=desc&foundText=" + searchStr;
+//        /requestList/list?pagenumber=1&sortBy=id&sortOrder=desc
+    }
+</script>
+
+
 <c:url var="root_url" value="/"/>
 <div class="container">
     <div class="table-header">
@@ -21,16 +31,15 @@
 
 
         <div style="display: inline-block; width: 300px; float: right; margin-top: -5px;">
-            <%--<form role="search">--%>
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Поиск">
-                <div class="input-group-btn">
-                    <a class="btn btn-default" title="Поиск" href="/requestList/add" role="button">
-                        <i class="glyphicon glyphicon-search"></i>
-                    </a>
-                </div>
-            </div>
-            <%--</form>--%>
+               <div class="input-group">
+                    <input type="text" class="form-control" id="idSearch" placeholder="Поиск">
+                    <div class="input-group-btn">
+                        <a class="btn btn-default" title="Поиск"
+                           href="#" onclick="onSearchClick(); return false;" role="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </a>
+                    </div>
+               </div>
         </div>
 
         <%--<div style="display: inline-block; width: 300px; float: right; margin-top: -5px;">--%>
