@@ -40,4 +40,7 @@ public interface RequestDao extends GenericDao<Request, Integer> {
     List<RequestGraphData> getGraphDataOut(String userName);
 
     Integer getCountLineOfTable();
+
+    List<Request> getRequestFound(String found);
+
 }

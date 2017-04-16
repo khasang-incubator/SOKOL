@@ -20,6 +20,7 @@ import io.khasang.sokol.dao.RequestDao;
 import io.khasang.sokol.dao.RequestStatusDao;
 import io.khasang.sokol.dao.UserDao;
 import io.khasang.sokol.entity.*;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
@@ -91,7 +92,7 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
         if (scoreQuery.get(0)[2] != null) {
             score.setCountClosed((long) scoreQuery.get(0)[2]);
         }
-         return score;
+        return score;
     }
 
     @Override
@@ -106,7 +107,7 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
         List<Object[]> scoreQuery = query.list();
         List<RequestGraphData> res = new ArrayList<RequestGraphData>();
 
-        scoreQuery.forEach(x -> res.add(new RequestGraphData((Date)x[0], ((Long) x[1]).intValue()) ));
+        scoreQuery.forEach(x -> res.add(new RequestGraphData((Date) x[0], ((Long) x[1]).intValue())));
         return res;
     }
 
@@ -120,7 +121,7 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
         query.setParameter(0, userName);
         List<Object[]> scoreQuery = query.list();
         List<RequestGraphData> res = new ArrayList<RequestGraphData>();
-        scoreQuery.forEach(x -> res.add(new RequestGraphData((Date)x[0], ((Long) x[1]).intValue()) ));
+        scoreQuery.forEach(x -> res.add(new RequestGraphData((Date) x[0], ((Long) x[1]).intValue())));
         return res;
     }
 
@@ -149,6 +150,24 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
     }
 
     @Override
+    public List<Request> getRequestFound(String found) {
+        Session session = getSession();
+        Query query = session.createQuery("from Request f WHERE f.title like ? OR f.description like ?");
+      //  Query query = session.createQuery("from Request f WHERE  f.title like '%22%' OR f.description like '%22%'");
+        query.setParameter(0, "%"+found+"%");
+        query.setParameter(1, "%"+found+"%");
+
+        return query.list();
+        // Session session = getSession();
+      //  Criteria criteria = getSession().createCriteria(Request.class);
+     //   criteria.add(Restrictions.eq("title", found));
+      //  return criteria.list();
+       // return (List<Request>) getSession().createCriteria(Request.class)
+       //         .add(Restrictions.eq("title", found));
+               // .uniqueResult();
+    }
+
+    @Override
     public Request getByName(String name) {
         return (Request) getSession().createCriteria(Request.class)
                 .add(Restrictions.eq("title", name))
@@ -163,4 +182,6 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
         long countResults = (long) countQuery.uniqueResult();
         return (int) countResults;
     }
+
+
 }

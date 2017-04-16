@@ -19,6 +19,7 @@ package io.khasang.sokol.controller;
 import com.google.gson.Gson;
 import io.khasang.sokol.dao.*;
 import io.khasang.sokol.entity.*;
+import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -38,10 +39,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 @PropertySource(value = {"classpath:hibernate.properties"})
 @Controller
@@ -121,6 +124,31 @@ public class RequestController {
         return "redirect:/requestList/list?pagenumber=1&sortBy=id&sortOrder=";
     }
 
+
+    @RequestMapping(value = "/found", method = RequestMethod.GET)
+    public String foundText(Model foundModel, @RequestParam(value = "pagenumber", required = false) String pagenumber,
+                            @RequestParam(value = "sortBy", required = false) String sortBy,
+                            @RequestParam(value = "sortOrder", required = false) String sortOrder,
+                            @RequestParam(value = "imgBy", required = false) String imgBy,
+                            @RequestParam(value = "sortOrderHeader", required = false) String sortOrderHeader,
+                            @RequestParam("foundText") String foundText) {
+        pagenumber = (pagenumber == null || sortBy.equals("")) ? "1" : pagenumber;
+        sortOrder = (sortOrder == null || sortOrder.equals("")) ? "" : sortOrder;
+        sortBy = (sortBy == null || sortBy.equals("")) ? "id" : sortBy;
+        List<Request> requestAll = requestDao.getRequestFound(foundText);
+        Integer countLineOfTable = requestDao.getCountLineOfTable(); // кол-во записей в таблице
+        Integer pageRows = Integer.parseInt(environment.getRequiredProperty("page.size")); // кол-во записей на странице
+        Integer lastPageNumber = ((countLineOfTable / pageRows) + 1);
+        ArrayList<Integer> pageNumbers = totalOfPages(lastPageNumber);
+        foundModel.addAttribute("requestAll", requestAll);
+        foundModel.addAttribute("pageTotal", pageNumbers);
+        foundModel.addAttribute("sortBy", sortBy);
+        foundModel.addAttribute("imgBy", imgBy);
+        foundModel.addAttribute("sortOrder", sortOrder);
+        foundModel.addAttribute("sortOrderHeader", sortOrderHeader);
+        foundModel.addAttribute("pagenumber", pagenumber);
+        return "requestList";        //return null;
+    }
 
 
     @RequestMapping(value = "/assignedTo", method = RequestMethod.GET) // назначение ответственного за выполнение заявки
