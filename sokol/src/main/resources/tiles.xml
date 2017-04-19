@@ -69,7 +69,10 @@
         <put-attribute name="title" value="My panel"/>
         <put-attribute name="body" value="/WEB-INF/views/mypanel.jsp"/>
     </definition>
-
+    <definition name="myprofile" extends="base.definition">
+        <put-attribute name="title" value="My profile"/>
+        <put-attribute name="body" value="/WEB-INF/views/myprofile.jsp"/>
+    </definition>
     <definition name="requestAdd" extends="base.definition">
         <put-attribute name="title" value="add Request "/>
         <put-attribute name="body" value="/WEB-INF/views/requestAdd.jsp"/>

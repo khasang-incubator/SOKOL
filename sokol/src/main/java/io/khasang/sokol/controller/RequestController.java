@@ -19,7 +19,7 @@ package io.khasang.sokol.controller;
 import com.google.gson.Gson;
 import io.khasang.sokol.dao.*;
 import io.khasang.sokol.entity.*;
-import org.jsoup.Jsoup;
+//import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;

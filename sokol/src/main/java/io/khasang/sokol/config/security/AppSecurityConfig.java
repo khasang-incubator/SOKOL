@@ -64,6 +64,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
                     .antMatchers("/requestTypes/**").access("hasAnyRole('ROLE_ADMIN')")
                //     .antMatchers("/requestlist/**").access("hasAnyRole('ROLE_ADMIN')")
 
+                .antMatchers("/myprofile/**").authenticated()
                 .antMatchers("/mypanel/**").authenticated()
                 .and()
                     .formLogin().defaultSuccessUrl("/", false)

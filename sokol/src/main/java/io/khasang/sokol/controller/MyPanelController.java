@@ -74,6 +74,7 @@ public class MyPanelController {
         return "mypanel";
     }
 
+
     void initGraphData(List<RequestGraphData> data, Model model, String attrNameDate, String attrNameCount)
     {
         StringBuilder sbDate = new StringBuilder();

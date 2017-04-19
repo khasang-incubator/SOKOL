@@ -1,40 +1,44 @@
 <%--
   Created by IntelliJ IDEA.
   User: denspbru
-  Date: 13.11.16
-  Time: 17:43
+  Date: 19.04.17
+  Time: 20:32
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+
 <c:if test="${errorMessage != null}">
     <div class="alert alert-danger">
-        ${errorMessage}
+            ${errorMessage}
     </div>
 </c:if>
 <div class="container">
-<!-- FORM  -->
+    <!-- FORM  -->
     <div class="form-wrapper">
-        <sf:form method="post" id="userForm" action="/users/${user.id}" cssClass="form-horizontal">
+        <sf:form method="post" id="myprofile" action="/myprofile" cssClass="form-horizontal">
+            <input type="hidden" id="id" name="id" value="${user.id}">
             <div class="form-body">
                 <div class="form-group">
-                    <label for="inputLogin"  class="control-label col-sm-3">ID сотрудника</label>
+                    <label  class="control-label col-sm-3">ID сотрудника</label>
                     <div class="col-sm-8">
                         <p class="form-control-static">${user.id}</p>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputLogin"  class="control-label col-sm-3">Логин</label>
+                    <label  class="control-label col-sm-3">Логин</label>
                     <div class="col-sm-8">
-                        <input name="login" id="inputLogin" class="form-control" placeholder="Имя пользователя" value="${user.login}" required autofocus/>
+                        <p class="form-control-static">${user.login}</p>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputFio" class="control-label col-sm-3">ФИО сотрудника</label>
                     <div class="col-sm-8">
-                        <input name="fio" id="inputFio" class="form-control" placeholder="ФИО сотрудника" value="${user.fio}" required />
+                        <input name="fio" id="inputFio" class="form-control" placeholder="ФИО сотрудника" value="${user.fio}" required autofocus/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -56,21 +60,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="roleId" class="control-label col-sm-3">Роль</label>
+                    <label class="control-label col-sm-3">Роль</label>
                     <div class="col-sm-8">
-                        <select name="roleId" class="form-control" id="roleId">
-                            <c:forEach var="role" items="${roles}">
-                                <c:choose>
-                                    <c:when test="${role.id == user.role.id}">
-                                        <option value="${role.id}" selected="1">${role.description}</option>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <option value="${role.id}">${role.description}</option>
-                                    </c:otherwise>
-                                </c:choose>
-
-                            </c:forEach>
-                        </select>
+                        <p class="form-control-static">${user.role.description}</p>
                     </div>
                 </div>
                 <div class="form-group">
@@ -94,7 +86,7 @@
                     <div class="control-label col-sm-3"></div>
                     <div class="col-sm-8">
 
-                        <a href="#" onclick="document.forms['userForm'].submit();" class="btn-save pull-left">СОХРАНИТЬ</a>
+                        <a href="#" onclick="document.forms['myprofile'].submit();" class="btn-save pull-left">СОХРАНИТЬ</a>
                         <a href="/users/list" class="btn-close pull-right">ЗАКРЫТЬ</a>
                     </div>
                 </div>

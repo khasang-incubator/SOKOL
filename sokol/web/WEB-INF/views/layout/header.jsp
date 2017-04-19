@@ -29,6 +29,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">${user.getUsername()}
                             <b class="caret"></b></a>
                         <ul class="dropdown-menu">
+                            <li><a href="/myprofile">Мой профиль</a></li>
                             <li><a href="#">Справка</a></li>
                             <li><a href="/static/j_spring_security_logout">Выход</a></li>
                         </ul>
