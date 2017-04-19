@@ -112,7 +112,7 @@ public class RequestController {
         requestPageModel.addAttribute("sortOrder", sortOrder);
         requestPageModel.addAttribute("sortOrderHeader", sortOrderHeader);
         requestPageModel.addAttribute("pagenumber", pagenumber);
-        requestPageModel.addAttribute("headerTitle", "ЗАПРОСЫ");
+        requestPageModel.addAttribute("headerTitle", "ZAPR");
         return "requestList";
     }
 

@@ -3,6 +3,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 
 
+
 <script type="text/javascript">
     function confirmAction(id) {
         if (confirm("Вы действительно хотите удалить запрос № " + id + " ?")) {
@@ -17,7 +18,7 @@
 <script type="text/javascript">
     function onSearchClick(){
         var searchStr = $("#idSearch").val();
-        document.location = "/requestList/found?pagenumber=1&sortBy=id&sortOrder=desc&foundText=" + searchStr;
+        document.location.href = "/requestList/found?pagenumber=1&sortBy=id&sortOrder=desc&foundText=" + searchStr;
 //        /requestList/list?pagenumber=1&sortBy=id&sortOrder=desc
     }
 </script>
