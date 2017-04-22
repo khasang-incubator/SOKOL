@@ -16,11 +16,11 @@
 
 package io.khasang.sokol.dao;
 
-import io.khasang.sokol.entity.MyPanelScore;
-import io.khasang.sokol.entity.Request;
-import io.khasang.sokol.entity.RequestGraphData;
+        import io.khasang.sokol.entity.MyPanelScore;
+        import io.khasang.sokol.entity.Request;
+        import io.khasang.sokol.entity.RequestGraphData;
 
-import java.util.List;
+        import java.util.List;
 
 public interface RequestDao extends GenericDao<Request, Integer> {
     Request getByName(String name);
@@ -40,6 +40,8 @@ public interface RequestDao extends GenericDao<Request, Integer> {
     List<RequestGraphData> getGraphDataOut(String userName);
 
     Integer getCountLineOfTable();
+
+    Integer getCountLineOfTable(String findText);
 
     List<Request> getRequestFound(String found);
 

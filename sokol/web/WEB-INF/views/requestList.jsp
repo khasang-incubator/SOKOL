@@ -18,7 +18,7 @@
 <script type="text/javascript">
     function onSearchClick(){
         var searchStr = $("#idSearch").val();
-        document.location.href = "/requestList/found?pagenumber=1&sortBy=id&sortOrder=desc&foundText=" + searchStr;
+        document.location.href = "/requestList/list?pagenumber=1&sortBy=id&sortOrder=desc&findText=" + searchStr;
 //        /requestList/list?pagenumber=1&sortBy=id&sortOrder=desc
     }
 </script>
@@ -43,16 +43,6 @@
                </div>
         </div>
 
-        <%--<div style="display: inline-block; width: 300px; float: right; margin-top: -5px;">--%>
-        <%--<div class="input-group">--%>
-        <%--<input type="text" class="form-control" placeholder="Поиск">--%>
-        <%--<div class="input-group-btn">--%>
-        <%--<button class="btn btn-default" type="submit">--%>
-        <%--<i class="glyphicon glyphicon-search"></i>--%>
-        <%--</button>--%>
-        <%--</div>--%>
-        <%--</div>--%>
-        <%--</div>--%>
     </div>
 
     <div class="table-wrapper">
@@ -65,11 +55,11 @@
                    class="${sortBy.equals('status')? imgBy : ''}">СТАТУС</a>
             </th>
             <th style="width: 14%">
-                <a href="/requestList/list?pagenumber=${pagenumber}&sortBy=title&sortOrder=${sortOrderHeader}"
+                <a href="/requestList/list?pagenumber=${pagenumber}&sortBy=title&sortOrder=${sortOrderHeader}&findText=${findText}"
                    class="${sortBy.equals('title')? imgBy : ''}">НАЗВАНИЕ</a>
             </th>
             <th style="width: 14%">
-               <a href="/requestList/list?pagenumber=${pagenumber}&sortBy=description&sortOrder=${sortOrderHeader}"
+               <a href="/requestList/list?pagenumber=${pagenumber}&sortBy=description&sortOrder=${sortOrderHeader}&findText=${findText}"
                    class="${sortBy.equals('description')? imgBy : ''}">ОПИСАНИЕ</a>
             </th>
             <th style="width: 8%">
@@ -110,14 +100,6 @@
                     <td><c:out value="${lists.assignedTo.fio}"/></td>
                     <td><c:out value="${lists.department.title}"/></td>
                     <td><c:out value="${lists.requestType.title}"/></td>
-                        <%--<td>  <a class="btn btn-default" title="Удаление запроса"--%>
-                        <%--href="/requestList/delete?idRequest=${lists.requestId}"--%>
-                        <%--onclick="return confirmAction(${lists.requestId})"--%>
-                        <%--role="button">--%>
-                        <%--<img src="/img/TrashFull.png" hspace="5" border="0"> </img>--%>
-                        <%--</a>--%>
-                        <%----%>
-                        <%--</td>--%>
                     <td class="del-cell"><a class="del-btn" href="/requestList/delete?idRequest=${lists.requestId}"
                                             onclick="return confirmAction(${lists.requestId})"></a></td>
                 </tr>
@@ -135,7 +117,7 @@
                             </li>
                             <c:forEach items="${pageTotal}" var="pagenumber" step="1">
                                 <li>
-                                    <a href="/requestList/list?pagenumber=${pagenumber.intValue()}&sortBy=${sortBy}&sortOrder=${sortOrder}">
+                                    <a href="/requestList/list?pagenumber=${pagenumber.intValue()}&sortBy=${sortBy}&sortOrder=${sortOrder}&findText=${findText}">
                                         <c:out value="${pagenumber.intValue()}"/>
                                     </a>
                                 </li>

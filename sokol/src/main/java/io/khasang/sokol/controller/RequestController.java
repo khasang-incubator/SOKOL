@@ -79,19 +79,28 @@ public class RequestController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String requestListPage(Model requestPageModel, @RequestParam(value = "pagenumber", required = false) String pagenumber,
                                   @RequestParam(value = "sortBy", required = false) String sortBy,
-                                  @RequestParam(value = "sortOrder", required = false) String sortOrder) {
-
+                                  @RequestParam(value = "sortOrder", required = false) String sortOrder,
+                                  @RequestParam(value = "findText", required = false) String findText) {
         pagenumber = (pagenumber == null || sortBy.equals("")) ? "1" : pagenumber;
         sortOrder = (sortOrder == null || sortOrder.equals("")) ? "" : sortOrder;
-        Integer countLineOfTable = requestDao.getCountLineOfTable(); // кол-во записей в таблице
-        Integer pageRows = Integer.parseInt(environment.getRequiredProperty("page.size")); // кол-во записей на странице
-        Integer lastPageNumber = ((countLineOfTable / pageRows) + 1);
-        ArrayList<Integer> pageNumbers = totalOfPages(lastPageNumber);
-        List<Request> requestAll;
         sortBy = (sortBy == null || sortBy.equals("")) ? "id" : sortBy;
         String imgBy = "";
         String sortOrderHeader = "";
-        requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy, sortOrder);
+        List<Request> requestAll;
+        ArrayList<Integer> pageNumbers;
+        Integer pageRows = Integer.parseInt(environment.getRequiredProperty("page.size")); // кол-во записей на странице
+        if (findText == null || findText.equals("")) {
+            Integer countLineOfTable = requestDao.getCountLineOfTable(); // кол-во записей в таблице
+            Integer lastPageNumber = ((countLineOfTable / pageRows) + 1);
+            pageNumbers = totalOfPages(lastPageNumber);
+            requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy, sortOrder);
+        } else {
+            Integer countLineOfTable = requestDao.getCountLineOfTable(findText); // кол-во записей в таблице
+            Integer lastPageNumber = ((countLineOfTable / pageRows) + 1);
+            pageNumbers = totalOfPages(lastPageNumber);
+            requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy, sortOrder, findText);
+        }
+
         if (sortOrder.equals("ASC")) {
             //  imgBy = "/img/sort_up.png";
             imgBy = "sort-up";
@@ -112,7 +121,8 @@ public class RequestController {
         requestPageModel.addAttribute("sortOrder", sortOrder);
         requestPageModel.addAttribute("sortOrderHeader", sortOrderHeader);
         requestPageModel.addAttribute("pagenumber", pagenumber);
-        requestPageModel.addAttribute("headerTitle", "ZAPR");
+        requestPageModel.addAttribute("findText", findText);
+        requestPageModel.addAttribute("headerTitle", "ЗАПРОСЫ");
         return "requestList";
     }
 
@@ -123,33 +133,6 @@ public class RequestController {
         delRequest.addAttribute("request", request);
         return "redirect:/requestList/list?pagenumber=1&sortBy=id&sortOrder=";
     }
-
-
-    @RequestMapping(value = "/found", method = RequestMethod.GET)
-    public String foundText(Model foundModel, @RequestParam(value = "pagenumber", required = false) String pagenumber,
-                            @RequestParam(value = "sortBy", required = false) String sortBy,
-                            @RequestParam(value = "sortOrder", required = false) String sortOrder,
-                            @RequestParam(value = "imgBy", required = false) String imgBy,
-                            @RequestParam(value = "sortOrderHeader", required = false) String sortOrderHeader,
-                            @RequestParam("foundText") String foundText) {
-        pagenumber = (pagenumber == null || sortBy.equals("")) ? "1" : pagenumber;
-        sortOrder = (sortOrder == null || sortOrder.equals("")) ? "" : sortOrder;
-        sortBy = (sortBy == null || sortBy.equals("")) ? "id" : sortBy;
-        List<Request> requestAll = requestDao.getRequestFound(foundText);
-        Integer countLineOfTable = requestDao.getCountLineOfTable(); // кол-во записей в таблице
-        Integer pageRows = Integer.parseInt(environment.getRequiredProperty("page.size")); // кол-во записей на странице
-        Integer lastPageNumber = ((countLineOfTable / pageRows) + 1);
-        ArrayList<Integer> pageNumbers = totalOfPages(lastPageNumber);
-        foundModel.addAttribute("requestAll", requestAll);
-        foundModel.addAttribute("pageTotal", pageNumbers);
-        foundModel.addAttribute("sortBy", sortBy);
-        foundModel.addAttribute("imgBy", imgBy);
-        foundModel.addAttribute("sortOrder", sortOrder);
-        foundModel.addAttribute("sortOrderHeader", sortOrderHeader);
-        foundModel.addAttribute("pagenumber", pagenumber);
-        return "requestList";        //return null;
-    }
-
 
     @RequestMapping(value = "/assignedTo", method = RequestMethod.GET) // назначение ответственного за выполнение заявки
     public String assignedToRequest(@RequestParam("idRequest") String idRequest) {

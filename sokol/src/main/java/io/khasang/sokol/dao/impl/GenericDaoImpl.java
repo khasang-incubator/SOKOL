@@ -82,4 +82,14 @@ public class GenericDaoImpl<T, K extends Serializable> implements GenericDao<T, 
         query.setMaxResults(addLine);
         return query.list();
     }
+
+    public List<T> sortingBy(Integer firstLine, Integer addLine, String sortBy, String sortOrder, String findText) {
+        Query query = getSession().createQuery(String.format("FROM %s f WHERE f.title like ? OR f.description like ? ORDER BY f.%s %s ", type.getName(), sortBy, sortOrder));
+        query.setFirstResult(firstLine);
+        query.setMaxResults(addLine);
+        query.setParameter(0, "%"+findText+"%");
+        query.setParameter(1, "%"+findText+"%");
+        return query.list();
+    }
 }
+

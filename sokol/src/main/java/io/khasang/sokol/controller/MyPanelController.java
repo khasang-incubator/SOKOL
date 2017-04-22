@@ -70,7 +70,10 @@ public class MyPanelController {
 
         model.addAttribute("myRequests", myRequests);
         model.addAttribute("forMeRequests", forMeRequests);
-        model.addAttribute("headerTitle", "МОЯ ПАНЕЛЬ");
+        String myPanel = "МОЯ ПАНЕЛЬ";
+//        model.addAttribute("headerTitle", "МОЯ ПАНЕЛЬ");
+        model.addAttribute("headerTitle", myPanel);
+
         return "mypanel";
     }
 

@@ -66,8 +66,10 @@ public class DepartmentController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String showNew(Model model) {
         model.addAttribute("department", new Department());
-        model.addAttribute("cancelUrl", LIST_MAP);
-        model.addAttribute("headerTitle", "Новый департамент");
+
+        String departmentNew = "Новый департамент";
+        //
+        model.addAttribute("headerTitle", departmentNew);
         return FORM_VIEW;
     }
 
