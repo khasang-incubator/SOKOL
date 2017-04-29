@@ -13,7 +13,9 @@
 <div class="container">
     <!-- FORM  -->
     <div class="form-wrapper">
-        <sf:form method="post" id="departmentForm" action="${root_url}department/add"  cssClass="form-horizontal">
+        <%--<sf:form method="post" id="departmentForm" action="${root_url}department/add"  cssClass="form-horizontal">--%>
+            <sf:form method="post" id="departmentForm" action="/department/${department.id}"  cssClass="form-horizontal">
+            <%--action="/users/${user.id}"--%>
         <div class="form-body">
 
             <div class="form-group">
