@@ -4,9 +4,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-
 <sec:authentication var="user" property="principal"/>
-
 
 <c:if test="${errorMessage != null}">
     <div class="alert alert-danger">
@@ -17,7 +15,7 @@
 <div class="container">
     <!-- FORM  -->
     <div class="form-wrapper">
-        <sf:form method="post" id="requestForm" action="/requestList/add" commandName="requestAdd"
+        <sf:form method="post" id="requestForm" action="/requestList/add"
                  cssClass="form-horizontal" enctype="multipart/form-data">
             <div class="form-body">
                 <input type="hidden" name="creator" value="${user.getUsername()}"/>
@@ -33,7 +31,6 @@
                                required autofocus/>
                     </div>
                 </div>
-
 
                 <div class="form-group">
                     <label for="inputType" class="control-label col-sm-3">Тип запроса</label>
@@ -69,12 +66,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputDescrition" class="control-label col-sm-3">Описание</label>
+                    <label for="inputDescription" class="control-label col-sm-3">Описание</label>
                     <div class="col-sm-8">
-                        <textarea name="description" id="inputDescrition" placeholder="Описание типа запроса"
+                        <textarea name="description" id="inputDescription" placeholder="Описание типа запроса"
                                   class="form-control" rows="3"></textarea>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <div class="control-label col-sm-3"></div>
                     <div class="col-sm-8">
