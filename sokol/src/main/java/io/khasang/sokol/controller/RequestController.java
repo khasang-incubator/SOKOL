@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import io.khasang.sokol.dao.*;
 import io.khasang.sokol.entity.*;
 //import org.jsoup.Jsoup;
+import io.khasang.sokol.pojo.PagePogo;
 import io.khasang.sokol.pojo.RequestPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
@@ -51,7 +52,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/requestList")
 public class RequestController {
-    private static final String REDIRECT_TO_LIST = "redirect:/requestList/list?pagenumber=1&sortBy=id&sortOrder=";
+    private static final String REDIRECT_TO_LIST = "redirect:/requestList/list?pageNumber=1&sortBy=id&sortOrder=";
     private static final String LIST_VIEW = "requestList";
 
     @Autowired
@@ -69,11 +70,11 @@ public class RequestController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String requestListPage(Model requestPageModel,
-                                  @RequestParam(value = "pagenumber", required = false) String pagenumber,
+                                  @RequestParam(value = "pageNumber", required = false) String pageNumber,
                                   @RequestParam(value = "sortBy", required = false) String sortBy,
                                   @RequestParam(value = "sortOrder", required = false) String sortOrder,
                                   @RequestParam(value = "findText", required = false) String findText) {
-        pagenumber = (pagenumber == null || sortBy.equals("")) ? "1" : pagenumber;
+        pageNumber = (pageNumber == null || pageNumber.equals("")) ? "1" : pageNumber;
         sortOrder = (sortOrder == null || sortOrder.equals("")) ? "" : sortOrder;
         sortBy = (sortBy == null || sortBy.equals("")) ? "id" : sortBy;
         String imgBy = "";
@@ -85,12 +86,12 @@ public class RequestController {
             Integer countLineOfTable = requestDao.getCountLineOfTable(); // кол-во записей в таблице
             Integer lastPageNumber = ((countLineOfTable / pageRows) + 1);
             pageNumbers = totalOfPages(lastPageNumber);
-            requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy, sortOrder);
+            requestAll = requestDao.sortingBy((Integer.parseInt(pageNumber) - 1) * pageRows, pageRows, sortBy, sortOrder);
         } else {
             Integer countLineOfTable = requestDao.getCountLineOfTable(findText); // кол-во записей в таблице
             Integer lastPageNumber = ((countLineOfTable / pageRows) + 1);
             pageNumbers = totalOfPages(lastPageNumber);
-            requestAll = requestDao.sortingBy((Integer.parseInt(pagenumber) - 1) * pageRows, pageRows, sortBy, sortOrder, findText);
+            requestAll = requestDao.sortingBy((Integer.parseInt(pageNumber) - 1) * pageRows, pageRows, sortBy, sortOrder, findText);
         }
         if (sortOrder.equals("ASC")) {
             imgBy = "sort-up";
@@ -108,23 +109,49 @@ public class RequestController {
         requestPageModel.addAttribute("imgBy", imgBy);
         requestPageModel.addAttribute("sortOrder", sortOrder);
         requestPageModel.addAttribute("sortOrderHeader", sortOrderHeader);
-        requestPageModel.addAttribute("pagenumber", pagenumber);
+        requestPageModel.addAttribute("pageNumber", pageNumber);
         requestPageModel.addAttribute("findText", findText);
         requestPageModel.addAttribute("headerTitle", "ЗАПРОСЫ");
         return LIST_VIEW;
     }
 
+/*    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String requestAddPage(Model requestAddModel, PagePogo pagePogo) {
+        List<RequestType> requestTypeAll = requestTypeDao.getAll();
+        requestAddModel.addAttribute("requestTypeAll", requestTypeAll);
+        List<Department> departmentAll = departmentDao.getAll();
+        requestAddModel.addAttribute("departmentAll", departmentAll);
+        String n = pagePogo.getPageNumber();
+        String sb = pagePogo.getSortBy();
+        String so = pagePogo.getSortOrder();
+        String soh = pagePogo.getSortOrderHeader();
+
+        requestAddModel.addAttribute("pageNumber", pagePogo.getPageNumber());
+        requestAddModel.addAttribute("sortBy", pagePogo.getSortBy());
+        requestAddModel.addAttribute("sortOrder", pagePogo.getSortOrder());
+        requestAddModel.addAttribute("sortOrderHeader", pagePogo.getSortOrder());
+        requestAddModel.addAttribute("headerTitle", "ЗАПРОСЫ. НОВЫЙ ЗАПРОС");
+        return "requestAdd";
+    }*/
+
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String requestAddPage(Model requestAddModel,
-                                 @RequestParam("pagenumber") String pagenumber,
+                                 @RequestParam("pageNumber") String pageNumber,
                                  @RequestParam("sortBy") String sortBy,
                                  @RequestParam("sortOrder") String sortOrder,
                                  @RequestParam("sortOrderHeader") String sortOrderHeader) {
         List<RequestType> requestTypeAll = requestTypeDao.getAll();
         requestAddModel.addAttribute("requestTypeAll", requestTypeAll);
         List<Department> departmentAll = departmentDao.getAll();
+        String n = pageNumber;
+        String sb = sortBy;
+        String so = sortOrder;
+        String soh = sortOrderHeader;
+
+
+
         requestAddModel.addAttribute("departmentAll", departmentAll);
-        requestAddModel.addAttribute("pagenumber", pagenumber);
+        requestAddModel.addAttribute("pageNumber", pageNumber);
         requestAddModel.addAttribute("sortBy", sortBy);
         requestAddModel.addAttribute("sortOrder", sortOrder);
         requestAddModel.addAttribute("sortOrderHeader", sortOrderHeader);
@@ -133,7 +160,7 @@ public class RequestController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String requestAdd(RequestPojo requestPojo, @RequestParam("file") MultipartFile file) throws IOException {
+    public String requestAdd(RequestPojo requestPojo, PagePogo pagePogo, @RequestParam("file") MultipartFile file) throws IOException {
         ModelAndView model = new ModelAndView();
         Request request = new Request();
         request.setTitle(requestPojo.getTitle());
@@ -141,7 +168,7 @@ public class RequestController {
         RequestStatus status = requestStatusDao.getById(1);
         request.setStatus(status);
         request.setVersion(1);
-        request.setFile_name(file.getOriginalFilename());
+        request.setFileName(file.getOriginalFilename());
         request.setFile(file.getBytes());
         request.setCreatedDate(new Date());
         RequestType requestType = requestTypeDao.getById(Integer.parseInt(requestPojo.getIdrequesttype()));
@@ -153,8 +180,8 @@ public class RequestController {
         request.setUpdatedBy(context.getAuthentication().getName());
         requestDao.save(request);
         model.setViewName("requestAdd");
-        return "redirect:/requestList/list?pagenumber=" + requestPojo.getPagenumber() + "&sortBy="
-                + requestPojo.getSortBy() + "&sortOrder=" + requestPojo.getSortOrder() + "&sortOrderHeader=" + requestPojo.getSortOrder();
+        return "redirect:/requestList/list?pageNumber=" + pagePogo.getPageNumber() + "&sortBy="
+                + pagePogo.getSortBy() + "&sortOrder=" + pagePogo.getSortOrder() + "&sortOrderHeader=" + pagePogo.getSortOrder();
     }
 
 /*    @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -162,7 +189,7 @@ public class RequestController {
                              @RequestParam("description") String description,
                              @RequestParam("idrequesttype") String idrequesttype,
                              @RequestParam("iddepartment") String iddepartment,
-                             @RequestParam("pagenumber") String pagenumber,
+                             @RequestParam("pageNumber") String pageNumber,
                              @RequestParam("sortBy") String sortBy,
                              @RequestParam("sortOrder") String sortOrder,
                              @RequestParam("sortOrderHeader") String sortOrderHeader,
@@ -186,13 +213,13 @@ public class RequestController {
         request.setUpdatedBy(context.getAuthentication().getName());
         requestDao.save(request);
         model.setViewName("requestAdd");
-        return "redirect:/requestList/list?pagenumber=" + pagenumber + "&sortBy=" + sortBy + "&sortOrder=" + sortOrder + "&sortOrderHeader=" + sortOrderHeader;
+        return "redirect:/requestList/list?pageNumber=" + pageNumber + "&sortBy=" + sortBy + "&sortOrder=" + sortOrder + "&sortOrderHeader=" + sortOrderHeader;
     }*/
 
     // добавление запроса на редактирование
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String requestEditPage(Model requestEditModel, @RequestParam("idRequest") String idRequest,
-                                  @RequestParam("pagenumber") String pagenumber,
+                                  @RequestParam("pageNumber") String pageNumber,
                                   @RequestParam("sortBy") String sortBy,
                                   @RequestParam("sortOrder") String sortOrder,
                                   @RequestParam("sortOrderHeader") String sortOrderHeader) {
@@ -204,7 +231,7 @@ public class RequestController {
         List<Department> departmentAll = departmentDao.getAll();
         requestEditModel.addAttribute("departmentAll", departmentAll);
         requestEditModel.addAttribute("requestStatusAll", requestStatusAll);
-        requestEditModel.addAttribute("pagenumber", pagenumber);
+        requestEditModel.addAttribute("pageNumber", pageNumber);
         requestEditModel.addAttribute("sortBy", sortBy);
         requestEditModel.addAttribute("sortOrder", sortOrder);
         requestEditModel.addAttribute("sortOrderHeader", sortOrderHeader);
@@ -218,7 +245,7 @@ public class RequestController {
                                       @RequestParam("description") String description,
                                       @RequestParam("idrequesttypes") String idrequesttypes,
                                       @RequestParam("iddepartment") String iddepartment,
-                                      @RequestParam("pagenumber") String pagenumber,
+                                      @RequestParam("pageNumber") String pageNumber,
                                       @RequestParam("sortBy") String sortBy,
                                       @RequestParam("sortOrder") String sortOrder,
                                       @RequestParam("sortOrderHeader") String sortOrderHeader,
@@ -236,12 +263,12 @@ public class RequestController {
         request.setRequestType(requestType);
         Department department = departmentDao.getById(Integer.parseInt(iddepartment));
         request.setDepartment(department);
-        request.setFile_name(file.getOriginalFilename());
+        request.setFileName(file.getOriginalFilename());
         SecurityContext context = SecurityContextHolder.getContext();
         request.setUpdatedBy(context.getAuthentication().getName());
         requestDao.saveOrUpdate(request);
         model.setViewName("requestEdit");
-        return "redirect:/requestList/list?pagenumber=" + pagenumber + "&sortBy=" + sortBy + "&sortOrder=" + sortOrder + "&sortOrderHeader=" + sortOrderHeader;
+        return "redirect:/requestList/list?pageNumber=" + pageNumber + "&sortBy=" + sortBy + "&sortOrder=" + sortOrder + "&sortOrderHeader=" + sortOrderHeader;
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
@@ -267,7 +294,7 @@ public class RequestController {
     public HttpServletResponse downloadFile(HttpServletResponse response, @RequestParam("idRequest") String idRequest)
             throws Exception {
         Request request = requestDao.getByRequestId(Integer.parseInt(idRequest));
-        String fileName = request.getFile_name();
+        String fileName = request.getFileName();
         byte[] file = request.getFile();
         InputStream input = new ByteArrayInputStream(file);
         OutputStream output = response.getOutputStream();

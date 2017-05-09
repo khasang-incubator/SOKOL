@@ -51,7 +51,7 @@ public class Request extends AuditableEntity {
     private int version;
 
     @Column(name = "FILE_NAME")
-    private String file_name;
+    private String fileName;
 
     @Column(name = "FILE")
     private byte[] file;
@@ -141,12 +141,12 @@ public class Request extends AuditableEntity {
         this.file = file;
     }
 
-    public String getFile_name() {
-        return file_name;
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setFile_name(String file_name) {
-        this.file_name = file_name;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public Date getAssignedDate() {

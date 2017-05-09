@@ -19,7 +19,7 @@
                  cssClass="form-horizontal" enctype="multipart/form-data">
             <div class="form-body">
                 <input type="hidden" name="creator" value="${user.getUsername()}"/>
-                <input type="hidden" name="pagenumber" value="${pagenumber}">
+                <input type="hidden" name="pageNumber" value="${pageNumber}">
                 <input type="hidden" name="sortBy" value="${sortBy}">
                 <input type="hidden" name="sortOrder" value="${sortOrder}">
                 <input type="hidden" name="sortOrderHeader" value="${sortOrderHeader}">
@@ -77,7 +77,7 @@
                     <div class="control-label col-sm-3"></div>
                     <div class="col-sm-8">
                         <a href="#" onclick="document.forms['requestForm'].submit();" class="btn-save pull-left">СОХРАНИТЬ</a>
-                        <a href="/requestList/list?pagenumber=${pagenumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}"
+                        <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}"
                            class="btn-close pull-right">ЗАКРЫТЬ</a>
                     </div>
                 </div>

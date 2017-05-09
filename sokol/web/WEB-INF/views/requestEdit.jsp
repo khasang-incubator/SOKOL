@@ -16,7 +16,7 @@
                  enctype="multipart/form-data">
             <div class="form-body">
                 <input type="hidden" name="idrequest" value="${request.requestId}">
-                <input type="hidden" name="pagenumber" value="${pagenumber}">
+                <input type="hidden" name="pageNumber" value="${pageNumber}">
                 <input type="hidden" name="sortBy" value="${sortBy}">
                 <input type="hidden" name="sortOrder" value="${sortOrder}">
                 <input type="hidden" name="sortOrderHeader" value="${sortOrderHeader}">
@@ -176,7 +176,7 @@
                             <a href="/requestList/assignedTo?idRequest=${request.requestId}"
                                class="btn-work pull-left">ВЗЯТЬ В РАБОТУ</a>
                         </c:if>
-                        <a href="/requestList/list?pagenumber=${pagenumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}"
+                        <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}"
                            class="btn-close pull-right">ЗАКРЫТЬ</a>
                         <a href="#" onclick="document.forms['requestForm'].submit();" class="btn-save pull-right">СОХРАНИТЬ</a>
                     </div>
