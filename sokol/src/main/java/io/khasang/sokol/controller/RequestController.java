@@ -16,11 +16,10 @@
 
 package io.khasang.sokol.controller;
 
-import com.google.gson.Gson;
+import io.khasang.sokol.controller.parameter.PagingParameters;
 import io.khasang.sokol.dao.*;
 import io.khasang.sokol.entity.*;
 //import org.jsoup.Jsoup;
-import io.khasang.sokol.pojo.PagePogo;
 import io.khasang.sokol.pojo.RequestPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
@@ -30,19 +29,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -115,26 +106,21 @@ public class RequestController {
         return LIST_VIEW;
     }
 
-/*    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String requestAddPage(Model requestAddModel, PagePogo pagePogo) {
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String requestAddPage(Model requestAddModel, PagingParameters pagingParameters) {
         List<RequestType> requestTypeAll = requestTypeDao.getAll();
         requestAddModel.addAttribute("requestTypeAll", requestTypeAll);
         List<Department> departmentAll = departmentDao.getAll();
         requestAddModel.addAttribute("departmentAll", departmentAll);
-        String n = pagePogo.getPageNumber();
-        String sb = pagePogo.getSortBy();
-        String so = pagePogo.getSortOrder();
-        String soh = pagePogo.getSortOrderHeader();
-
-        requestAddModel.addAttribute("pageNumber", pagePogo.getPageNumber());
-        requestAddModel.addAttribute("sortBy", pagePogo.getSortBy());
-        requestAddModel.addAttribute("sortOrder", pagePogo.getSortOrder());
-        requestAddModel.addAttribute("sortOrderHeader", pagePogo.getSortOrder());
+        requestAddModel.addAttribute("pageNumber", pagingParameters.getPageNumber());
+        requestAddModel.addAttribute("sortBy", pagingParameters.getSortBy());
+        requestAddModel.addAttribute("sortOrder", pagingParameters.getSortOrder());
+        requestAddModel.addAttribute("sortOrderHeader", pagingParameters.getSortOrder());
         requestAddModel.addAttribute("headerTitle", "ЗАПРОСЫ. НОВЫЙ ЗАПРОС");
         return "requestAdd";
-    }*/
+    }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+/*    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String requestAddPage(Model requestAddModel,
                                  @RequestParam("pageNumber") String pageNumber,
                                  @RequestParam("sortBy") String sortBy,
@@ -143,13 +129,6 @@ public class RequestController {
         List<RequestType> requestTypeAll = requestTypeDao.getAll();
         requestAddModel.addAttribute("requestTypeAll", requestTypeAll);
         List<Department> departmentAll = departmentDao.getAll();
-        String n = pageNumber;
-        String sb = sortBy;
-        String so = sortOrder;
-        String soh = sortOrderHeader;
-
-
-
         requestAddModel.addAttribute("departmentAll", departmentAll);
         requestAddModel.addAttribute("pageNumber", pageNumber);
         requestAddModel.addAttribute("sortBy", sortBy);
@@ -157,10 +136,10 @@ public class RequestController {
         requestAddModel.addAttribute("sortOrderHeader", sortOrderHeader);
         requestAddModel.addAttribute("headerTitle", "ЗАПРОСЫ. НОВЫЙ ЗАПРОС");
         return "requestAdd";
-    }
+    }*/
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String requestAdd(RequestPojo requestPojo, PagePogo pagePogo, @RequestParam("file") MultipartFile file) throws IOException {
+    public String requestAdd(RequestPojo requestPojo, PagingParameters pagingParameters, @RequestParam("file") MultipartFile file) throws IOException {
         ModelAndView model = new ModelAndView();
         Request request = new Request();
         request.setTitle(requestPojo.getTitle());
@@ -180,8 +159,8 @@ public class RequestController {
         request.setUpdatedBy(context.getAuthentication().getName());
         requestDao.save(request);
         model.setViewName("requestAdd");
-        return "redirect:/requestList/list?pageNumber=" + pagePogo.getPageNumber() + "&sortBy="
-                + pagePogo.getSortBy() + "&sortOrder=" + pagePogo.getSortOrder() + "&sortOrderHeader=" + pagePogo.getSortOrder();
+        return "redirect:/requestList/list?pageNumber=" + pagingParameters.getPageNumber() + "&sortBy="
+                + pagingParameters.getSortBy() + "&sortOrder=" + pagingParameters.getSortOrder() + "&sortOrderHeader=" + pagingParameters.getSortOrder();
     }
 
 /*    @RequestMapping(value = "/add", method = RequestMethod.POST)
