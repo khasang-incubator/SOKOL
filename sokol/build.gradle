@@ -25,7 +25,11 @@ war {
             include 'tiles.xml'
             into('WEB-INF/classes/')
         }
+        from ('web/WEB-INF/views') {
+            into('/WEB-INF/views')
+        }
     }
+
 }
 
 sourceSets {
@@ -89,27 +93,28 @@ dependencies {
     testCompile 'org.springframework:spring-orm:4.2.5.RELEASE'
     // Hibernate -->
     // to start need only this -->
-    compile 'org.hibernate:hibernate-core:5.0.1.Final'
-    testCompile 'org.hibernate:hibernate-core:5.0.1.Final'
+    compile 'org.hibernate:hibernate-core:5.2.10.Final'
+    testCompile 'org.hibernate:hibernate-core:5.2.10.Final'
     // for JPA, use hibernate-entitymanager instead of hibernate-core
-    compile 'org.hibernate:hibernate-entitymanager:5.0.1.Final'
-    testCompile 'org.hibernate:hibernate-entitymanager:5.0.1.Final'
+    compile 'org.hibernate:hibernate-entitymanager:5.2.10.Final'
+    testCompile 'org.hibernate:hibernate-entitymanager:5.2.10.Final'
     // optional
-    compile 'org.hibernate:hibernate-osgi:5.0.1.Final'
-    testCompile 'org.hibernate:hibernate-osgi:5.0.1.Final'
-    compile 'org.hibernate:hibernate-envers:5.0.1.Final'
-    testCompile 'org.hibernate:hibernate-envers:5.0.1.Final'
-    compile 'org.hibernate:hibernate-c3p0:5.0.1.Final'
-    testCompile 'org.hibernate:hibernate-c3p0:5.0.1.Final'
-    compile 'org.hibernate:hibernate-proxool:5.0.1.Final'
-    testCompile 'org.hibernate:hibernate-proxool:5.0.1.Final'
-    compile 'org.hibernate:hibernate-infinispan:5.0.1.Final'
-    testCompile 'org.hibernate:hibernate-infinispan:5.0.1.Final'
+    compile 'org.hibernate:hibernate-osgi:5.2.10.Final'
+    testCompile 'org.hibernate:hibernate-osgi:5.2.10.Final'
+    compile 'org.hibernate:hibernate-envers:5.2.10.Final'
+    testCompile 'org.hibernate:hibernate-envers:5.2.10.Final'
+    compile 'org.hibernate:hibernate-c3p0:5.2.10.Final'
+    testCompile 'org.hibernate:hibernate-c3p0:5.2.10.Final'
+    compile 'org.hibernate:hibernate-proxool:5.2.10.Final'
+    testCompile 'org.hibernate:hibernate-proxool:5.2.10.Final'
+    compile 'org.hibernate:hibernate-infinispan:5.2.10.Final'
+    testCompile 'org.hibernate:hibernate-infinispan:5.2.10.Final'
+    compile 'org.hibernate:hibernate-validator:5.4.1.Final'
     // cache API
     compile group: 'org.ehcache', name: 'ehcache', version: '3.1.1'
-    compile group: 'org.hibernate', name: 'hibernate-ehcache', version: '5.2.2.Final'
-    compile group: 'org.hibernate', name: 'hibernate-jcache', version: '5.2.2.Final'
-    compile 'org.springframework:spring-context-support:4.2.5.RELEASE'
+    compile group: 'org.hibernate', name: 'hibernate-ehcache', version: '5.2.10.Final'
+    compile group: 'org.hibernate', name: 'hibernate-jcache', version: '5.2.10.Final'
+    compile 'org.springframework:spring-context-support:4.3.8.RELEASE'
     // Jersey REST
     compile 'org.glassfish.jersey.core:jersey-server:2.22.2'
     compile 'org.glassfish.jersey.containers:jersey-container-servlet-core:2.22.2'

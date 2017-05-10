@@ -20,13 +20,14 @@ import io.khasang.sokol.validators.PasswordMatcher;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import javax.print.attribute.standard.Severity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
 @Table(name = "USERS")
-@PasswordMatcher
+//@PasswordMatcher(payload=Severity.WARNING.class)
 public class User extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

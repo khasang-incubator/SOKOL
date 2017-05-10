@@ -17,6 +17,7 @@
 package io.khasang.sokol.validators;
 
 import javax.validation.Constraint;
+import javax.validation.Payload;
 import java.lang.annotation.*;
 
 @Retention(RetentionPolicy.RUNTIME)
@@ -24,4 +25,9 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = PasswordValidator.class)
 @Documented
 public @interface PasswordMatcher {
+    String message() default "Password is not correct";
+    Class<?> [] groups() default {};
+
+    // Required by validation runtime
+    Class<? extends Payload>[] payload() default {};
 }
