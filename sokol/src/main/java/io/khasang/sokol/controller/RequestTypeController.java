@@ -46,7 +46,10 @@ public class RequestTypeController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String showRequestTypes(Model model) {
         model.addAttribute("requestTypes", requestTypeDao.getAll());
-        model.addAttribute("headerTitle", "Типы запросов");
+        String requestType = "Типы запросов";
+        model.addAttribute("headerTitle", requestType);
+        //model.addAttribute("headerTitle", "Типы запросов");
+
         return REQUEST_TYPE_LIST_VIEW;
     }
 
@@ -62,6 +65,26 @@ public class RequestTypeController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public String updateRequestType(@PathVariable int id, RequestType requestType, Department department) {
+        if (id == 0) {
+            Date now = new Date();
+            requestType.setCreatedDate(now);
+            requestType.setUpdatedDate(now);
+            requestTypeDao.save(requestType);
+        } else {
+            RequestType updated = requestTypeDao.getById(id);
+            updated.setDescription(requestType.getDescription());
+            updated.setTitle(requestType.getTitle());
+            updated.setDepartment(department);
+            updated.setUpdatedDate(new Date());
+            updated.setDepartment(requestType.getDepartment());
+            requestTypeDao.update(requestType);
+        }
+        return REDIRECT_TO_LIST;
+    }
+
+
+/*    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+    public String updateRequestType(@PathVariable int id, RequestType requestType, Department department) {
         RequestType updated = requestTypeDao.getById(id);
         updated.setDescription(requestType.getDescription());
         updated.setTitle(requestType.getTitle());
@@ -70,13 +93,15 @@ public class RequestTypeController {
         updated.setDepartment(requestType.getDepartment());
         requestTypeDao.update(requestType);
         return REDIRECT_TO_LIST;
-    }
+    }*/
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String newRequestType(Model model) {
         model.addAttribute("requestType", new RequestType());
         model.addAttribute("departments", departmentDao.getAll());
-        model.addAttribute("headerTitle", "Новый тип запроса");
+        String newRequestType = "Новый тип запроса";
+        model.addAttribute("headerTitle", newRequestType);
+        //model.addAttribute("headerTitle", "Новый тип запроса");
         configureCancelUrl(model);
         return REQUEST_TYPE_VIEW;
     }
