@@ -19,10 +19,15 @@
                  cssClass="form-horizontal" enctype="multipart/form-data">
             <div class="form-body">
                 <input type="hidden" name="creator" value="${user.getUsername()}"/>
+                <input type="hidden" name="pageNumber" value="${pagingParameters.pageNumber}">
+                <input type="hidden" name="sortBy" value="${pagingParameters.sortBy}">
+                <input type="hidden" name="sortOrder" value="${pagingParameters.sortOrder}">
+                <input type="hidden" name="sortOrderHeader" value="${pagingParameters.sortOrderHeader}">
+<%--                <input type="hidden" name="creator" value="${user.getUsername()}"/>
                 <input type="hidden" name="pageNumber" value="${pageNumber}">
                 <input type="hidden" name="sortBy" value="${sortBy}">
                 <input type="hidden" name="sortOrder" value="${sortOrder}">
-                <input type="hidden" name="sortOrderHeader" value="${sortOrderHeader}">
+                <input type="hidden" name="sortOrderHeader" value="${sortOrderHeader}">--%>
 
                 <div class="form-group">
                     <label for="inputTitle" class="control-label col-sm-3">Название</label>
@@ -35,10 +40,10 @@
                 <div class="form-group">
                     <label for="inputType" class="control-label col-sm-3">Тип запроса</label>
                     <div class="col-sm-8">
-                        <select name="idrequesttype" id="inputType" class="form-control">
-                            <c:forEach items="${requestTypeAll}" var="requesttype">
-                                <option value="${requesttype.id}">
-                                    <c:out value="${requesttype.title}"/>
+                        <select name="requestTypeid" id="inputType" class="form-control">
+                            <c:forEach items="${requestTypeAll}" var="requestType">
+                                <option value="${requestType.id}">
+                                    <c:out value="${requestType.title}"/>
                                 </option>
                             </c:forEach>
                         </select>
@@ -48,7 +53,7 @@
                 <div class="form-group">
                     <label for="inputDepartment" class="control-label col-sm-3">Департамент</label>
                     <div class="col-sm-8">
-                        <select name="iddepartment" id="inputDepartment" class="form-control">
+                        <select name="departmentid" id="inputDepartment" class="form-control">
                             <c:forEach items="${departmentAll}" var="department">
                                 <option value="${department.id}">
                                     <c:out value="${department.title}"/>
@@ -77,7 +82,8 @@
                     <div class="control-label col-sm-3"></div>
                     <div class="col-sm-8">
                         <a href="#" onclick="document.forms['requestForm'].submit();" class="btn-save pull-left">СОХРАНИТЬ</a>
-                        <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}"
+                        <a href="/requestList/list?pageNumber=${pagingParameters.pageNumber}&sortBy=${pagingParameters.sortBy}
+                                    &sortOrder=${pagingParameters.sortOrder}&sortOrderHeader=${pagingParameters.sortOrderHeader}"
                            class="btn-close pull-right">ЗАКРЫТЬ</a>
                     </div>
                 </div>

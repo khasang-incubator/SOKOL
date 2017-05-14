@@ -15,11 +15,18 @@
         <sf:form method="post" action="/requestList/edit" id="requestForm" cssClass="form-horizontal"
                  enctype="multipart/form-data">
             <div class="form-body">
-                <input type="hidden" name="idrequest" value="${request.requestId}">
+                <input type="hidden" name="requestid" value="${request.requestId}">
+                <input type="hidden" name="pageNumber" value="${pagingParameters.pageNumber}">
+                <input type="hidden" name="sortBy" value="${pagingParameters.sortBy}">
+                <input type="hidden" name="sortOrder" value="${pagingParameters.sortOrder}">
+                <input type="hidden" name="sortOrderHeader" value="${pagingParameters.sortOrderHeader}">
+<%--
                 <input type="hidden" name="pageNumber" value="${pageNumber}">
                 <input type="hidden" name="sortBy" value="${sortBy}">
                 <input type="hidden" name="sortOrder" value="${sortOrder}">
                 <input type="hidden" name="sortOrderHeader" value="${sortOrderHeader}">
+--%>
+
                 <div class="form-group">
                     <label class="control-label col-sm-3">Номер запроса</label>
                     <div class="col-sm-4">
@@ -38,16 +45,16 @@
                 <div class="form-group">
                     <label for="inputType" class="control-label col-sm-3">Тип запроса</label>
                     <div class="col-sm-8">
-                        <select name="idrequesttypes" id="inputType" class="form-control">
-                            <c:forEach items="${requestTypeAll}" var="requesttype">
-                                <c:if test="${requesttype.id == request.requestType.id}">
-                                    <option value="${requesttype.id}" selected>
-                                        <c:out value="${requesttype.title}"/>
+                        <select name="requestTypeid" id="inputType" class="form-control">
+                            <c:forEach items="${requestTypeAll}" var="requestType">
+                                <c:if test="${requestType.id == request.requestType.id}">
+                                    <option value="${requestType.id}" selected>
+                                        <c:out value="${requestType.title}"/>
                                     </option>
                                 </c:if>
-                                <c:if test="${requesttype.id != request.requestType.id}">
-                                    <option value="${requesttype.id}">
-                                        <c:out value="${requesttype.title}"/>
+                                <c:if test="${requestType.id != request.requestType.id}">
+                                    <option value="${requestType.id}">
+                                        <c:out value="${requestType.title}"/>
                                     </option>
                                 </c:if>
                             </c:forEach>
@@ -58,7 +65,7 @@
                 <div class="form-group">
                     <label for="inputDepartment" class="control-label col-sm-3">Департамент</label>
                     <div class="col-sm-8">
-                        <select name="iddepartment" id="inputDepartment" class="form-control">
+                        <select name="departmentid" id="inputDepartment" class="form-control">
                             <c:forEach items="${departmentAll}" var="department">
                                 <c:if test="${department.id == request.department.id}">
                                     <option value="${department.id}" selected>
@@ -78,53 +85,53 @@
                 <div class="form-group">
                     <label for="inputStatus" class="control-label col-sm-3">Статус запроса</label>
                     <div class="col-sm-8">
-                        <select name="idrequeststatus" id="inputStatus" class="form-control">
-                            <c:set value="${requestStatusAll}" var="requeststatus"/>
+                        <select name="requestStatusid" id="inputStatus" class="form-control">
+                            <c:set value="${requestStatusAll}" var="requestStatus"/>
                             <c:choose>
                                 <c:when test="${request.status.requestStatusId == '1'}"> <%--статус "новый"--%>
-                                    <option value="${requeststatus.get(0).requestStatusId}" selected>
-                                        <c:out value="${requeststatus.get(0).requestStatusName}"/> <%--"новая"--%>
+                                    <option value="${requestStatus.get(0).requestStatusId}" selected>
+                                        <c:out value="${requestStatus.get(0).requestStatusName}"/> <%--"новая"--%>
                                     </option>
-                                    <option value="${requeststatus.get(1).requestStatusId}">
-                                        <c:out value="${requeststatus.get(1).requestStatusName}"/> <%--"в работе"--%>
+                                    <option value="${requestStatus.get(1).requestStatusId}">
+                                        <c:out value="${requestStatus.get(1).requestStatusName}"/> <%--"в работе"--%>
                                     </option>
                                 </c:when>
                                 <c:when test="${request.status.requestStatusId == '2'}"> <%--статус "в работе"--%>
-                                    <option value="${requeststatus.get(1).requestStatusId}" selected>
-                                        <c:out value="${requeststatus.get(1).requestStatusName}"/>
+                                    <option value="${requestStatus.get(1).requestStatusId}" selected>
+                                        <c:out value="${requestStatus.get(1).requestStatusName}"/>
                                     </option>
-                                    <option value="${requeststatus.get(2).requestStatusId}">
-                                        <c:out value="${requeststatus.get(2).requestStatusName}"/>
+                                    <option value="${requestStatus.get(2).requestStatusId}">
+                                        <c:out value="${requestStatus.get(2).requestStatusName}"/>
                                     </option>
-                                    <option value="${requeststatus.get(3).requestStatusId}">
-                                        <c:out value="${requeststatus.get(3).requestStatusName}"/>
+                                    <option value="${requestStatus.get(3).requestStatusId}">
+                                        <c:out value="${requestStatus.get(3).requestStatusName}"/>
                                     </option>
                                 </c:when>
                                 <c:when test="${request.status.requestStatusId == '3'}"> <%--статус "закрыта"--%>
-                                    <option value="${requeststatus.get(1).requestStatusId}">
-                                        <c:out value="${requeststatus.get(1).requestStatusName}"/>
+                                    <option value="${requestStatus.get(1).requestStatusId}">
+                                        <c:out value="${requestStatus.get(1).requestStatusName}"/>
                                     </option>
-                                    <option value="${requeststatus.get(2).requestStatusId}" selected>
-                                        <c:out value="${requeststatus.get(2).requestStatusName}"/>
+                                    <option value="${requestStatus.get(2).requestStatusId}" selected>
+                                        <c:out value="${requestStatus.get(2).requestStatusName}"/>
                                     </option>
-                                    <option value="${requeststatus.get(4).requestStatusId}">
-                                        <c:out value="${requeststatus.get(4).requestStatusName}"/>
+                                    <option value="${requestStatus.get(4).requestStatusId}">
+                                        <c:out value="${requestStatus.get(4).requestStatusName}"/>
                                     </option>
                                 </c:when>
                                 <c:when test="${request.status.requestStatusId == '4'}"> <%--статус "отклонена"--%>
-                                    <option value="${requeststatus.get(3).requestStatusId}" selected>
-                                        <c:out value="${requeststatus.get(3).requestStatusName}"/>
+                                    <option value="${requestStatus.get(3).requestStatusId}" selected>
+                                        <c:out value="${requestStatus.get(3).requestStatusName}"/>
                                     </option>
-                                    <option value="${requeststatus.get(4).requestStatusId}">
-                                        <c:out value="${requeststatus.get(4).requestStatusName}"/>
+                                    <option value="${requestStatus.get(4).requestStatusId}">
+                                        <c:out value="${requestStatus.get(4).requestStatusName}"/>
                                     </option>
                                 </c:when>
                                 <c:when test="${request.status.requestStatusId == '5'}"> <%--статус "на доработку"--%>
-                                    <option value="${requeststatus.get(1).requestStatusId}">
-                                        <c:out value="${requeststatus.get(1).requestStatusName}"/>
+                                    <option value="${requestStatus.get(1).requestStatusId}">
+                                        <c:out value="${requestStatus.get(1).requestStatusName}"/>
                                     </option>
-                                    <option value="${requeststatus.get(4).requestStatusId}" selected>
-                                        <c:out value="${requeststatus.get(4).requestStatusName}"/>
+                                    <option value="${requestStatus.get(4).requestStatusId}" selected>
+                                        <c:out value="${requestStatus.get(4).requestStatusName}"/>
                                     </option>
                                      </c:when>
                             </c:choose>
@@ -142,19 +149,19 @@
                     <div class="col-sm-3">
                     </div>
                     <div class="col-sm-8">
-                        <c:set value="${request.file_name}" var="filename"/>
+                        <c:set value="${request.fileName}" var="fileName"/>
                         <c:choose>
-                            <c:when test="${filename == ''}"> <%--нет файла для скачивания--%>
+                            <c:when test="${fileName == ''}"> <%--нет файла для скачивания--%>
                                 <a title="Скачать"
                                    href="#">
                                     Нет файла для скачивания
                                 </a>
                             </c:when>
 
-                            <c:when test="${filename != ''}">
+                            <c:when test="${fileName != ''}">
                                 <a title="Скачать"
-                                   href="/requestList/download?idRequest=${request.requestId}">
-                                    <c:out value="${filename}"/>
+                                   href="/requestList/download?requestid=${request.requestId}">
+                                    <c:out value="${fileName}"/>
                                 </a>
                             </c:when>
                         </c:choose>
@@ -173,10 +180,11 @@
                     <div class="control-label col-sm-3"></div>
                     <div class="col-sm-8">
                         <c:if test="${request.status.requestStatusId == '1' && request.assignedTo.id == null}"> <%--статус "новый" и запрос никому не назначе--%>
-                            <a href="/requestList/assignedTo?idRequest=${request.requestId}"
+                            <a href="/requestList/assignedTo?requestid=${request.requestId}"
                                class="btn-work pull-left">ВЗЯТЬ В РАБОТУ</a>
                         </c:if>
-                        <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}"
+                        <a href="/requestList/list?pageNumber=${pagingParameters.pageNumber}&sortBy=${pagingParameters.sortBy}
+                                &sortOrder=${pagingParameters.sortOrder}&sortOrderHeader=${pagingParameters.sortOrderHeader}"
                            class="btn-close pull-right">ЗАКРЫТЬ</a>
                         <a href="#" onclick="document.forms['requestForm'].submit();" class="btn-save pull-right">СОХРАНИТЬ</a>
                     </div>

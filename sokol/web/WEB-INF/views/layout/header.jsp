@@ -41,7 +41,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/">Главная</a></li>
                     <sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
-                        <li><a href="/requestList/list?pagenumber=1&sortBy=id&sortOrder=ASC">Запросы</a></li>
+                        <li><a href="/requestList/list?pageNumber=1&sortBy=id&sortOrder=ASC">Запросы</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
                         <li class="dropdown">

@@ -3,17 +3,17 @@ package io.khasang.sokol.pojo;
 public class RequestPojo {
     String title;
     String description;
-    String idrequesttype;
-    String iddepartment;
+    String requestTypeid;
+    String departmentid;
 
     public RequestPojo() {
     }
 
-    public RequestPojo(String title, String description, String idrequesttype, String iddepartment) {
+    public RequestPojo(String title, String description, String requestTypeid, String departmentid) {
         this.title = title;
         this.description = description;
-        this.idrequesttype = idrequesttype;
-        this.iddepartment = iddepartment;
+        this.requestTypeid = requestTypeid;
+        this.departmentid = departmentid;
     }
 
     public String getTitle() {
@@ -32,19 +32,19 @@ public class RequestPojo {
         this.description = description;
     }
 
-    public String getIdrequesttype() {
-        return idrequesttype;
+    public String getRequestTypeid() {
+        return requestTypeid;
     }
 
-    public void setIdrequesttype(String idrequesttype) {
-        this.idrequesttype = idrequesttype;
+    public void setRequestTypeid(String requestTypeid) {
+        this.requestTypeid = requestTypeid;
     }
 
-    public String getIddepartment() {
-        return iddepartment;
+    public String getDepartmentid() {
+        return departmentid;
     }
 
-    public void setIddepartment(String iddepartment) {
-        this.iddepartment = iddepartment;
+    public void setDepartmentid(String departmentid) {
+        this.departmentid = departmentid;
     }
 }
