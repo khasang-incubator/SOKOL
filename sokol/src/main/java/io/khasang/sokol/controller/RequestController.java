@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.ArrayList;
@@ -136,21 +137,21 @@ public class RequestController {
     }*/
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String requestAdd(RequestPojo requestPojo, PagingParameters pagingParameters,
+    public String requestAdd(HttpServletRequest httpServletRequest, PagingParameters pagingParameters,
                              @RequestParam("file") MultipartFile file) throws IOException {
         ModelAndView model = new ModelAndView();
         Request request = new Request();
-        request.setTitle(requestPojo.getTitle());
-        request.setDescription(requestPojo.getDescription());
+        request.setTitle(httpServletRequest.getParameter("title"));
+        request.setDescription(httpServletRequest.getParameter("description"));
         RequestStatus status = requestStatusDao.getById(1);
         request.setStatus(status);
         request.setVersion(1);
         request.setFileName(file.getOriginalFilename());
         request.setFile(file.getBytes());
         request.setCreatedDate(new Date());
-        RequestType requestType = requestTypeDao.getById(Integer.parseInt(requestPojo.getRequestTypeid()));
+        RequestType requestType = requestTypeDao.getById(Integer.parseInt(httpServletRequest.getParameter("requestTypeid")));
         request.setRequestType(requestType);
-        Department department = departmentDao.getById(Integer.parseInt(requestPojo.getDepartmentid()));
+        Department department = departmentDao.getById(Integer.parseInt(httpServletRequest.getParameter("departmentid")));
         request.setDepartment(department);
         SecurityContext context = SecurityContextHolder.getContext();
         request.setCreatedBy(context.getAuthentication().getName());
@@ -235,6 +236,31 @@ public class RequestController {
     }*/
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String addRequestPerformer(HttpServletRequest httpServletRequest,
+                                      PagingParameters pagingParameters,
+                                      @RequestParam("file") final MultipartFile file) throws IOException {
+        ModelAndView model = new ModelAndView();
+        Request request = requestDao.getByRequestId(Integer.parseInt(httpServletRequest.getParameter("requestid")));
+        request.setTitle(httpServletRequest.getParameter("title"));
+        request.setDescription(httpServletRequest.getParameter("description"));
+        RequestStatus status = requestStatusDao.getByRequestStatusId(Integer.parseInt(httpServletRequest.getParameter("requestStatusid")));
+        request.setStatus(status);
+        request.setFile(file.getBytes());
+        request.setUpdatedDate(new Date());
+        RequestType requestType = requestTypeDao.getById(Integer.parseInt(httpServletRequest.getParameter("requestTypeid")));
+        request.setRequestType(requestType);
+        Department department = departmentDao.getById(Integer.parseInt(httpServletRequest.getParameter("departmentid")));
+        request.setDepartment(department);
+        request.setFileName(file.getOriginalFilename());
+        SecurityContext context = SecurityContextHolder.getContext();
+        request.setUpdatedBy(context.getAuthentication().getName());
+        requestDao.saveOrUpdate(request);
+        model.setViewName("requestEdit");
+        return "redirect:/requestList/list?pageNumber=" + pagingParameters.getPageNumber() + "&sortBy=" + pagingParameters.getSortBy()
+                + "&sortOrder=" + pagingParameters.getSortOrder() + "&sortOrderHeader=" + pagingParameters.getSortOrderHeader();
+    }
+
+/*    @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String addRequestPerformer(@RequestParam("requestid") String requestid,
                                       @RequestParam("requestStatusid") String requestStatusid,
                                       RequestPojo requestPojo,
@@ -259,7 +285,7 @@ public class RequestController {
         model.setViewName("requestEdit");
         return "redirect:/requestList/list?pageNumber=" + pagingParameters.getPageNumber() + "&sortBy=" + pagingParameters.getSortBy()
                 + "&sortOrder=" + pagingParameters.getSortOrder() + "&sortOrderHeader=" + pagingParameters.getSortOrderHeader();
-    }
+    }*/
 
 /*        @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String addRequestPerformer(@RequestParam("idrequest") String idrequest,
