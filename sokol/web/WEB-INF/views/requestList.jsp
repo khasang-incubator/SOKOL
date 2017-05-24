@@ -18,8 +18,7 @@
 <script type="text/javascript">
     function onSearchClick(){
         var searchStr = $("#idSearch").val();
-        document.location.href = "/requestList/list?pagenumber=1&sortBy=id&sortOrder=desc&findText=" + searchStr;
-//        /requestList/list?pagenumber=1&sortBy=id&sortOrder=desc
+        document.location.href = "/requestList/list?pageNumber=1&sortBy=id&sortOrder=desc&findText=" + searchStr;
     }
 </script>
 
@@ -27,7 +26,7 @@
 <c:url var="root_url" value="/"/>
 <div class="container">
     <div class="table-header">
-        <a href="${root_url}requestList/add?pagenumber=${pagenumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}"
+        <a href="${root_url}requestList/add?pageNumber=${pageNumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}"
            class="create-btn btn-danger">НОВЫЙ</a>
 
 
@@ -51,31 +50,31 @@
 
             <th style="width: 3%">#</th>
             <th style="width: 8%">
-                <a href="/requestList/list?pagenumber=${pagenumber}&sortBy=status&sortOrder=${sortOrderHeader}"
+                <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=status&sortOrder=${sortOrderHeader}"
                    class="${sortBy.equals('status')? imgBy : ''}">СТАТУС</a>
             </th>
             <th style="width: 14%">
-                <a href="/requestList/list?pagenumber=${pagenumber}&sortBy=title&sortOrder=${sortOrderHeader}&findText=${findText}"
+                <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=title&sortOrder=${sortOrderHeader}&findText=${findText}"
                    class="${sortBy.equals('title')? imgBy : ''}">НАЗВАНИЕ</a>
             </th>
             <th style="width: 14%">
-               <a href="/requestList/list?pagenumber=${pagenumber}&sortBy=description&sortOrder=${sortOrderHeader}&findText=${findText}"
+               <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=description&sortOrder=${sortOrderHeader}&findText=${findText}"
                    class="${sortBy.equals('description')? imgBy : ''}">ОПИСАНИЕ</a>
             </th>
             <th style="width: 8%">
-                <a href="/requestList/list?pagenumber=${pagenumber}&sortBy=createdBy&sortOrder=${sortOrderHeader}"
+                <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=createdBy&sortOrder=${sortOrderHeader}"
                    class="${sortBy.equals('createdBy')? imgBy : ''}">СОЗДАТЕЛЬ</a>
             </th>
             <th style="width: 10%">
-                <a href="/requestList/list?pagenumber=${pagenumber}&sortBy=assignedTo&sortOrder=${sortOrderHeader}"
+                <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=assignedTo&sortOrder=${sortOrderHeader}"
                    class="${sortBy.equals('assignedTo')? imgBy : ''}">ИСПОЛНИТЕЛЬ</a>
             </th>
             <th style="width: 10%">
-                <a href="/requestList/list?pagenumber=${pagenumber}&sortBy=department&sortOrder=${sortOrderHeader}"
+                <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=department&sortOrder=${sortOrderHeader}"
                    class="${sortBy.equals('department')? imgBy : ''}">ДЕПАРТАМЕНТ</a>
             </th>
             <th style="width: 8%">
-                <a href="/requestList/list?pagenumber=${pagenumber}&sortBy=requestType&sortOrder=${sortOrderHeader}"
+                <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=requestType&sortOrder=${sortOrderHeader}"
                    class="${sortBy.equals('requestType')? imgBy : ''}">ТИП</a>
             </th>
             <th style="width: 5%">УДАЛИТЬ</th>
@@ -90,7 +89,7 @@
                     <td><c:out value="${lists.status.requestStatusName}"/></td>
                     <td>
                         <a title="Редактирование запроса"
-                           href="/requestList/edit?idRequest=${lists.requestId}&pagenumber=${pagenumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}">
+                           href="/requestList/edit?requestid=${lists.requestId}&pageNumber=${pageNumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}">
                             <c:out value="${lists.title}"/>
                         </a>
                     </td>
@@ -100,7 +99,7 @@
                     <td><c:out value="${lists.assignedTo.fio}"/></td>
                     <td><c:out value="${lists.department.title}"/></td>
                     <td><c:out value="${lists.requestType.title}"/></td>
-                    <td class="del-cell"><a class="del-btn" href="/requestList/delete?idRequest=${lists.requestId}"
+                    <td class="del-cell"><a class="del-btn" href="/requestList/delete?requestid=${lists.requestId}"
                                             onclick="return confirmAction(${lists.requestId})"></a></td>
                 </tr>
             </c:forEach>
@@ -115,10 +114,10 @@
                             <li>
                                 <a href="" aria-label="Previous"><span aria-hidden="true">&laquo</span></a>
                             </li>
-                            <c:forEach items="${pageTotal}" var="pagenumber" step="1">
+                            <c:forEach items="${pageTotal}" var="pageNumber" step="1">
                                 <li>
-                                    <a href="/requestList/list?pagenumber=${pagenumber.intValue()}&sortBy=${sortBy}&sortOrder=${sortOrder}&findText=${findText}">
-                                        <c:out value="${pagenumber.intValue()}"/>
+                                    <a href="/requestList/list?pageNumber=${pageNumber.intValue()}&sortBy=${sortBy}&sortOrder=${sortOrder}&findText=${findText}">
+                                        <c:out value="${pageNumber.intValue()}"/>
                                     </a>
                                 </li>
                             </c:forEach>

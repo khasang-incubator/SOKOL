@@ -125,6 +125,9 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.jsoup/jsoup
     compile group: 'org.jsoup', name: 'jsoup', version: '1.7.2'
+
+    compile group: 'org.hibernate', name: 'hibernate-validator', version: '4.2.0.Final'
+
 }
 
 task wrapper(type: Wrapper) {
