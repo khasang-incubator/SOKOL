@@ -20,7 +20,6 @@ import io.khasang.sokol.controller.parameter.PagingParameters;
 import io.khasang.sokol.dao.*;
 import io.khasang.sokol.entity.*;
 //import org.jsoup.Jsoup;
-import io.khasang.sokol.pojo.RequestPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -118,84 +117,31 @@ public class RequestController {
         return "requestAdd";
     }
 
-/*    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String requestAddPage(Model requestAddModel,
-                                 @RequestParam("pageNumber") String pageNumber,
-                                 @RequestParam("sortBy") String sortBy,
-                                 @RequestParam("sortOrder") String sortOrder,
-                                 @RequestParam("sortOrderHeader") String sortOrderHeader) {
-        List<RequestType> requestTypeAll = requestTypeDao.getAll();
-        requestAddModel.addAttribute("requestTypeAll", requestTypeAll);
-        List<Department> departmentAll = departmentDao.getAll();
-        requestAddModel.addAttribute("departmentAll", departmentAll);
-        requestAddModel.addAttribute("pageNumber", pageNumber);
-        requestAddModel.addAttribute("sortBy", sortBy);
-        requestAddModel.addAttribute("sortOrder", sortOrder);
-        requestAddModel.addAttribute("sortOrderHeader", sortOrderHeader);
-        requestAddModel.addAttribute("headerTitle", "ЗАПРОСЫ. НОВЫЙ ЗАПРОС");
-        return "requestAdd";
-    }*/
-
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String requestAdd(HttpServletRequest httpServletRequest, PagingParameters pagingParameters,
-                             @RequestParam("file") MultipartFile file) throws IOException {
-        ModelAndView model = new ModelAndView();
-        Request request = new Request();
-        request.setTitle(httpServletRequest.getParameter("title"));
-        request.setDescription(httpServletRequest.getParameter("description"));
+    public String requestAdd(Request request,
+                             @RequestParam("requestTypeId") Integer requestTypeId,
+                             @RequestParam("departmentId") Integer departmentId,
+                             PagingParameters pagingParameters,
+                             @RequestParam("attachedFile") MultipartFile attachedFile) throws IOException {
         RequestStatus status = requestStatusDao.getById(1);
         request.setStatus(status);
         request.setVersion(1);
-        request.setFileName(file.getOriginalFilename());
-        request.setFile(file.getBytes());
+        request.setFileName(attachedFile.getOriginalFilename());
+        request.setFile(attachedFile.getBytes());
         request.setCreatedDate(new Date());
-        RequestType requestType = requestTypeDao.getById(Integer.parseInt(httpServletRequest.getParameter("requestTypeid")));
+        RequestType requestType = requestTypeDao.getById(requestTypeId);
         request.setRequestType(requestType);
-        Department department = departmentDao.getById(Integer.parseInt(httpServletRequest.getParameter("departmentid")));
+        Department department = departmentDao.getById(departmentId);
         request.setDepartment(department);
         SecurityContext context = SecurityContextHolder.getContext();
         request.setCreatedBy(context.getAuthentication().getName());
         request.setUpdatedBy(context.getAuthentication().getName());
         requestDao.save(request);
-        model.setViewName("requestAdd");
         return "redirect:/requestList/list?pageNumber=" + pagingParameters.getPageNumber() + "&sortBy="
                 + pagingParameters.getSortBy() + "&sortOrder=" + pagingParameters.getSortOrder() + "&sortOrderHeader=" + pagingParameters.getSortOrder();
     }
 
-/*    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String requestAdd(@RequestParam("title") String name,
-                             @RequestParam("description") String description,
-                             @RequestParam("idrequesttype") String idrequesttype,
-                             @RequestParam("iddepartment") String iddepartment,
-                             @RequestParam("pageNumber") String pageNumber,
-                             @RequestParam("sortBy") String sortBy,
-                             @RequestParam("sortOrder") String sortOrder,
-                             @RequestParam("sortOrderHeader") String sortOrderHeader,
-                             @RequestParam("file") MultipartFile file) throws IOException {
-        ModelAndView model = new ModelAndView();
-        Request request = new Request();
-        request.setTitle(name);
-        request.setDescription(description);
-        RequestStatus status = requestStatusDao.getById(1);
-        request.setStatus(status);
-        request.setVersion(1);
-        request.setFile_name(file.getOriginalFilename());
-        request.setFile(file.getBytes());
-        request.setCreatedDate(new Date());
-        RequestType requestType = requestTypeDao.getById(Integer.parseInt(idrequesttype));
-        request.setRequestType(requestType);
-        Department department = departmentDao.getById(Integer.parseInt(iddepartment));
-        request.setDepartment(department);
-        SecurityContext context = SecurityContextHolder.getContext();
-        request.setCreatedBy(context.getAuthentication().getName());
-        request.setUpdatedBy(context.getAuthentication().getName());
-        requestDao.save(request);
-        model.setViewName("requestAdd");
-        return "redirect:/requestList/list?pageNumber=" + pageNumber + "&sortBy=" + sortBy + "&sortOrder=" + sortOrder + "&sortOrderHeader=" + sortOrderHeader;
-    }*/
-
     // добавление запроса на редактирование
-
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String requestEditPage(Model requestEditModel, PagingParameters pagingParameters,

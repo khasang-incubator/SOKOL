@@ -23,12 +23,6 @@
                 <input type="hidden" name="sortBy" value="${pagingParameters.sortBy}">
                 <input type="hidden" name="sortOrder" value="${pagingParameters.sortOrder}">
                 <input type="hidden" name="sortOrderHeader" value="${pagingParameters.sortOrderHeader}">
-<%--                <input type="hidden" name="creator" value="${user.getUsername()}"/>
-                <input type="hidden" name="pageNumber" value="${pageNumber}">
-                <input type="hidden" name="sortBy" value="${sortBy}">
-                <input type="hidden" name="sortOrder" value="${sortOrder}">
-                <input type="hidden" name="sortOrderHeader" value="${sortOrderHeader}">--%>
-
                 <div class="form-group">
                     <label for="inputTitle" class="control-label col-sm-3">Название</label>
                     <div class="col-sm-8">
@@ -40,7 +34,7 @@
                 <div class="form-group">
                     <label for="inputType" class="control-label col-sm-3">Тип запроса</label>
                     <div class="col-sm-8">
-                        <select name="requestTypeid" id="inputType" class="form-control">
+                        <select name="requestTypeId" id="inputType" class="form-control">
                             <c:forEach items="${requestTypeAll}" var="requestType">
                                 <option value="${requestType.id}">
                                     <c:out value="${requestType.title}"/>
@@ -53,7 +47,7 @@
                 <div class="form-group">
                     <label for="inputDepartment" class="control-label col-sm-3">Департамент</label>
                     <div class="col-sm-8">
-                        <select name="departmentid" id="inputDepartment" class="form-control">
+                        <select name="departmentId" id="inputDepartment" class="form-control">
                             <c:forEach items="${departmentAll}" var="department">
                                 <option value="${department.id}">
                                     <c:out value="${department.title}"/>
@@ -66,7 +60,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-3">Приложение</label>
                     <div class="col-sm-8">
-                        <input type="file" name="file">
+                        <input type="file" name="attachedFile">
                     </div>
                 </div>
 
