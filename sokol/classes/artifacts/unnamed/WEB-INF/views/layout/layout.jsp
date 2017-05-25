@@ -25,8 +25,8 @@
 
     <title><tiles:getAsString name="title"/></title>
     <script type="text/javascript">
-        function confirmDeletion(id) {
-            if (confirm("Вы действительно хотите удалить № " + id + " ?")) {
+        function confirmDeletion(id, name) {
+            if (confirm("Вы действительно хотите удалить " + name + " № " + id + " ?")) {
                 return true;
             } else {
                 return false;
