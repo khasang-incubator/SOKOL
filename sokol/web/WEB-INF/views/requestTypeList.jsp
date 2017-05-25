@@ -1,16 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<script type="text/javascript">
-    function confirmDeletion(id) {
-        if (confirm("Вы действительно хотите удалить тип запроса № " + id + " ?")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-</script>
-
 <c:url var="root_url" value="/"/>
 <div class="container">
     <div class="table-header">
@@ -32,7 +22,7 @@
                     <td><a href="/requestType/${list.id}"> <c:out value="${list.title}"/></a></td>
                     <td><c:out value="${list.description}"/></td>
                     <td class="del-cell"><a class="del-btn" href="/requestType/delete/${list.id}"
-                                            onclick="return confirmDeletion(${list.id})"></a></td>
+                                            onclick="return confirmDeletion(${list.id}, 'тип запроса')"></a></td>
                 </tr>
             </c:forEach>
             </tbody>

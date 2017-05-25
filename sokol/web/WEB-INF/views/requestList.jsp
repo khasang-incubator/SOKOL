@@ -2,19 +2,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 
-
-
-<script type="text/javascript">
-    function confirmAction(id) {
-        if (confirm("Вы действительно хотите удалить запрос № " + id + " ?")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-</script>
-
-
 <script type="text/javascript">
     function onSearchClick(){
         var searchStr = $("#idSearch").val();
@@ -100,7 +87,7 @@
                     <td><c:out value="${lists.department.title}"/></td>
                     <td><c:out value="${lists.requestType.title}"/></td>
                     <td class="del-cell"><a class="del-btn" href="/requestList/delete?requestid=${lists.requestId}"
-                                            onclick="return confirmAction(${lists.requestId})"></a></td>
+                                            onclick="return confirmDeletion(${lists.requestId}, 'запрос')"></a></td>
                 </tr>
             </c:forEach>
             </tbody>
