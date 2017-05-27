@@ -10,10 +10,11 @@
     <div class="table-wrapper">
         <table class="list-table">
             <thead>
-            <th>#</th>
-            <th style="width: 20%">НАЗВАНИЕ</th>
-            <th style="width: 45%">ОПИСАНИЕ</th>
-            <th>УДАЛИТЬ</th>
+            <th style="width: 5%">#</th>
+            <th style="width: 30%">НАЗВАНИЕ</th>
+            <th style="width: 30%">ОПИСАНИЕ</th>
+            <th style="width: 25%">ДЕПАРТАМЕНТ</th>
+            <th style="width: 10%">УДАЛИТЬ</th>
             </thead>
             <tbody>
             <c:forEach items="${requestTypes}" var="list" step="1" varStatus="loopStatus">
@@ -21,6 +22,7 @@
                     <td><c:out value="${list.id}"/></td>
                     <td><a href="/requestType/${list.id}"> <c:out value="${list.title}"/></a></td>
                     <td><c:out value="${list.description}"/></td>
+                    <td><c:out value="${list.department.title}"/></td>
                     <td class="del-cell"><a class="del-btn" href="/requestType/delete/${list.id}"
                                             onclick="return confirmDeletion(${list.id}, 'тип запроса')"></a></td>
                 </tr>

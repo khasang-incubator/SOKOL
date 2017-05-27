@@ -194,8 +194,8 @@ public class RequestController {
     }
 
     @RequestMapping(value = "/assignedTo", method = RequestMethod.GET) // назначение ответственного за выполнение заявки
-    public String assignedToRequest(@RequestParam("requestId") String requestId) {
-        Request request = requestDao.getByRequestId(Integer.parseInt(requestId));
+    public String assignedToRequest(@RequestParam("requestId") Integer requestId) {
+        Request request = requestDao.getByRequestId(requestId);
         SecurityContext context = SecurityContextHolder.getContext();
         User user = userDao.getByLogin(context.getAuthentication().getName());
         request.setAssignedTo(user);

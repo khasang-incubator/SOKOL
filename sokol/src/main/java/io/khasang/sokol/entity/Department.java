@@ -18,7 +18,9 @@ package io.khasang.sokol.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "DEPARTMENTS")
@@ -30,6 +32,9 @@ public class Department extends AuditableEntity {
 
     @Column(name = "TITLE")
     private String title;
+
+    @OneToMany(mappedBy = "department")
+    private List<Request> requests = new ArrayList<>();
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RequestType> requestTypes = new ArrayList<>();
@@ -65,5 +70,17 @@ public class Department extends AuditableEntity {
     public void removeRequestType(RequestType requestType) {
         requestTypes.remove(requestType);
         requestType.setDepartment(null);
+    }
+
+    public List<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
+    }
+
+    public void setRequestTypes(List<RequestType> requestTypes) {
+        this.requestTypes = requestTypes;
     }
 }
