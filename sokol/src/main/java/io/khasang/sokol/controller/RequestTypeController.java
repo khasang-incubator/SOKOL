@@ -21,6 +21,8 @@ import io.khasang.sokol.dao.RequestTypeDao;
 import io.khasang.sokol.entity.Department;
 import io.khasang.sokol.entity.RequestType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -72,6 +74,9 @@ public class RequestTypeController {
             requestType.setCreatedDate(now);
             requestType.setUpdatedDate(now);
             requestType.setDepartment(department);
+            SecurityContext context = SecurityContextHolder.getContext();
+            requestType.setCreatedBy(context.getAuthentication().getName());
+            requestType.setUpdatedBy(context.getAuthentication().getName());
             requestTypeDao.save(requestType);
         } else {
             RequestType updated = requestTypeDao.getById(id);
@@ -80,6 +85,8 @@ public class RequestTypeController {
             updated.setTitle(requestType.getTitle());
             updated.setDepartment(department);
             updated.setUpdatedDate(new Date());
+            SecurityContext context = SecurityContextHolder.getContext();
+            updated.setUpdatedBy(context.getAuthentication().getName());
             requestTypeDao.update(updated);
         }
         return REDIRECT_TO_LIST;
