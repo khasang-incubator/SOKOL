@@ -40,8 +40,12 @@ public class RequestType extends AuditableEntity {
 //    @OneToMany(mappedBy = "requestType", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private Set<Field> fields = new HashSet<>();
 
-    @ManyToOne
+/*    @ManyToOne
     @JoinColumn(name = "DEPARTMENT_ID", foreignKey = @ForeignKey(name = "DEPARTMENT_ID_FK"))
+    private Department department;*/
+
+    @ManyToOne
+    @JoinColumn(name = "DEPARTMENT_ID")
     private Department department;
 
     public int getId() {

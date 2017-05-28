@@ -76,7 +76,7 @@
                     <td><c:out value="${lists.status.requestStatusName}"/></td>
                     <td>
                         <a title="Редактирование запроса"
-                           href="/requestList/edit?requestid=${lists.requestId}&pageNumber=${pageNumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}">
+                           href="/requestList/edit?requestId=${lists.requestId}&pageNumber=${pageNumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}">
                             <c:out value="${lists.title}"/>
                         </a>
                     </td>
@@ -86,7 +86,7 @@
                     <td><c:out value="${lists.assignedTo.fio}"/></td>
                     <td><c:out value="${lists.department.title}"/></td>
                     <td><c:out value="${lists.requestType.title}"/></td>
-                    <td class="del-cell"><a class="del-btn" href="/requestList/delete?requestid=${lists.requestId}"
+                    <td class="del-cell"><a class="del-btn" href="/requestList/delete?requestId=${lists.requestId}"
                                             onclick="return confirmDeletion(${lists.requestId}, 'запрос')"></a></td>
                 </tr>
             </c:forEach>

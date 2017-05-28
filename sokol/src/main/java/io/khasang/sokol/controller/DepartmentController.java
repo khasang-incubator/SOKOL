@@ -19,6 +19,8 @@ package io.khasang.sokol.controller;
 import io.khasang.sokol.dao.DepartmentDao;
 import io.khasang.sokol.entity.Department;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,12 +68,17 @@ public class DepartmentController {
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public String update(@PathVariable int id, final Department department) {
         if (id == 0) {
+            SecurityContext context = SecurityContextHolder.getContext();
+            department.setCreatedBy(context.getAuthentication().getName());
+            department.setUpdatedBy(context.getAuthentication().getName());
             departmentDao.save(department);
 
         } else {
             Department updated = departmentDao.getById(id);
             updated.setTitle(department.getTitle());
             updated.setUpdatedDate(new Date());
+            SecurityContext context = SecurityContextHolder.getContext();
+            updated.setUpdatedBy(context.getAuthentication().getName());
             departmentDao.update(department);
 
         }

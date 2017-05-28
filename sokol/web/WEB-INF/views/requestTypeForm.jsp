@@ -14,7 +14,7 @@
             <div class="form-body">
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">ID подразделения</label>
+                    <label class="control-label col-sm-3">ID типа запроса</label>
                     <div class="col-sm-8">
                         <p class="form-control-static">${requestType.id}</p>
                     </div>
@@ -23,14 +23,30 @@
                 <div class="form-group">
                     <label for="inputTitle"  class="control-label col-sm-3">Название</label>
                     <div class="col-sm-8">
-                        <input name="title" id="inputTitle" class="form-control" placeholder="Название подразделения" value="${requestType.title}" required autofocus/>
+                        <input name="title" id="inputTitle" class="form-control" placeholder="Название типа запроса" value="${requestType.title}" required autofocus/>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="inputDescrition"  class="control-label col-sm-3">Описание</label>
+                    <label for="inputDepartment" class="control-label col-sm-3">Департамент</label>
                     <div class="col-sm-8">
-                        <textarea  name="description" id="inputDescrition" placeholder="Описание типа запроса" class="form-control" rows="3" >${requestType.description}</textarea>
+                        <select name="departmentId" id="inputDepartment" class="form-control">
+                            <c:forEach items="${departments}" var="department">
+                                <option value="${department.id}">
+                                    <c:out value="${department.title}"/>
+                                </option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label for="inputDescription"  class="control-label col-sm-3">Описание</label>
+                    <div class="col-sm-8">
+                        <textarea  name="description" id="inputDescription" placeholder="Описание типа запроса" class="form-control" rows="3" >${requestType.description}</textarea>
                     </div>
                 </div>
 
@@ -42,26 +58,36 @@
                         <a href="/requestType/list" class="btn-close pull-right">ЗАКРЫТЬ</a>
                     </div>
                 </div>
-
-
             </div>
         </sf:form>
-        <div class="audit-info">
-            <table>
-                <tr>
-                    <th>АВТОР</th>
-                    <td>Кузнецов Денис</td>
-                    <th>ДАТА СОЗДАНИЯ</th>
-                    <td>01.01.2019 12:78:21</td>
-                </tr>
-                <tr>
-                    <th>ИЗМЕНЕНО</th>
-                    <td>Кузнецов Денис</td>
-                    <th>ДАТА ИЗМЕНЕНИЯ</th>
-                    <td>01.01.2019 12:78:02</td>
-                </tr>
-            </table>
-        </div>
+        <c:choose>
+            <c:when test="${requestType.id == ''}"> <%-- новый тип запроса --%>
+            </c:when>
+            <c:when test="${requestType.id != ''}"> <%-- редактирование типа запроса --%>
+                <div class="audit-info">
+                    <table>
+                        <tr>
+                            <th>АВТОР</th>
+                            <td>${requestType.createdBy}</td>
+                            <th>ДАТА СОЗДАНИЯ</th>
+                            <td>${requestType.createdDate}</td>
+                        </tr>
+                        <tr>
+                            <th>ИЗМЕНЕНО</th>
+                            <td>${requestType.updatedBy}</td>
+                            <th>ДАТА ИЗМЕНЕНИЯ</th>
+                            <td>${requestType.updatedDate}</td>
+                        </tr>
+                    </table>
+                </div>
+            </c:when>
+        </c:choose>
+
+
+
     </div>
     <!-- /FORM -->
 </div>
+
+
+

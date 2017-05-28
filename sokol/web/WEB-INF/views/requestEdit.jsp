@@ -15,17 +15,11 @@
         <sf:form method="post" action="/requestList/edit" id="requestForm" cssClass="form-horizontal"
                  enctype="multipart/form-data">
             <div class="form-body">
-                <input type="hidden" name="requestid" value="${request.requestId}">
+                <input type="hidden" name="requestId" value="${request.requestId}">
                 <input type="hidden" name="pageNumber" value="${pagingParameters.pageNumber}">
                 <input type="hidden" name="sortBy" value="${pagingParameters.sortBy}">
                 <input type="hidden" name="sortOrder" value="${pagingParameters.sortOrder}">
                 <input type="hidden" name="sortOrderHeader" value="${pagingParameters.sortOrderHeader}">
-<%--
-                <input type="hidden" name="pageNumber" value="${pageNumber}">
-                <input type="hidden" name="sortBy" value="${sortBy}">
-                <input type="hidden" name="sortOrder" value="${sortOrder}">
-                <input type="hidden" name="sortOrderHeader" value="${sortOrderHeader}">
---%>
 
                 <div class="form-group">
                     <label class="control-label col-sm-3">Номер запроса</label>
@@ -45,7 +39,7 @@
                 <div class="form-group">
                     <label for="inputType" class="control-label col-sm-3">Тип запроса</label>
                     <div class="col-sm-8">
-                        <select name="requestTypeid" id="inputType" class="form-control">
+                        <select name="requestTypeId" id="inputType" class="form-control">
                             <c:forEach items="${requestTypeAll}" var="requestType">
                                 <c:if test="${requestType.id == request.requestType.id}">
                                     <option value="${requestType.id}" selected>
@@ -65,7 +59,7 @@
                 <div class="form-group">
                     <label for="inputDepartment" class="control-label col-sm-3">Департамент</label>
                     <div class="col-sm-8">
-                        <select name="departmentid" id="inputDepartment" class="form-control">
+                        <select name="departmentId" id="inputDepartment" class="form-control">
                             <c:forEach items="${departmentAll}" var="department">
                                 <c:if test="${department.id == request.department.id}">
                                     <option value="${department.id}" selected>
@@ -85,7 +79,7 @@
                 <div class="form-group">
                     <label for="inputStatus" class="control-label col-sm-3">Статус запроса</label>
                     <div class="col-sm-8">
-                        <select name="requestStatusid" id="inputStatus" class="form-control">
+                        <select name="requestStatusId" id="inputStatus" class="form-control">
                             <c:set value="${requestStatusAll}" var="requestStatus"/>
                             <c:choose>
                                 <c:when test="${request.status.requestStatusId == '1'}"> <%--статус "новый"--%>
@@ -141,7 +135,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-3">Приложение</label>
                     <div class="col-sm-8">
-                        <input type="file" name="file">
+                        <input type="file" name="attachedFile">
                     </div>
                 </div>
 
@@ -160,7 +154,7 @@
 
                             <c:when test="${fileName != ''}">
                                 <a title="Скачать"
-                                   href="/requestList/download?requestid=${request.requestId}">
+                                   href="/requestList/download?requestId=${request.requestId}">
                                     <c:out value="${fileName}"/>
                                 </a>
                             </c:when>
@@ -180,7 +174,7 @@
                     <div class="control-label col-sm-3"></div>
                     <div class="col-sm-8">
                         <c:if test="${request.status.requestStatusId == '1' && request.assignedTo.id == null}"> <%--статус "новый" и запрос никому не назначе--%>
-                            <a href="/requestList/assignedTo?requestid=${request.requestId}"
+                            <a href="/requestList/assignedTo?requestId=${request.requestId}"
                                class="btn-work pull-left">ВЗЯТЬ В РАБОТУ</a>
                         </c:if>
                         <a href="/requestList/list?pageNumber=${pagingParameters.pageNumber}&sortBy=${pagingParameters.sortBy}

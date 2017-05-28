@@ -21,11 +21,14 @@ import io.khasang.sokol.dao.RequestTypeDao;
 import io.khasang.sokol.entity.Department;
 import io.khasang.sokol.entity.RequestType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
 
@@ -49,7 +52,6 @@ public class RequestTypeController {
         String requestType = "Типы запросов";
         model.addAttribute("headerTitle", requestType);
         //model.addAttribute("headerTitle", "Типы запросов");
-
         return REQUEST_TYPE_LIST_VIEW;
     }
 
@@ -64,20 +66,28 @@ public class RequestTypeController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public String updateRequestType(@PathVariable int id, RequestType requestType, Department department) {
+    public String updateRequestType(@PathVariable int id, RequestType requestType,
+                                    @RequestParam("departmentId") Integer departmentId) {
         if (id == 0) {
+            Department department = departmentDao.getById(departmentId);
             Date now = new Date();
             requestType.setCreatedDate(now);
             requestType.setUpdatedDate(now);
+            requestType.setDepartment(department);
+            SecurityContext context = SecurityContextHolder.getContext();
+            requestType.setCreatedBy(context.getAuthentication().getName());
+            requestType.setUpdatedBy(context.getAuthentication().getName());
             requestTypeDao.save(requestType);
         } else {
             RequestType updated = requestTypeDao.getById(id);
+            Department department = departmentDao.getById(departmentId);
             updated.setDescription(requestType.getDescription());
             updated.setTitle(requestType.getTitle());
             updated.setDepartment(department);
             updated.setUpdatedDate(new Date());
-            updated.setDepartment(requestType.getDepartment());
-            requestTypeDao.update(requestType);
+            SecurityContext context = SecurityContextHolder.getContext();
+            updated.setUpdatedBy(context.getAuthentication().getName());
+            requestTypeDao.update(updated);
         }
         return REDIRECT_TO_LIST;
     }

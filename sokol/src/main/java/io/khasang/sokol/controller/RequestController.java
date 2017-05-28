@@ -60,11 +60,11 @@ public class RequestController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String requestListPage(Model requestPageModel,
-                                  @RequestParam(value = "pageNumber", required = false) String pageNumber,
+                                  @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
                                   @RequestParam(value = "sortBy", required = false) String sortBy,
                                   @RequestParam(value = "sortOrder", required = false) String sortOrder,
                                   @RequestParam(value = "findText", required = false) String findText) {
-        pageNumber = (pageNumber == null || pageNumber.equals("")) ? "1" : pageNumber;
+        pageNumber = (pageNumber == null || pageNumber.equals("")) ? 1 : pageNumber;
         sortOrder = (sortOrder == null || sortOrder.equals("")) ? "" : sortOrder;
         sortBy = (sortBy == null || sortBy.equals("")) ? "id" : sortBy;
         String imgBy = "";
@@ -76,12 +76,12 @@ public class RequestController {
             Integer countLineOfTable = requestDao.getCountLineOfTable(); // кол-во записей в таблице
             Integer lastPageNumber = ((countLineOfTable / pageRows) + 1);
             pageNumbers = totalOfPages(lastPageNumber);
-            requestAll = requestDao.sortingBy((Integer.parseInt(pageNumber) - 1) * pageRows, pageRows, sortBy, sortOrder);
+            requestAll = requestDao.sortingBy((pageNumber - 1) * pageRows, pageRows, sortBy, sortOrder);
         } else {
             Integer countLineOfTable = requestDao.getCountLineOfTable(findText); // кол-во записей в таблице
             Integer lastPageNumber = ((countLineOfTable / pageRows) + 1);
             pageNumbers = totalOfPages(lastPageNumber);
-            requestAll = requestDao.sortingBy((Integer.parseInt(pageNumber) - 1) * pageRows, pageRows, sortBy, sortOrder, findText);
+            requestAll = requestDao.sortingBy((pageNumber - 1) * pageRows, pageRows, sortBy, sortOrder, findText);
         }
         if (sortOrder.equals("ASC")) {
             imgBy = "sort-up";
@@ -106,31 +106,31 @@ public class RequestController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String requestAddPage(Model requestAddModel, PagingParameters pagingParameters) {
+    public String doGetRequestPageAdd(Model model, PagingParameters pagingParameters) {
         List<RequestType> requestTypeAll = requestTypeDao.getAll();
         List<Department> departmentAll = departmentDao.getAll();
-        requestAddModel.addAttribute("requestTypeAll", requestTypeAll);
-        requestAddModel.addAttribute("departmentAll", departmentAll);
-        requestAddModel.addAttribute("pagingParameters", pagingParameters);
-        requestAddModel.addAttribute("headerTitle", "ЗАПРОСЫ. НОВЫЙ ЗАПРОС");
+        model.addAttribute("requestTypeAll", requestTypeAll);
+        model.addAttribute("departmentAll", departmentAll);
+        model.addAttribute("pagingParameters", pagingParameters);
+        model.addAttribute("headerTitle", "ЗАПРОСЫ. НОВЫЙ ЗАПРОС");
         return "requestAdd";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String requestAdd(Request request,
-                             @RequestParam("requestTypeId") Integer requestTypeId,
-                             @RequestParam("departmentId") Integer departmentId,
-                             PagingParameters pagingParameters,
-                             @RequestParam("attachedFile") MultipartFile attachedFile) throws IOException {
+    public String doPostRequestPageAdd(Request request,
+                                 PagingParameters pagingParameters,
+                                 @RequestParam("requestTypeId") Integer requestTypeId,
+                                 @RequestParam("departmentId") Integer departmentId,
+                                 @RequestParam("attachedFile") MultipartFile attachedFile) throws IOException {
         RequestStatus status = requestStatusDao.getById(1);
+        RequestType requestType = requestTypeDao.getById(requestTypeId);
+        Department department = departmentDao.getById(departmentId);
         request.setStatus(status);
         request.setVersion(1);
         request.setFileName(attachedFile.getOriginalFilename());
         request.setFile(attachedFile.getBytes());
         request.setCreatedDate(new Date());
-        RequestType requestType = requestTypeDao.getById(requestTypeId);
         request.setRequestType(requestType);
-        Department department = departmentDao.getById(departmentId);
         request.setDepartment(department);
         SecurityContext context = SecurityContextHolder.getContext();
         request.setCreatedBy(context.getAuthentication().getName());
@@ -143,136 +143,59 @@ public class RequestController {
     // добавление запроса на редактирование
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String requestEditPage(Model requestEditModel, PagingParameters pagingParameters,
-                                  @RequestParam("requestid") String requestid) {
-        Request request = requestDao.getByRequestId(Integer.parseInt(requestid));
-        requestEditModel.addAttribute("request", request);
+    public String doGetRequestPageEdit (Model model, PagingParameters pagingParameters,
+                                  @RequestParam("requestId") Integer requestId) {
+        Request request = requestDao.getByRequestId(requestId);
         List<RequestStatus> requestStatusAll = requestStatusDao.getAll();
         List<RequestType> requestTypeAll = requestTypeDao.getAll();
-        requestEditModel.addAttribute("requestTypeAll", requestTypeAll);
-        requestEditModel.addAttribute("requestStatusAll", requestStatusAll);
         List<Department> departmentAll = departmentDao.getAll();
-        requestEditModel.addAttribute("departmentAll", departmentAll);
-        requestEditModel.addAttribute("pagingParameters", pagingParameters);
-        requestEditModel.addAttribute("headerTitle", "ЗАПРОСЫ. РЕДАКТИРОВАНИЕ ЗАПРОСА");
+        model.addAttribute("request", request);
+        model.addAttribute("requestTypeAll", requestTypeAll);
+        model.addAttribute("requestStatusAll", requestStatusAll);
+        model.addAttribute("departmentAll", departmentAll);
+        model.addAttribute("pagingParameters", pagingParameters);
+        model.addAttribute("headerTitle", "ЗАПРОСЫ. РЕДАКТИРОВАНИЕ ЗАПРОСА");
         return "requestEdit";
     }
-
-/*    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String requestEditPage(Model requestEditModel, @RequestParam("idRequest") String idRequest,
-                                  @RequestParam("pageNumber") String pageNumber,
-                                  @RequestParam("sortBy") String sortBy,
-                                  @RequestParam("sortOrder") String sortOrder,
-                                  @RequestParam("sortOrderHeader") String sortOrderHeader) {
-        Request request = requestDao.getByRequestId(Integer.parseInt(idRequest));
-        requestEditModel.addAttribute("request", request);
-        List<RequestStatus> requestStatusAll = requestStatusDao.getAll();
-        List<RequestType> requestTypeAll = requestTypeDao.getAll();
-        requestEditModel.addAttribute("requestTypeAll", requestTypeAll);
-        List<Department> departmentAll = departmentDao.getAll();
-        requestEditModel.addAttribute("departmentAll", departmentAll);
-        requestEditModel.addAttribute("requestStatusAll", requestStatusAll);
-        requestEditModel.addAttribute("pageNumber", pageNumber);
-        requestEditModel.addAttribute("sortBy", sortBy);
-        requestEditModel.addAttribute("sortOrder", sortOrder);
-        requestEditModel.addAttribute("sortOrderHeader", sortOrderHeader);
-        requestEditModel.addAttribute("headerTitle", "ЗАПРОСЫ. РЕДАКТИРОВАНИЕ ЗАПРОСА");
-        return "requestEdit";
-    }*/
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String addRequestPerformer(HttpServletRequest httpServletRequest,
+    public String doPostRequestPageEdit (Request request,
                                       PagingParameters pagingParameters,
-                                      @RequestParam("file") final MultipartFile file) throws IOException {
-        ModelAndView model = new ModelAndView();
-        Request request = requestDao.getByRequestId(Integer.parseInt(httpServletRequest.getParameter("requestid")));
-        request.setTitle(httpServletRequest.getParameter("title"));
-        request.setDescription(httpServletRequest.getParameter("description"));
-        RequestStatus status = requestStatusDao.getByRequestStatusId(Integer.parseInt(httpServletRequest.getParameter("requestStatusid")));
-        request.setStatus(status);
-        request.setFile(file.getBytes());
-        request.setUpdatedDate(new Date());
-        RequestType requestType = requestTypeDao.getById(Integer.parseInt(httpServletRequest.getParameter("requestTypeid")));
-        request.setRequestType(requestType);
-        Department department = departmentDao.getById(Integer.parseInt(httpServletRequest.getParameter("departmentid")));
-        request.setDepartment(department);
-        request.setFileName(file.getOriginalFilename());
+                                      @RequestParam("requestId") Integer requestId,
+                                      @RequestParam("requestStatusId") Integer requestStatusId,
+                                      @RequestParam("requestTypeId") Integer requestTypeId,
+                                      @RequestParam("departmentId") Integer departmentId,
+                                      @RequestParam("attachedFile") MultipartFile attachedFile) throws IOException {
+        Request update = requestDao.getByRequestId(requestId);
+        RequestStatus status = requestStatusDao.getByRequestStatusId(requestStatusId);
+        RequestType requestType = requestTypeDao.getById(requestTypeId);
+        Department department = departmentDao.getById(departmentId);
+        update.setTitle(request.getTitle());
+        update.setDescription(request.getDescription());
+        update.setStatus(status);
+        update.setRequestType(requestType);
+        update.setDepartment(department);
+        update.setFile(attachedFile.getBytes());
+        update.setFileName(attachedFile.getOriginalFilename());
+        update.setUpdatedDate(new Date());
         SecurityContext context = SecurityContextHolder.getContext();
-        request.setUpdatedBy(context.getAuthentication().getName());
-        requestDao.saveOrUpdate(request);
-        model.setViewName("requestEdit");
+        update.setUpdatedBy(context.getAuthentication().getName());
+        requestDao.saveOrUpdate(update);
         return "redirect:/requestList/list?pageNumber=" + pagingParameters.getPageNumber() + "&sortBy=" + pagingParameters.getSortBy()
                 + "&sortOrder=" + pagingParameters.getSortOrder() + "&sortOrderHeader=" + pagingParameters.getSortOrderHeader();
     }
 
-/*    @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String addRequestPerformer(@RequestParam("requestid") String requestid,
-                                      @RequestParam("requestStatusid") String requestStatusid,
-                                      RequestPojo requestPojo,
-                                      PagingParameters pagingParameters,
-                                      @RequestParam("file") final MultipartFile file) throws IOException {
-        ModelAndView model = new ModelAndView();
-        Request request = requestDao.getByRequestId(Integer.parseInt(requestid));
-        request.setTitle(requestPojo.getTitle());
-        request.setDescription(requestPojo.getDescription());
-        RequestStatus status = requestStatusDao.getByRequestStatusId(Integer.parseInt(requestStatusid));
-        request.setStatus(status);
-        request.setFile(file.getBytes());
-        request.setUpdatedDate(new Date());
-        RequestType requestType = requestTypeDao.getById(Integer.parseInt(requestPojo.getRequestTypeid()));
-        request.setRequestType(requestType);
-        Department department = departmentDao.getById(Integer.parseInt(requestPojo.getDepartmentid()));
-        request.setDepartment(department);
-        request.setFileName(file.getOriginalFilename());
-        SecurityContext context = SecurityContextHolder.getContext();
-        request.setUpdatedBy(context.getAuthentication().getName());
-        requestDao.saveOrUpdate(request);
-        model.setViewName("requestEdit");
-        return "redirect:/requestList/list?pageNumber=" + pagingParameters.getPageNumber() + "&sortBy=" + pagingParameters.getSortBy()
-                + "&sortOrder=" + pagingParameters.getSortOrder() + "&sortOrderHeader=" + pagingParameters.getSortOrderHeader();
-    }*/
-
-/*        @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String addRequestPerformer(@RequestParam("idrequest") String idrequest,
-                                      @RequestParam("title") String name,
-                                      @RequestParam("description") String description,
-                                      @RequestParam("idrequesttypes") String idrequesttypes,
-                                      @RequestParam("iddepartment") String iddepartment,
-                                      @RequestParam("idrequeststatus") String idrequeststatus,
-                                      PagingParameters pagingParameters,
-                                      @RequestParam("file") final MultipartFile file) throws IOException {
-        ModelAndView model = new ModelAndView();
-        Request request = requestDao.getByRequestId(Integer.parseInt(idrequest));
-        request.setTitle(name);
-        request.setDescription(description);
-        RequestStatus status = requestStatusDao.getByRequestStatusId(Integer.parseInt(idrequeststatus));
-        request.setStatus(status);
-        request.setFile(file.getBytes());
-        request.setUpdatedDate(new Date());
-        RequestType requestType = requestTypeDao.getById(Integer.parseInt(idrequesttypes));
-        request.setRequestType(requestType);
-        Department department = departmentDao.getById(Integer.parseInt(iddepartment));
-        request.setDepartment(department);
-        request.setFileName(file.getOriginalFilename());
-        SecurityContext context = SecurityContextHolder.getContext();
-        request.setUpdatedBy(context.getAuthentication().getName());
-        requestDao.saveOrUpdate(request);
-        model.setViewName("requestEdit");
-        return "redirect:/requestList/list?pageNumber=" + pagingParameters.getPageNumber() + "&sortBy=" + pagingParameters.getSortBy()
-                + "&sortOrder=" + pagingParameters.getSortOrder() + "&sortOrderHeader=" + pagingParameters.getSortOrderHeader();
-    }*/
-
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String delRequestPage(Model delRequest, @RequestParam("requestid") String requestid) {
-        Request request = requestDao.getByRequestId(Integer.parseInt(requestid));
+    public String delRequestPage(Model delRequest, @RequestParam("requestId") Integer requestId) {
+        Request request = requestDao.getByRequestId(requestId);
         requestDao.delete(request);
         delRequest.addAttribute("request", request);
         return REDIRECT_TO_LIST;
     }
 
     @RequestMapping(value = "/assignedTo", method = RequestMethod.GET) // назначение ответственного за выполнение заявки
-    public String assignedToRequest(@RequestParam("requestid") String requestid) {
-        Request request = requestDao.getByRequestId(Integer.parseInt(requestid));
+    public String assignedToRequest(@RequestParam("requestId") Integer requestId) {
+        Request request = requestDao.getByRequestId(requestId);
         SecurityContext context = SecurityContextHolder.getContext();
         User user = userDao.getByLogin(context.getAuthentication().getName());
         request.setAssignedTo(user);
@@ -282,9 +205,9 @@ public class RequestController {
     }
 
     @RequestMapping(value = "/download", method = RequestMethod.GET)
-    public HttpServletResponse downloadFile(HttpServletResponse response, @RequestParam("requestid") String requestid)
+    public HttpServletResponse downloadFile(HttpServletResponse response, @RequestParam("requestId") Integer requestId)
             throws Exception {
-        Request request = requestDao.getByRequestId(Integer.parseInt(requestid));
+        Request request = requestDao.getByRequestId(requestId);
         String fileName = request.getFileName();
         byte[] file = request.getFile();
         InputStream input = new ByteArrayInputStream(file);
