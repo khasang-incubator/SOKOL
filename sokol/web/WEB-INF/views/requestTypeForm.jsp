@@ -14,7 +14,7 @@
             <div class="form-body">
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">ID подразделения</label>
+                    <label class="control-label col-sm-3">ID</label>
                     <div class="col-sm-8">
                         <p class="form-control-static">${requestType.id}</p>
                     </div>

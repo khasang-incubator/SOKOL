@@ -68,7 +68,7 @@ public class AppInitialiser implements ApplicationListener<ContextRefreshedEvent
         if (dep == null) {
             dep = new Department();
             dep.setId(1);
-            dep.setTitle("Test");
+            dep.setTitle("ИТ-сервис");
             dep.setCreatedBy("SYSTEM");
             dep.setUpdatedBy("SYSTEM");
 
