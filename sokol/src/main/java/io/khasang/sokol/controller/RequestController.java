@@ -108,11 +108,9 @@ public class RequestController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String doGetRequestPageAdd(Model model, PagingParameters pagingParameters) {
         List<RequestType> requestTypeAll = requestTypeDao.getAll();
-        List<Department> departmentAll = departmentDao.getAll();
         model.addAttribute("requestTypeAll", requestTypeAll);
-        model.addAttribute("departmentAll", departmentAll);
         model.addAttribute("pagingParameters", pagingParameters);
-        model.addAttribute("headerTitle", "ЗАПРОСЫ. НОВЫЙ ЗАПРОС");
+        model.addAttribute("headerTitle", "Новый запрос");
         return "requestAdd";
     }
 
@@ -120,18 +118,16 @@ public class RequestController {
     public String doPostRequestPageAdd(Request request,
                                  PagingParameters pagingParameters,
                                  @RequestParam("requestTypeId") Integer requestTypeId,
-                                 @RequestParam("departmentId") Integer departmentId,
                                  @RequestParam("attachedFile") MultipartFile attachedFile) throws IOException {
         RequestStatus status = requestStatusDao.getById(1);
         RequestType requestType = requestTypeDao.getById(requestTypeId);
-        Department department = departmentDao.getById(departmentId);
         request.setStatus(status);
         request.setVersion(1);
         request.setFileName(attachedFile.getOriginalFilename());
         request.setFile(attachedFile.getBytes());
         request.setCreatedDate(new Date());
         request.setRequestType(requestType);
-        request.setDepartment(department);
+     //   request.setDepartment(department);
         SecurityContext context = SecurityContextHolder.getContext();
         request.setCreatedBy(context.getAuthentication().getName());
         request.setUpdatedBy(context.getAuthentication().getName());
@@ -148,13 +144,11 @@ public class RequestController {
         Request request = requestDao.getByRequestId(requestId);
         List<RequestStatus> requestStatusAll = requestStatusDao.getAll();
         List<RequestType> requestTypeAll = requestTypeDao.getAll();
-        List<Department> departmentAll = departmentDao.getAll();
         model.addAttribute("request", request);
         model.addAttribute("requestTypeAll", requestTypeAll);
         model.addAttribute("requestStatusAll", requestStatusAll);
-        model.addAttribute("departmentAll", departmentAll);
         model.addAttribute("pagingParameters", pagingParameters);
-        model.addAttribute("headerTitle", "ЗАПРОСЫ. РЕДАКТИРОВАНИЕ ЗАПРОСА");
+        model.addAttribute("headerTitle", String.format("Запрос: %s", request.getTitle()));
         return "requestEdit";
     }
 
@@ -164,17 +158,14 @@ public class RequestController {
                                       @RequestParam("requestId") Integer requestId,
                                       @RequestParam("requestStatusId") Integer requestStatusId,
                                       @RequestParam("requestTypeId") Integer requestTypeId,
-                                      @RequestParam("departmentId") Integer departmentId,
                                       @RequestParam("attachedFile") MultipartFile attachedFile) throws IOException {
         Request update = requestDao.getByRequestId(requestId);
         RequestStatus status = requestStatusDao.getByRequestStatusId(requestStatusId);
         RequestType requestType = requestTypeDao.getById(requestTypeId);
-        Department department = departmentDao.getById(departmentId);
         update.setTitle(request.getTitle());
         update.setDescription(request.getDescription());
         update.setStatus(status);
         update.setRequestType(requestType);
-        update.setDepartment(department);
         update.setFile(attachedFile.getBytes());
         update.setFileName(attachedFile.getOriginalFilename());
         update.setUpdatedDate(new Date());

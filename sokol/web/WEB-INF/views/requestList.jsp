@@ -9,13 +9,11 @@
     }
 </script>
 
-
 <c:url var="root_url" value="/"/>
 <div class="container">
     <div class="table-header">
         <a href="${root_url}requestList/add?pageNumber=${pageNumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}"
            class="create-btn btn-danger">НОВЫЙ</a>
-
 
         <div style="display: inline-block; width: 300px; float: right; margin-top: -5px;">
                <div class="input-group">
@@ -56,10 +54,6 @@
                 <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=assignedTo&sortOrder=${sortOrderHeader}"
                    class="${sortBy.equals('assignedTo')? imgBy : ''}">ИСПОЛНИТЕЛЬ</a>
             </th>
-            <th style="width: 10%">
-                <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=department&sortOrder=${sortOrderHeader}"
-                   class="${sortBy.equals('department')? imgBy : ''}">ДЕПАРТАМЕНТ</a>
-            </th>
             <th style="width: 8%">
                 <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=requestType&sortOrder=${sortOrderHeader}"
                    class="${sortBy.equals('requestType')? imgBy : ''}">ТИП</a>
@@ -71,7 +65,6 @@
             <c:forEach items="${requestAll}" var="lists" step="1" varStatus="loopStatus">
 
                 <tr class="${loopStatus.index % 2 == 0 ? 'alt' : ''}">
-
                     <td><c:out value="${lists.requestId}"/></td>
                     <td><c:out value="${lists.status.requestStatusName}"/></td>
                     <td>
@@ -84,7 +77,6 @@
                     <td><c:out value="${lists.description}"/></td>
                     <td><c:out value="${lists.createdBy}"/></td>
                     <td><c:out value="${lists.assignedTo.fio}"/></td>
-                    <td><c:out value="${lists.department.title}"/></td>
                     <td><c:out value="${lists.requestType.title}"/></td>
                     <td class="del-cell"><a class="del-btn" href="/requestList/delete?requestId=${lists.requestId}"
                                             onclick="return confirmDeletion(${lists.requestId}, 'запрос')"></a></td>

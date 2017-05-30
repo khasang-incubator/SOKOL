@@ -12,13 +12,12 @@
 <div class="container">
     <!-- FORM  -->
     <div class="form-wrapper">
-        <%--<sf:form method="post" id="departmentForm" action="${root_url}department/add"  cssClass="form-horizontal">--%>
         <sf:form method="post" id="departmentForm" action="/department/${department.id}" cssClass="form-horizontal">
             <%--action="/users/${user.id}"--%>
             <div class="form-body">
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">ID подразделения</label>
+                    <label class="control-label col-sm-3">ID департамента</label>
                     <div class="col-sm-8">
                         <p class="form-control-static">${department.id}</p>
                     </div>

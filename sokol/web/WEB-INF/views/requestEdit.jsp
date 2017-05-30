@@ -57,26 +57,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputDepartment" class="control-label col-sm-3">Департамент</label>
-                    <div class="col-sm-8">
-                        <select name="departmentId" id="inputDepartment" class="form-control">
-                            <c:forEach items="${departmentAll}" var="department">
-                                <c:if test="${department.id == request.department.id}">
-                                    <option value="${department.id}" selected>
-                                        <c:out value="${department.title}"/>
-                                    </option>
-                                </c:if>
-                                <c:if test="${department.id != request.department.id}">
-                                    <option value="${department.id}">
-                                        <c:out value="${department.title}"/>
-                                    </option>
-                                </c:if>
-                            </c:forEach>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label for="inputStatus" class="control-label col-sm-3">Статус запроса</label>
                     <div class="col-sm-8">
                         <select name="requestStatusId" id="inputStatus" class="form-control">
