@@ -40,9 +40,6 @@
                     </div>
                 </div>
 
-
-
-
                 <div class="form-group">
                     <label for="inputDescription"  class="control-label col-sm-3">Описание</label>
                     <div class="col-sm-8">
@@ -82,9 +79,6 @@
                 </div>
             </c:when>
         </c:choose>
-
-
-
     </div>
     <!-- /FORM -->
 </div>

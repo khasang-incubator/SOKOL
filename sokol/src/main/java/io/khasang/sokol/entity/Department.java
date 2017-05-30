@@ -33,8 +33,8 @@ public class Department extends AuditableEntity {
     @Column(name = "TITLE")
     private String title;
 
-    @OneToMany(mappedBy = "department")
-    private List<Request> requests = new ArrayList<>();
+/*    @OneToMany(mappedBy = "department")
+    private List<Request> requests = new ArrayList<>();*/
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RequestType> requestTypes = new ArrayList<>();
@@ -54,15 +54,39 @@ public class Department extends AuditableEntity {
         return title;
     }
 
-    public void setTitle(String name) {
-        this.title = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public List<RequestType> getRequestTypes() {
         return requestTypes;
     }
 
-    public void addRequestType(RequestType requestType) {
+    public void setRequestTypes(List<RequestType> requestTypes) {
+        this.requestTypes = requestTypes;
+    }
+
+    /*    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String name) {
+        this.title = name;
+    }
+
+    public List<RequestType> getRequestTypes() {
+        return requestTypes;
+    }*/
+
+/*    public void addRequestType(RequestType requestType) {
         requestTypes.add(requestType);
         requestType.setDepartment(this);
     }
@@ -70,17 +94,17 @@ public class Department extends AuditableEntity {
     public void removeRequestType(RequestType requestType) {
         requestTypes.remove(requestType);
         requestType.setDepartment(null);
-    }
+    }*/
 
-    public List<Request> getRequests() {
+/*    public List<Request> getRequests() {
         return requests;
     }
 
     public void setRequests(List<Request> requests) {
         this.requests = requests;
-    }
+    }*/
 
-    public void setRequestTypes(List<RequestType> requestTypes) {
+/*    public void setRequestTypes(List<RequestType> requestTypes) {
         this.requestTypes = requestTypes;
-    }
+    }*/
 }

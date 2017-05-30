@@ -45,19 +45,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputDepartment" class="control-label col-sm-3">Департамент</label>
-                    <div class="col-sm-8">
-                        <select name="departmentId" id="inputDepartment" class="form-control">
-                            <c:forEach items="${departmentAll}" var="department">
-                                <option value="${department.id}">
-                                    <c:out value="${department.title}"/>
-                                </option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label class="control-label col-sm-3">Приложение</label>
                     <div class="col-sm-8">
                         <input type="file" name="attachedFile">
