@@ -181,7 +181,7 @@ public class AppInitialiser implements ApplicationListener<ContextRefreshedEvent
 
         if (admin_user == null) {
             admin_user = new User();
-            admin_user.setLogin("admin");
+            admin_user.setLogin("admin@test.com");
             admin_user.setFio("Adminisrator");
             admin_user.setEnabled(true);
             admin_user.setPassword(new BCryptPasswordEncoder().encode("admin"));
