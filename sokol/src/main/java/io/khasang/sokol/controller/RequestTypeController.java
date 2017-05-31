@@ -92,26 +92,12 @@ public class RequestTypeController {
         return REDIRECT_TO_LIST;
     }
 
-
-/*    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public String updateRequestType(@PathVariable int id, RequestType requestType, Department department) {
-        RequestType updated = requestTypeDao.getById(id);
-        updated.setDescription(requestType.getDescription());
-        updated.setTitle(requestType.getTitle());
-        updated.setDepartment(department);
-        updated.setUpdatedDate(new Date());
-        updated.setDepartment(requestType.getDepartment());
-        requestTypeDao.update(requestType);
-        return REDIRECT_TO_LIST;
-    }*/
-
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String newRequestType(Model model) {
         model.addAttribute("requestType", new RequestType());
         model.addAttribute("departments", departmentDao.getAll());
         String newRequestType = "Новый тип запроса";
         model.addAttribute("headerTitle", newRequestType);
-        //model.addAttribute("headerTitle", "Новый тип запроса");
         configureCancelUrl(model);
         return REQUEST_TYPE_VIEW;
     }

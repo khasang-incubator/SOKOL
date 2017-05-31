@@ -56,15 +56,6 @@ public class DepartmentController {
         return FORM_VIEW;
     }
 
-/*    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public String update(@PathVariable int id, final Department department) {
-        Department updated = departmentDao.getById(id);
-        updated.setTitle(department.getTitle());
-        updated.setUpdatedDate(new Date());
-        departmentDao.update(department);
-        return REDIRECT_TO_LIST;
-    }*/
-
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public String update(@PathVariable int id, final Department department) {
         if (id == 0) {
@@ -85,7 +76,6 @@ public class DepartmentController {
         return REDIRECT_TO_LIST;
     }
 
-
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String showNew(Model model) {
         model.addAttribute("department", new Department());
@@ -95,13 +85,6 @@ public class DepartmentController {
         model.addAttribute("headerTitle", departmentNew);
         return FORM_VIEW;
     }
-
-
-/*    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String add(Department department) {
-        departmentDao.save(department);
-        return REDIRECT_TO_LIST;
-    }*/
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteRequestType(@PathVariable int id) {
