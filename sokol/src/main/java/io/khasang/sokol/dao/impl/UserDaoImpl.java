@@ -20,7 +20,9 @@ import io.khasang.sokol.dao.UserDao;
 import io.khasang.sokol.entity.Department;
 import io.khasang.sokol.entity.Role;
 import io.khasang.sokol.entity.User;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -63,5 +65,13 @@ public class UserDaoImpl extends GenericDaoImpl<User, Integer> implements UserDa
             return this.getUserListByDepartment(user.getDepartment());
 
         return new ArrayList<User>();
+    }
+
+    @Override
+    public int getCount() {
+        Session session = getSession();
+        String countQ = "Select count(u.id) from User u";
+        Query countQuery = session.createQuery(countQ);
+        return (int) countQuery.uniqueResult();
     }
 }

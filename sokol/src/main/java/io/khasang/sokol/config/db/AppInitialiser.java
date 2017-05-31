@@ -176,11 +176,9 @@ public class AppInitialiser implements ApplicationListener<ContextRefreshedEvent
     }
 
     private void CheckForAdminUser(Role admin_role) {
-
-        User admin_user = userDao.getByLogin("admin");
-
-        if (admin_user == null) {
-            admin_user = new User();
+        int cnt  = userDao.getAll().size();
+        if (cnt == 0) {
+            User admin_user = new User();
             admin_user.setLogin("admin@test.com");
             admin_user.setFio("Adminisrator");
             admin_user.setEnabled(true);

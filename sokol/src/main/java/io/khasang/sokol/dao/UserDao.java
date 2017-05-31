@@ -29,4 +29,7 @@ public interface UserDao extends GenericDao<User, Integer> {
     List<User> getUserListByDepartment(Department department);
 
     List<User> getUserListByUser(User user);
+
+    int getCount();
+
 }
