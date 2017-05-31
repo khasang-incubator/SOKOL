@@ -16,14 +16,8 @@
 
 package io.khasang.sokol.config.db;
 
-import io.khasang.sokol.dao.DepartmentDao;
-import io.khasang.sokol.dao.RequestStatusDao;
-import io.khasang.sokol.dao.RoleDao;
-import io.khasang.sokol.dao.UserDao;
-import io.khasang.sokol.entity.Department;
-import io.khasang.sokol.entity.RequestStatus;
-import io.khasang.sokol.entity.Role;
-import io.khasang.sokol.entity.User;
+import io.khasang.sokol.dao.*;
+import io.khasang.sokol.entity.*;
 import org.osgi.service.component.annotations.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -44,6 +38,8 @@ public class AppInitialiser implements ApplicationListener<ContextRefreshedEvent
     @Autowired
     RequestStatusDao requestStatusDao;
     @Autowired
+    RequestTypeDao requestTypeDao;
+    @Autowired
     DepartmentDao departmentDao;
     @Autowired
     RoleDao roleDao;
@@ -58,20 +54,42 @@ public class AppInitialiser implements ApplicationListener<ContextRefreshedEvent
         CheckForUserRole();
         CheckForManagerRole();
         CheckForDepartments();
+        CheckForRequestTypes();
         CheckForAdminUser(admin_role);
         CheckForStatuses();
         alreadySetup = true;
     }
 
-    private void CheckForDepartments() {
+    private void CheckForRequestTypes() {
+        int cnt  = requestTypeDao.getAll().size();
         Department dep = departmentDao.getById(1);
-        if (dep == null) {
-            dep = new Department();
+        if( dep == null) {
+            CheckForDepartments();
+            dep = departmentDao.getAll().get(0);
+        }
+
+        if(cnt  == 0)
+        {
+            RequestType requestType = new RequestType();
+            requestType.setId(1);
+            requestType.setTitle("Простой  запрос");
+            requestType.setDescription("Запрос в произвольной форме");
+            requestType.setDepartment(dep);
+            requestType.setCreatedBy("SYSTEM");
+            requestType.setUpdatedBy("SYSTEM");
+            requestTypeDao.save(requestType);
+        }
+    }
+
+    private void CheckForDepartments() {
+        int cnt = departmentDao.getAll().size();
+        if (cnt == 0) {
+            Department dep = new Department();
             dep.setId(1);
-            dep.setTitle("Test");
+            dep.setTitle("ИТ сервис");
             dep.setCreatedBy("SYSTEM");
             dep.setUpdatedBy("SYSTEM");
-
+            departmentDao.save(dep);
         }
     }
 
