@@ -177,7 +177,9 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
     @Override
     public Integer getCountLineOfTable() {
         Session session = getSession();
-        String countQ = "Select count (f.requestId) from Request f";
+        //String countQ = "Select count (f.requestId) from Request f";
+        String countQ = "Select count (*) from User ";
+
         Query countQuery = session.createQuery(countQ);
         long countResults = (long) countQuery.uniqueResult();
         return (int) countResults;

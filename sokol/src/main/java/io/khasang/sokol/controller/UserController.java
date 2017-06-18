@@ -64,7 +64,7 @@ public class UserController {
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public String Edit(@PathVariable int userId, Model model) throws ResourceNotFoundException {
-        //Достаем пользователя, которого хотим редактирвоать
+        //Достаем пользователя, которого хотим редактировать
         User user = getUserById(userId);
 
         //Если все в порядке, то достаем все необходимые данные и рисуем форму

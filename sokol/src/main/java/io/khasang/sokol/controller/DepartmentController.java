@@ -86,9 +86,20 @@ public class DepartmentController {
         return FORM_VIEW;
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+/*    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteRequestType(@PathVariable int id) {
-        departmentDao.delete(departmentDao.getById(id));
+      // departmentDao.delete(departmentDao.getById(id));
+        return REDIRECT_TO_LIST;
+    }*/
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteDepartment(@PathVariable int id) {
+        Department updated = departmentDao.getById(id);
+        updated.setUpdatedDate(new Date());
+        updated.setDeleted(true);
+        SecurityContext context = SecurityContextHolder.getContext();
+        updated.setUpdatedBy(context.getAuthentication().getName());
+        departmentDao.update(updated);
         return REDIRECT_TO_LIST;
     }
 }
