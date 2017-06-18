@@ -170,14 +170,13 @@ public class UserController {
         return USER_EDIT_VIEW;
     }
 
-    @RequestMapping(value = "/delete/{userId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete/{userId}")
     public String dreateUser(@PathVariable int userId, Model model) {
         //Достаем пользователя, которого хотим сохранить
         User user = getUserById(userId);
-
         //Удаляем пользователя
         userDao.delete(user);
         model.addAttribute("userEdit", userDao.getAll());
-        return USER_EDIT_VIEW;
+        return REDIRECT_TO_LIST;
     }
 }
