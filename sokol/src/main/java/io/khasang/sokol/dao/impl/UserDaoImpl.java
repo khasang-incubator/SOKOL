@@ -68,6 +68,11 @@ public class UserDaoImpl extends GenericDaoImpl<User, Integer> implements UserDa
     }
 
     @Override
+    public void delete(User entity) {
+        getSession().delete(entity);
+    }
+
+    @Override
     public int getCount() {
         Session session = getSession();
         String countQ = "Select count(u.id) from User u";

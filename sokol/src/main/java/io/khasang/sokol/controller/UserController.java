@@ -121,6 +121,12 @@ public class UserController {
             if (user.getPassword().compareTo(confirmPassword) == 0) {
                 user.setCreatedBy(currentUser.getLogin());
                 user.setUpdatedBy(currentUser.getLogin());
+                if (user.getPassword().compareTo(confirmPassword) == 0 && !confirmPassword.isEmpty()) {
+                    user.Merge(user, user.getPassword());
+                } else {
+                    user.Merge(user);
+                    preparePasswordPrepareErrorForm(model, user);
+                }
                 userDao.save(user);
             } else {
                 preparePasswordPrepareErrorForm(model, user);
