@@ -32,9 +32,12 @@
                     <div class="col-sm-8">
                         <select name="departmentId" id="inputDepartment" class="form-control">
                             <c:forEach items="${departments}" var="department">
-                                <option value="${department.id}">
-                                    <c:out value="${department.title}"/>
-                                </option>
+                                <c:if test="${department.deleted == false}">
+                                    <option value="${department.id}">
+                                        <c:out value="${department.title}"/>
+                                    </option>
+                                </c:if>
+
                             </c:forEach>
                         </select>
                     </div>

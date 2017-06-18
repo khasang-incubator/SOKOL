@@ -33,6 +33,9 @@ public class Department extends AuditableEntity {
     @Column(name = "TITLE")
     private String title;
 
+    @Column(name = "IS_DELETED")
+    private Boolean isDeleted;
+
 /*    @OneToMany(mappedBy = "department")
     private List<Request> requests = new ArrayList<>();*/
 
@@ -40,6 +43,7 @@ public class Department extends AuditableEntity {
     private List<RequestType> requestTypes = new ArrayList<>();
 
     public Department() {
+        this.setDeleted(false);
     }
 
     public int getId() {
@@ -60,6 +64,14 @@ public class Department extends AuditableEntity {
 
     public List<RequestType> getRequestTypes() {
         return requestTypes;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 
     public void setRequestTypes(List<RequestType> requestTypes) {
