@@ -37,7 +37,6 @@
                                         <c:out value="${department.title}"/>
                                     </option>
                                 </c:if>
-
                             </c:forEach>
                         </select>
                     </div>

@@ -79,9 +79,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputDepartmen" class="control-label col-sm-3">Подразделение</label>
+                    <label for="inputDepartment" class="control-label col-sm-3">Департамент</label>
                     <div class="col-sm-8">
-                        <select name="departmentId" class="form-control" id="inputDepartmen">
+<%--                        <select name="departmentId" class="form-control" id="inputDepartment">
                             <c:forEach var="department" items="${departments}">
                                 <c:choose>
                                     <c:when test="${department.id == user.department.id}">
@@ -92,8 +92,28 @@
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>
+                        </select>--%>
+
+                        <select name="departmentId" id="inputDepartment" class="form-control">
+                            <c:forEach items="${departments}" var="department">
+                                <c:if test="${department.deleted == false}">
+                                    <option value="${department.id}">
+                                        <c:out value="${department.title}"/>
+                                    </option>
+                                </c:if>
+                            </c:forEach>
                         </select>
+
+
+
+
+
+
+
+
+
                     </div>
+
                 </div>
                 <div class="form-group">
                     <div class="control-label col-sm-3"></div>
