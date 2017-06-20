@@ -446,4 +446,14 @@ a.graph-btn:hover{
 .panel-sokol .list-table thead{
 	border-bottom: 2px solid #477d95;
 }
-
+.login-frame{
+	background-color: white;
+	width: 400px;
+	margin:auto;
+	margin-top: 50px;
+	border-radius: 10px;
+	padding-bottom: 10px;
+}
+.login-frame .form-control{
+	height: 30px;
+}
