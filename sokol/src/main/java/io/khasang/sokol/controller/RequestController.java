@@ -36,6 +36,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 @PropertySource(value = {"classpath:hibernate.properties"})
@@ -54,11 +55,61 @@ public class RequestController {
     @Autowired
     UserDao userDao;
     @Autowired
-    DepartmentDao departmentDao;
-    @Autowired
     private Environment environment;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String requestListPage(Model requestPageModel,
+                                  Locale locale,
+                                  @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
+                                  @RequestParam(value = "sortBy", required = false) String sortBy,
+                                  @RequestParam(value = "sortOrder", required = false) String sortOrder,
+                                  @RequestParam(value = "findText", required = false) String findText) {
+        pageNumber = (pageNumber == null) ? 1 : pageNumber;
+        sortOrder = (sortOrder == null || sortOrder.equals("")) ? "" : sortOrder;
+        sortBy = (sortBy == null || sortBy.equals("")) ? "id" : sortBy;
+        String imgBy = "";
+        String sortOrderHeader = "";
+        List<Request> requestAll;
+        ArrayList<Integer> pageNumbers;
+        Integer pageRows = Integer.parseInt(environment.getRequiredProperty("page.size")); // кол-во записей на странице
+        if (findText == null || findText.equals("")) {
+            Integer countLineOfTable = requestDao.getCountLineOfTable(); // кол-во записей в таблице
+            Integer lastPageNumber = ((countLineOfTable / pageRows) + 1);
+            pageNumbers = totalOfPages(lastPageNumber);
+            requestAll = requestDao.sortingBy((pageNumber - 1) * pageRows, pageRows, sortBy, sortOrder);
+        } else {
+            Integer countLineOfTable = requestDao.getCountLineOfTable(findText); // кол-во записей в таблице
+            Integer lastPageNumber = ((countLineOfTable / pageRows) + 1);
+            pageNumbers = totalOfPages(lastPageNumber);
+            requestAll = requestDao.sortingBy((pageNumber - 1) * pageRows, pageRows, sortBy, sortOrder, findText);
+        }
+        if (sortOrder.equals("ASC")) {
+            imgBy = "sort-up";
+            sortOrderHeader = "DESC";
+        } else if (sortOrder.equals("DESC")) {
+            imgBy = "sort-down";
+            sortOrderHeader = "ASC";
+        } else {
+            sortOrderHeader = "ASC";
+            sortOrder = "ASC";
+        }
+        requestPageModel.addAttribute("requestAll", requestAll);
+        requestPageModel.addAttribute("pageTotal", pageNumbers);
+        requestPageModel.addAttribute("sortBy", sortBy);
+        requestPageModel.addAttribute("imgBy", imgBy);
+        requestPageModel.addAttribute("sortOrder", sortOrder);
+        requestPageModel.addAttribute("sortOrderHeader", sortOrderHeader);
+        requestPageModel.addAttribute("pageNumber", pageNumber);
+        requestPageModel.addAttribute("findText", findText);
+        requestPageModel.addAttribute("headerTitle", "ЗАПРОСЫ");
+        requestPageModel.addAttribute(locale);
+        return LIST_VIEW;
+    }
+
+
+
+
+   /* @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String requestListPage(Model requestPageModel,
                                   @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
                                   @RequestParam(value = "sortBy", required = false) String sortBy,
@@ -103,7 +154,7 @@ public class RequestController {
         requestPageModel.addAttribute("findText", findText);
         requestPageModel.addAttribute("headerTitle", "ЗАПРОСЫ");
         return LIST_VIEW;
-    }
+    }*/
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String doGetRequestPageAdd(Model model, PagingParameters pagingParameters) {
@@ -116,9 +167,9 @@ public class RequestController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String doPostRequestPageAdd(Request request,
-                                 PagingParameters pagingParameters,
-                                 @RequestParam("requestTypeId") Integer requestTypeId,
-                                 @RequestParam("attachedFile") MultipartFile attachedFile) throws IOException {
+                                       PagingParameters pagingParameters,
+                                       @RequestParam("requestTypeId") Integer requestTypeId,
+                                       @RequestParam("attachedFile") MultipartFile attachedFile) throws IOException {
         RequestStatus status = requestStatusDao.getById(1);
         RequestType requestType = requestTypeDao.getById(requestTypeId);
         request.setStatus(status);
@@ -127,7 +178,7 @@ public class RequestController {
         request.setFile(attachedFile.getBytes());
         request.setCreatedDate(new Date());
         request.setRequestType(requestType);
-     //   request.setDepartment(department);
+        //   request.setDepartment(department);
         SecurityContext context = SecurityContextHolder.getContext();
         request.setCreatedBy(context.getAuthentication().getName());
         request.setUpdatedBy(context.getAuthentication().getName());
@@ -139,8 +190,8 @@ public class RequestController {
     // добавление запроса на редактирование
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String doGetRequestPageEdit (Model model, PagingParameters pagingParameters,
-                                  @RequestParam("requestId") Integer requestId) {
+    public String doGetRequestPageEdit(Model model, PagingParameters pagingParameters,
+                                       @RequestParam("requestId") Integer requestId) {
         Request request = requestDao.getByRequestId(requestId);
         List<RequestStatus> requestStatusAll = requestStatusDao.getAll();
         List<RequestType> requestTypeAll = requestTypeDao.getAll();
@@ -153,12 +204,12 @@ public class RequestController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String doPostRequestPageEdit (Request request,
-                                      PagingParameters pagingParameters,
-                                      @RequestParam("requestId") Integer requestId,
-                                      @RequestParam("requestStatusId") Integer requestStatusId,
-                                      @RequestParam("requestTypeId") Integer requestTypeId,
-                                      @RequestParam("attachedFile") MultipartFile attachedFile) throws IOException {
+    public String doPostRequestPageEdit(Request request,
+                                        PagingParameters pagingParameters,
+                                        @RequestParam("requestId") Integer requestId,
+                                        @RequestParam("requestStatusId") Integer requestStatusId,
+                                        @RequestParam("requestTypeId") Integer requestTypeId,
+                                        @RequestParam("attachedFile") MultipartFile attachedFile) throws IOException {
         Request update = requestDao.getByRequestId(requestId);
         RequestStatus status = requestStatusDao.getByRequestStatusId(requestStatusId);
         RequestType requestType = requestTypeDao.getById(requestTypeId);

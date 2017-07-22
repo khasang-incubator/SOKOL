@@ -14,6 +14,9 @@
     <div class="table-header">
         <a href="${root_url}requestList/add?pageNumber=${pageNumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}"
            class="create-btn btn-danger">НОВЫЙ</a>
+        <a href="/requestList/list?pageNumber=1&sortBy=id&sortOrder=ASC&mylocale=en">EN</a>
+        <a href="/requestList/list?pageNumber=1&sortBy=id&sortOrder=ASC&mylocale=ru">RU</a>
+
 
         <div style="display: inline-block; width: 300px; float: right; margin-top: -5px;">
                <div class="input-group">
@@ -35,8 +38,10 @@
 
             <th style="width: 3%">#</th>
             <th style="width: 8%">
+                <%--                <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=status&sortOrder=${sortOrderHeader}"
+                                 class="${sortBy.equals('status')? imgBy : ''}">СТАТУС</a>--%>
                 <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=status&sortOrder=${sortOrderHeader}"
-                   class="${sortBy.equals('status')? imgBy : ''}">СТАТУС</a>
+                   class="${sortBy.equals('status')? imgBy : ''}"><s:message code="status"/></a>
             </th>
             <th style="width: 14%">
                 <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=title&sortOrder=${sortOrderHeader}&findText=${findText}"
