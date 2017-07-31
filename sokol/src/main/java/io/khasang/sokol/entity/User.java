@@ -53,6 +53,9 @@ public class User extends AuditableEntity {
     @ManyToOne
     private Department department;
 
+    @Column(name = "LANGUAGE")
+    private String language;
+
     @Version
     private int version;
 
@@ -66,6 +69,7 @@ public class User extends AuditableEntity {
         this.fio = usr.fio;
         this.role = usr.role;
         this.department = usr.department;
+        this.language = usr.language;
     }
 
     public void Merge(User usr, String password) {
@@ -159,5 +163,13 @@ public class User extends AuditableEntity {
 
     public void setActive(Boolean active) {
         isActive = active;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }

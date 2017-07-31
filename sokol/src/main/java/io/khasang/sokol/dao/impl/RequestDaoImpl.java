@@ -80,7 +80,7 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
         Query query = session.createQuery("Select sum (case when f.status.requestStatusId = 1 THEN 1 ELSE 0 END)," +
                 "sum(case when f.status.requestStatusId = 2 THEN 1 ELSE 0 END)," +
                 "sum(case when f.status.requestStatusId = 3 THEN 1 ELSE 0 END)" +
-                "from Request f WHERE f.createdBy = ?");
+                "from  Request f WHERE f.createdBy = ?");
         query.setParameter(0, userName);
         List<Object[]> scoreQuery = query.list();
         if (scoreQuery.get(0)[0] != null) {

@@ -111,11 +111,13 @@ public class UserController {
     public String Save(Model model, @PathVariable int userId, User user
             , @RequestParam(value = "confirmPassword", required = false) String confirmPassword
             , @RequestParam(value = "roleId", required = false) Integer roleId
-            , @RequestParam(value = "departmentId", required = false) Integer departmentId) {
+            , @RequestParam(value = "departmentId", required = false) Integer departmentId
+            , @RequestParam(value = "language", required = false) String language) {
         //Достаем текущего пользователя и его роль в системе
         User currentUser = getCurrentUser();
         user.setRole(roleDao.getById(roleId));
         user.setDepartment(departmentDao.getById(departmentId));
+        user.setLanguage(language);
         //Если userId = 0 то создаем нового польователя
         if (userId == 0) {
             if (user.getPassword().compareTo(confirmPassword) == 0) {

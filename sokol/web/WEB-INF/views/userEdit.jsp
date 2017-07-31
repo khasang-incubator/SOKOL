@@ -73,11 +73,11 @@
                                         <option value="${role.id}">${role.description}</option>
                                     </c:otherwise>
                                 </c:choose>
-
                             </c:forEach>
                         </select>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label for="inputDepartment" class="control-label col-sm-3">Департамент</label>
                     <div class="col-sm-8">
@@ -103,18 +103,21 @@
                                 </c:if>
                             </c:forEach>
                         </select>
-
-
-
-
-
-
-
-
-
                     </div>
-
                 </div>
+
+                <div class="form-group">
+                    <label for="roleId" class="control-label col-sm-3">Язык</label>
+                    <div class="col-sm-8">
+                        <select name="language" class="form-control" id="language">
+                            <option value="RU">RU</option>
+                            <option value="EN">EN</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
                 <div class="form-group">
                     <div class="control-label col-sm-3"></div>
                     <div class="col-sm-8">

@@ -55,8 +55,7 @@ To change this template use File | Settings | File Templates.
                 <td><a href="/users/${user.id}"> <c:out value="${user.login}"/></a></td>
                 <td><c:out value="${user.fio}"/></td>
                 <td><c:out value="${user.email}"/></td>
-                <td class="del-cell"><a class="del-btn" href="#"></a>
-                    <a class="del-btn" href="/users/delete/${user.id}"
+                <td class="del-cell"><a class="del-btn" href="/users/delete/${user.id}"
                        onclick="return confirmDeletion(${user.id}, 'пользователь')"></a>
                 </td>
             </tr>
