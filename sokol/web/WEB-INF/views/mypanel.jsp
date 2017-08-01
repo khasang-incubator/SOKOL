@@ -80,7 +80,9 @@
     <div class="mypanel-wrapper">
         <div class="row">
             <div class="col col-md-6 mypanel-col">
-                <span class="col-header">ВХОДЯЩИЕ</span>
+
+                <span class="col-header"><s:message code="status"/></span>
+                <%--<span class="col-header">ВХОДЯЩИЕ</span>--%>
 
                 <div class="panel panel-sokol">
                     <div class="panel-heading">КОЛИЧЕСТВО ЗАПРОСОВ</div>
