@@ -33,6 +33,7 @@ public class MyProfileController {
     DepartmentDao departmentDao;
     private static final String MY_PROFILE_VIEW = "myprofile";
 
+
     @RequestMapping("/myprofile")
     public String myprofile(Model model) {
 
@@ -60,6 +61,7 @@ public class MyProfileController {
 
     @RequestMapping(value = "/myprofile", method = RequestMethod.POST)
     public String Save(Model model,  User user
+            , @RequestParam(value = "language", required = false) String language
             , @RequestParam(value = "confirmPassword", required = false) String confirmPassword
             , @RequestParam(value = "departmentId", required = false) Integer departmentId) {
         //Достаем текущего пользователя и его роль в системе
@@ -67,6 +69,7 @@ public class MyProfileController {
         user.setRole(oldUser.getRole());
         user.setLogin(oldUser.getLogin());
         user.setDepartment(departmentDao.getById(departmentId));
+        user.setLanguage(language);
 
         // Если потрогали парошль, то проверяем что его подтвердили
         if (user.getPassword().compareTo("12345") != 0 || !confirmPassword.isEmpty()) {
@@ -84,7 +87,8 @@ public class MyProfileController {
         oldUser.setUpdatedDate(new Date());
         userDao.update(oldUser);
         fillDictionaries(model);
-        return MY_PROFILE_VIEW;
+        //return MY_PROFILE_VIEW;
+        return "redirect:/mypanel/";
     }
     private void preparePasswordPrepareErrorForm(Model model, User user) {
         model.addAttribute("user", user);

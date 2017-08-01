@@ -83,6 +83,15 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="language" class="control-label col-sm-3">Язык</label>
+                    <div class="col-sm-8">
+                        <select name="language" class="form-control" id="language">
+                            <option value="RU">RU</option>
+                            <option value="EN">EN</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
                     <div class="control-label col-sm-3"></div>
                     <div class="col-sm-8">
 
