@@ -36,6 +36,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Logger;
 
 @Controller
@@ -51,7 +52,7 @@ public class MyPanelController {
     RequestDao requestDao;
 
     @RequestMapping("/mypanel")
-    public String hello(Model model) {
+    public String hello(Model model, Locale locale) {
         requestDao.getAll();
         SecurityContext context = SecurityContextHolder.getContext();
         String userName = context.getAuthentication().getName();
@@ -71,7 +72,8 @@ public class MyPanelController {
         model.addAttribute("myRequests", myRequests);
         model.addAttribute("forMeRequests", forMeRequests);
         String myPanel = "МОЯ ПАНЕЛЬ";
-//        model.addAttribute("headerTitle", "МОЯ ПАНЕЛЬ");
+//      model.addAttribute("headerTitle", "МОЯ ПАНЕЛЬ");
+        model.addAttribute(locale);
         model.addAttribute("headerTitle", myPanel);
 
         return "mypanel";
