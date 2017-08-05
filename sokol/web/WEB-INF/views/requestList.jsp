@@ -14,6 +14,7 @@
     <div class="table-header">
         <a href="${root_url}requestList/add?pageNumber=${pageNumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}"
            class="create-btn btn-danger">НОВЫЙ</a>
+
         <a href="/requestList/list?pageNumber=1&sortBy=id&sortOrder=ASC&mylocale=en">EN</a>
         <a href="/requestList/list?pageNumber=1&sortBy=id&sortOrder=ASC&mylocale=ru">RU</a>
 

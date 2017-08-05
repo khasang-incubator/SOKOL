@@ -59,7 +59,6 @@ public class RequestController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String requestListPage(Model requestPageModel,
-                                  Locale locale,
                                   @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
                                   @RequestParam(value = "sortBy", required = false) String sortBy,
                                   @RequestParam(value = "sortOrder", required = false) String sortOrder,
@@ -102,7 +101,6 @@ public class RequestController {
         requestPageModel.addAttribute("pageNumber", pageNumber);
         requestPageModel.addAttribute("findText", findText);
         requestPageModel.addAttribute("headerTitle", "ЗАПРОСЫ");
-        requestPageModel.addAttribute(locale);
         return LIST_VIEW;
     }
 

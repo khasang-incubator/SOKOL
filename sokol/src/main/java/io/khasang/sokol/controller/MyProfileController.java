@@ -36,15 +36,13 @@ public class MyProfileController {
 
     @RequestMapping("/myprofile")
     public String myprofile(Model model) {
-
-
         User currentUsr = getCurrentUser();
-
         model.addAttribute("user", currentUsr);
         fillDictionaries(model);
         model.addAttribute("headerTitle", "Редактирование пользователя");
         return "myprofile";
     }
+
 
 
 

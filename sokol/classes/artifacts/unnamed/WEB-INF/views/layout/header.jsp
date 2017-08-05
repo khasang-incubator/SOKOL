@@ -39,10 +39,10 @@
             <a class="navbar-brand" href="#"><img src="${root_url}img/Logo1.png"/></a>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Главная</a></li>
+                   <li><a href="/">Главная</a></li>
                     <sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
-                        <li><a href="/requestList/list?pageNumber=1&sortBy=id&sortOrder=ASC&mylocale=ru">Запросы</a></li>
-                        <%--<li><a href="/requestList/list?pageNumber=1&sortBy=id&sortOrder=ASC">Запросы</a></li>--%>
+                        <%--<li><a href="/requestList/list?pageNumber=1&sortBy=id&sortOrder=ASC&mylocale=ru">Запросы</a></li>--%>
+                        <li><a href="/requestList/list?pageNumber=1&sortBy=id&sortOrder=ASC">Запросы</a></li>
                     </sec:authorize>
                     <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
                         <li class="dropdown">
@@ -56,6 +56,8 @@
                             </ul>
                         </li>
                     </sec:authorize>
+                    <li><a href="/mypanel?mylocale=en">EN</a></li>
+                    <li><a href="/mypanel?mylocale=ru">RU</a></li>
                 </ul>
             </div>
         </div>
