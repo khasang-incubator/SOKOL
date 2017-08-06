@@ -85,7 +85,8 @@
                 <%--<span class="col-header">ВХОДЯЩИЕ</span>--%>
 
                 <div class="panel panel-sokol">
-                    <div class="panel-heading">КОЛИЧЕСТВО ЗАПРОСОВ</div>
+                    <%--КОЛИЧЕСТВО ЗАПРОСОВ--%>
+                    <div class="panel-heading"><s:message code="number_of_requests"/></div>
                     <div class="panel-body">
                         <table class="score">
                             <tr>
@@ -140,11 +141,13 @@
             </div>
 
             <div class="col col-md-6  mypanel-col right">
-                <span class="col-header">ИСХОДЯЩИЕ</span>
+                <%--ИСХОДЯЩИЕ--%>
+                <span class="col-header"><s:message code="outcoming"/></span>
 
                 <div class="panel panel-sokol">
-                    <div class="panel-heading">КОЛИЧЕСТВО ЗАПРОСОВ</div>
-                    <div class="panel-body">
+                    <%--КОЛИЧЕСТВО ЗАПРОСОВ--%>
+                    <div class="panel-heading"><s:message code="number_of_requests"/></div>
+                        <div class="panel-body">
                         <table class="score">
                             <tr>
                                 <th>НОВЫЕ</th>
