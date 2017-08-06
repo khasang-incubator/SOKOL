@@ -1,20 +1,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 
 <c:url var="root_url" value="/"/>
 <div class="container">
     <div class="table-header">
-        <a href="${root_url}requestType/add" class="create-btn btn-danger">НОВЫЙ</a>
+        <%--НОВЫЙ--%>
+        <a href="${root_url}requestType/add" class="create-btn btn-danger"><s:message code="new"/></a>
     </div>
 
     <div class="table-wrapper">
         <table class="list-table">
             <thead>
             <th style="width: 5%">#</th>
-            <th style="width: 30%">НАЗВАНИЕ</th>
-            <th style="width: 30%">ОПИСАНИЕ</th>
-            <th style="width: 25%">ДЕПАРТАМЕНТ</th>
-            <th style="width: 10%">УДАЛИТЬ</th>
+            <%--НАЗВАНИЕ--%>
+            <th style="width: 30%"><s:message code="title"/></th>
+            <%--ОПИСАНИЕ--%>
+            <th style="width: 30%"><s:message code="desc"/></th>
+            <%--ДЕПАРТАМЕНТ--%>
+            <th style="width: 25%"><s:message code="department"/></th>
+            <%--УДАЛИТЬ--%>
+            <th style="width: 10%"><s:message code="remove"/></th>
             </thead>
             <tbody>
             <c:forEach items="${requestTypes}" var="list" step="1" varStatus="loopStatus">
