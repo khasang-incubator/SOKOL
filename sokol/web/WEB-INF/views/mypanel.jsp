@@ -90,9 +90,12 @@
                     <div class="panel-body">
                         <table class="score">
                             <tr>
-                                <th>НОВЫЕ</th>
-                                <th>ВЫПОЛНЯЮТСЯ</th>
-                                <th>ВЫПОЛНЕНО</th>
+                                <%--НОВЫЕ--%>
+                                <th><s:message code="new_items"/></th>
+                                    <%--ВЫПОЛНЯЮТСЯ--%>
+                                <th><s:message code="in_progress"/></th>
+                                    <%--ВЫПОЛНЕНО--%>
+                                <th><s:message code="done"/></th>
                             </tr>
                             <tr>
                                 <td>${scoreIn.countNew}</td>
@@ -104,12 +107,17 @@
                 </div>
 
                 <div class="panel panel-sokol">
-                    <div class="panel-heading">ПРОИЗВОДИТЕЛЬНОСТЬ</div>
+                    <%--ПРОИЗВОДИТЕЛЬНОСТЬ--%>
+                    <div class="panel-heading"><s:message code="efficiency"/></div>
                     <div class="panel-body">
-                        <a href="#" class="graph-btn">ЗА ДЕНЬ</a>
-                        <a href="#" class="graph-btn active">ЗА НЕДЕЛЮ</a>
-                        <a href="#" class="graph-btn">ЗА МЕСЯЦ</a>
-                        <a href="#" class="graph-btn">ЗА ГОД</a>
+                        <%--ЗА ДЕНЬ--%>
+                        <a href="#" class="graph-btn"><s:message code="for_day"/></a>
+                        <%--ЗА НЕДЕЛЮ--%>
+                        <a href="#" class="graph-btn active"><s:message code="for_week"/></a>
+                        <%--ЗА МЕСЯЦ--%>
+                        <a href="#" class="graph-btn"><s:message code="for_month"/></a>
+                        <%--ЗА ГОД--%>
+                        <a href="#" class="graph-btn"><s:message code="for_year"/></a>
                         <div class="box">
                             <canvas id="lineLeftChart" height="300" width="400"></canvas>
                         </div>
@@ -117,13 +125,16 @@
                 </div>
 
                 <div class="panel panel-sokol">
-                    <div class="panel-heading">ЗАПРОСЫ</div>
+                    <%--ЗАПРОСЫ--%>
+                    <div class="panel-heading"><s:message code="requests"/></div>
                     <div class="panel-body">
                         <table class="list-table">
                             <thead>
                             <th><a href="#">ID</a></th>
-                            <th><a href="#" class="sort-up">НАЗВАНИЕ</a></th>
-                            <th><a href="#" class="sort-down">СТАТУС</a></th>
+                            <%--НАЗВАНИЕ--%>
+                            <th><a href="#" class="sort-up"><s:message code="title"/></a></th>
+                            <%--СТАТУС--%>
+                            <th><a href="#" class="sort-down"><s:message code="status"/></a></th>
                             </thead>
                             <tbody>
                             <c:forEach var="request" items="${forMeRequests}" step="1" varStatus="loopStatus">
@@ -150,9 +161,12 @@
                         <div class="panel-body">
                         <table class="score">
                             <tr>
-                                <th>НОВЫЕ</th>
-                                <th>ВЫПОЛНЯЮТСЯ</th>
-                                <th>ВЫПОЛНЕНО</th>
+                                <%--НОВЫЕ--%>
+                                <th><s:message code="new_items"/></th>
+                                <%--ВЫПОЛНЯЮТСЯ--%>
+                                <th><s:message code="in_progress"/></th>
+                                <%--ВЫПОЛНЕНО--%>
+                                <th><s:message code="done"/></th>
                             </tr>
                             <tr>
                                 <td>${scoreOut.countNew}</td>
@@ -164,12 +178,17 @@
                 </div>
 
                 <div class="panel panel-sokol">
-                    <div class="panel-heading">ПРОИЗВОДИТЕЛЬНОСТЬ</div>
+                    <%--ПРОИЗВОДИТЕЛЬНОСТЬ--%>
+                    <div class="panel-heading"><s:message code="efficiency"/></div>
                     <div class="panel-body">
-                        <a href="#" class="graph-btn">ЗА ДЕНЬ</a>
-                        <a href="#" class="graph-btn active">ЗА НЕДЕЛЮ</a>
-                        <a href="#" class="graph-btn">ЗА МЕСЯЦ</a>
-                        <a href="#" class="graph-btn">ЗА ГОД</a>
+                        <%--ЗА ДЕНЬ--%>
+                        <a href="#" class="graph-btn"><s:message code="for_day"/></a>
+                        <%--ЗА НЕДЕЛЮ--%>
+                        <a href="#" class="graph-btn active"><s:message code="for_week"/></a>
+                        <%--ЗА МЕСЯЦ--%>
+                        <a href="#" class="graph-btn"><s:message code="for_month"/></a>
+                        <%--ЗА ГОД--%>
+                        <a href="#" class="graph-btn"><s:message code="for_year"/></a>
                         <div class="box">
                             <canvas id="lineRightChart" height="300" width="400"></canvas>
                         </div>
@@ -177,13 +196,16 @@
                 </div>
 
                 <div class="panel panel-sokol">
-                    <div class="panel-heading">ЗАПРОСЫ</div>
+                    <%--ЗАПРОСЫ--%>
+                    <div class="panel-heading"><s:message code="requests"/></div>
                     <div class="panel-body">
                         <table class="list-table">
                             <thead>
                             <th><a href="#">ID</a></th>
-                            <th><a href="#" class="sort-up">НАЗВАНИЕ</a></th>
-                            <th><a href="#" class="sort-down">СТАТУС</a></th>
+                            <%--НАЗВАНИЕ--%>
+                            <th><a href="#" class="sort-up"><s:message code="title"/></a></th>
+                            <%--СТАТУС--%>
+                            <th><a href="#" class="sort-down"><s:message code="status"/></a></th>
                             </thead>
                             <tbody>
                             <c:forEach var="request" items="${myRequests}" step="1" varStatus="loopStatus">
