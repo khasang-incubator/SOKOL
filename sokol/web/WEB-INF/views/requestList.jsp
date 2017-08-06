@@ -12,18 +12,16 @@
 <c:url var="root_url" value="/"/>
 <div class="container">
     <div class="table-header">
+        <%--НОВЫЙ--%>
         <a href="${root_url}requestList/add?pageNumber=${pageNumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}"
-           class="create-btn btn-danger">НОВЫЙ</a>
-
-        <a href="/requestList/list?pageNumber=1&sortBy=id&sortOrder=ASC&mylocale=en">EN</a>
-        <a href="/requestList/list?pageNumber=1&sortBy=id&sortOrder=ASC&mylocale=ru">RU</a>
-
+           class="create-btn btn-danger"><s:message code="new"/></a>
 
         <div style="display: inline-block; width: 300px; float: right; margin-top: -5px;">
                <div class="input-group">
-                    <input type="text" class="form-control" id="idSearch" placeholder="Поиск">
+                    <input type="text" class="form-control" id="idSearch" placeholder="<s:message code="search"/>">
                     <div class="input-group-btn">
-                        <a class="btn btn-default" title="Поиск"
+                        <%--Поиск--%>
+                        <a class="btn btn-default" title="<s:message code="search"/>"
                            href="#" onclick="onSearchClick(); return false;" role="button">
                             <i class="glyphicon glyphicon-search"></i>
                         </a>
@@ -39,32 +37,37 @@
 
             <th style="width: 3%">#</th>
             <th style="width: 8%">
-                <%--                <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=status&sortOrder=${sortOrderHeader}"
-                                 class="${sortBy.equals('status')? imgBy : ''}">СТАТУС</a>--%>
+                <%--СТАТУС--%>
                 <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=status&sortOrder=${sortOrderHeader}"
                    class="${sortBy.equals('status')? imgBy : ''}"><s:message code="status"/></a>
             </th>
             <th style="width: 14%">
+                <%--НАЗВАНИЕ--%>
                 <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=title&sortOrder=${sortOrderHeader}&findText=${findText}"
-                   class="${sortBy.equals('title')? imgBy : ''}">НАЗВАНИЕ</a>
+                   class="${sortBy.equals('title')? imgBy : ''}"><s:message code="title"/></a>
             </th>
             <th style="width: 14%">
+                <%--ОПИСАНИЕ--%>
                <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=description&sortOrder=${sortOrderHeader}&findText=${findText}"
-                   class="${sortBy.equals('description')? imgBy : ''}">ОПИСАНИЕ</a>
+                   class="${sortBy.equals('description')? imgBy : ''}"><s:message code="desc"/></a>
             </th>
             <th style="width: 8%">
+                <%--СОЗДАТЕЛЬ--%>
                 <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=createdBy&sortOrder=${sortOrderHeader}"
-                   class="${sortBy.equals('createdBy')? imgBy : ''}">СОЗДАТЕЛЬ</a>
+                   class="${sortBy.equals('createdBy')? imgBy : ''}"><s:message code="author"/></a>
             </th>
             <th style="width: 10%">
+                <%--ИСПОЛНИТЕЛЬ--%>
                 <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=assignedTo&sortOrder=${sortOrderHeader}"
-                   class="${sortBy.equals('assignedTo')? imgBy : ''}">ИСПОЛНИТЕЛЬ</a>
+                   class="${sortBy.equals('assignedTo')? imgBy : ''}"><s:message code="responsible"/></a>
             </th>
             <th style="width: 8%">
+                <%--ТИП--%>
                 <a href="/requestList/list?pageNumber=${pageNumber}&sortBy=requestType&sortOrder=${sortOrderHeader}"
-                   class="${sortBy.equals('requestType')? imgBy : ''}">ТИП</a>
+                   class="${sortBy.equals('requestType')? imgBy : ''}"><s:message code="type"/></a>
             </th>
-            <th style="width: 5%">УДАЛИТЬ</th>
+            <%--УДАЛИТЬ--%>
+            <th style="width: 5%"><s:message code="remove"/></th>
 
             </thead>
             <tbody>
@@ -93,7 +96,8 @@
         <div class="table-footer">
             <table>
                 <tr>
-                    <td>Страницы:</td>
+                    <%--Страницы--%>
+                    <td><s:message code="pages"/>:</td>
                     <td>
                         <ul class="pagination">
                             <li>
