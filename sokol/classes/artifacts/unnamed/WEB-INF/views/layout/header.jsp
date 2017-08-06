@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <sec:authentication var="user" property="principal"/>
 
 
@@ -39,20 +39,23 @@
             <a class="navbar-brand" href="#"><img src="${root_url}img/Logo1.png"/></a>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                   <li><a href="/">Главная</a></li>
+                    <%--Главная--%>
+                    <li><a href="/"><s:message code="main"/></a></li>
                     <sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')">
-                        <%--<li><a href="/requestList/list?pageNumber=1&sortBy=id&sortOrder=ASC&mylocale=ru">Запросы</a></li>--%>
-                        <li><a href="/requestList/list?pageNumber=1&sortBy=id&sortOrder=ASC">Запросы</a></li>
+                        <%--Запросы--%>
+                        <li><a href="/requestList/list?pageNumber=1&sortBy=id&sortOrder=ASC"><s:message code="requests"/></a></li>
                     </sec:authorize>
                     <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Настройки<b
-                                    class="caret"></b></a>
+                            <%--Настройки--%>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><s:message code="settings"/><b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <!-- <li class="divider"></li> -->
-                                <li><a href="/department/list">Департаменты</a></li>
-                                <li><a href="/users/list">Пользователи</a></li>
-                                <li><a href="/requestType/list">Типы запросов</a></li>
+                                <%--Департаменты--%>
+                                <li><a href="/department/list"><s:message code="departments"/></a></li>
+                                <%--Пользователи--%>
+                                <li><a href="/users/list"><s:message code="users"/></a></li>
+                                <%--Типы запросов--%>
+                                <li><a href="/requestType/list"><s:message code="request_types"/></a></li>
                             </ul>
                         </li>
                     </sec:authorize>

@@ -103,15 +103,16 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("/i18n/usermsg");
-        //messageSource.setDefaultEncoding("UTF-8");
-        messageSource.setDefaultEncoding("windows-1251");
+        messageSource.setDefaultEncoding("UTF-8");
+        //messageSource.setDefaultEncoding("windows-1251");
         return messageSource;
     }
 
     @Bean
     public LocaleResolver localeResolver(){
         CookieLocaleResolver resolver = new CookieLocaleResolver();
-        resolver.setDefaultLocale(new Locale("en"));
+        //resolver.setDefaultLocale(new Locale("en"));
+        resolver.setDefaultLocale(new Locale("ru"));
         resolver.setCookieName("myLocaleCookie");
         resolver.setCookieMaxAge(4800);
 
