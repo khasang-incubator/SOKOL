@@ -23,22 +23,22 @@
                 <input type="hidden" name="sortOrderHeader" value="${pagingParameters.sortOrderHeader}">
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Номер запроса</label>
+                    <label class="control-label col-sm-3"><s:message code="id_request"/></label>
                     <div class="col-sm-4">
                         <p class="form-control-static">${request.requestId}</p>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="inputTitle" class="control-label col-sm-3">Название</label>
+                    <label for="inputTitle" class="control-label col-sm-3"><s:message code="title"/></label>
                     <div class="col-sm-8">
-                        <input name="title" id="inputTitle" class="form-control" placeholder="Название запроса"
+                        <input name="title" id="inputTitle" class="form-control" placeholder="<s:message code='title'/>а"
                                value="${request.title}" required autofocus/>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="inputType" class="control-label col-sm-3">Тип запроса</label>
+                    <label for="inputType" class="control-label col-sm-3"><s:message code="request_type"/></label>
                     <div class="col-sm-8">
                         <select name="requestTypeId" id="inputType" class="form-control">
                             <c:forEach items="${requestTypeAll}" var="requestType">
@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputStatus" class="control-label col-sm-3">Статус запроса</label>
+                    <label for="inputStatus" class="control-label col-sm-3"><s:message code="request_status"/></label>
                     <div class="col-sm-8">
                         <select name="requestStatusId" id="inputStatus" class="form-control">
                             <c:set value="${requestStatusAll}" var="requestStatus"/>
@@ -114,7 +114,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Приложение</label>
+                    <label class="control-label col-sm-3"><s:message code="attachment"/></label>
                     <div class="col-sm-8">
                         <input type="file" name="attachedFile">
                     </div>
@@ -144,9 +144,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputDescription" class="control-label col-sm-3">Описание</label>
+                    <label for="inputDescription" class="control-label col-sm-3"><s:message code="description"/></label>
                     <div class="col-sm-8">
-                        <textarea name="description" id="inputDescription" placeholder="Описание типа запроса"
+                        <textarea name="description" id="inputDescription" placeholder="<s:message code='description'/>"
                                   class="form-control" rows="3">${request.description}</textarea>
                     </div>
                 </div>

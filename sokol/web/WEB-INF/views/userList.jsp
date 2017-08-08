@@ -21,11 +21,12 @@ To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 
 <c:url var="root_url" value="/"/>
 <div class="container">
 <div class="table-header">
-    <a href="${root_url}users/create" class="create-btn btn-danger">НОВЫЙ</a>
+    <a href="${root_url}users/create" class="create-btn btn-danger"><s:message code="new"/></a>
 
     <%--<div style="display: inline-block; width: 300px; float: right; margin-top: -5px;">--%>
         <%--<div class="input-group">--%>
@@ -43,10 +44,10 @@ To change this template use File | Settings | File Templates.
     <table class="list-table">
         <thead>
         <th>#</th>
-        <th>Логин</th>
-        <th>ФИО</th>
-        <th>Эл. почта</th>
-        <th>УДАЛИТЬ</th>
+        <th><s:message code='login'/></th>
+        <th><s:message code="fio_employee"/></th>
+        <th><s:message code="email"/></th>
+        <th><s:message code="remove"/></th>
         </thead>
         <tbody>
         <c:forEach items="${userList}" var="user" step="1" varStatus="loopStatus">
