@@ -8,6 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 
 <c:if test="${errorMessage != null}">
     <div class="alert alert-danger">
@@ -123,8 +124,8 @@
                     <div class="col-sm-8">
 
                         <a href="#" onclick="document.forms['userForm'].submit();"
-                           class="btn-save pull-left">СОХРАНИТЬ</a>
-                        <a href="/users/list" class="btn-close pull-right">ЗАКРЫТЬ</a>
+                           class="btn-save pull-left"><s:message code="save"/></a>
+                        <a href="/users/list" class="btn-close pull-right"><s:message code="close"/></a>
                     </div>
                 </div>
 
@@ -138,16 +139,20 @@
                 <div class="audit-info">
                     <table>
                         <tr>
-                            <th>АВТОР</th>
-                            <td>${user.createdBy}</td>
-                            <th>ДАТА СОЗДАНИЯ</th>
-                            <td>${user.createdDate}</td>
+                                <%--АВТОР--%>
+                            <th><s:message code="author"/></th>
+                            <td>${requestType.createdBy}</td>
+                                <%--ДАТА СОЗДАНИЯ--%>
+                            <th><s:message code="date_of_creation"/></th>
+                            <td>${requestType.createdDate}</td>
                         </tr>
                         <tr>
-                            <th>ИЗМЕНЕНО</th>
-                            <td>${user.updatedBy}</td>
-                            <th>ДАТА ИЗМЕНЕНИЯ</th>
-                            <td>${user.updatedDate}</td>
+                                <%--ИЗМЕНЕНО--%>
+                            <th><s:message code="changed"/></th>
+                            <td>${requestType.updatedBy}</td>
+                                <%--ДАТА ИЗМЕНЕНИЯ--%>
+                            <th><s:message code="date_of_change"/></th>
+                            <td>${requestType.updatedDate}</td>
                         </tr>
                     </table>
                 </div>

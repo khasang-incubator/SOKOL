@@ -105,16 +105,20 @@
         <div class="audit-info">
             <table>
                 <tr>
-                    <th>АВТОР</th>
-                    <td>Кузнецов Денис</td>
-                    <th>ДАТА СОЗДАНИЯ</th>
-                    <td>01.01.2019 12:78:21</td>
+                    <%--АВТОР--%>
+                    <th><s:message code="author"/></th>
+                    <td>${requestType.createdBy}</td>
+                    <%--ДАТА СОЗДАНИЯ--%>
+                    <th><s:message code="date_of_creation"/></th>
+                    <td>${requestType.createdDate}</td>
                 </tr>
                 <tr>
-                    <th>ИЗМЕНЕНО</th>
-                    <td>Кузнецов Денис</td>
-                    <th>ДАТА ИЗМЕНЕНИЯ</th>
-                    <td>01.01.2019 12:78:02</td>
+                    <%--ИЗМЕНЕНО--%>
+                    <th><s:message code="changed"/></th>
+                    <td>${requestType.updatedBy}</td>
+                    <%--ДАТА ИЗМЕНЕНИЯ--%>
+                    <th><s:message code="date_of_change"/></th>
+                    <td>${requestType.updatedDate}</td>
                 </tr>
             </table>
         </div>
