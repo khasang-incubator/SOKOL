@@ -49,7 +49,7 @@
 
                 <div class="form-group">
                     <%--Приложение--%>
-                    <label class="control-label col-sm-3">Приложение</label>
+                    <label class="control-label col-sm-3"><s:message code="attachment"/></label>
                     <div class="col-sm-8">
                         <input type="file" name="attachedFile">
                     </div>
@@ -59,7 +59,7 @@
                     <%--Описание--%>
                     <label for="inputDescription" class="control-label col-sm-3"><s:message code="desc"/></label>
                     <div class="col-sm-8">
-                        <textarea name="description" id="inputDescription" placeholder="<s:message code="request_type_desc"/>"
+                        <textarea name="description" id="inputDescription" placeholder="<s:message code="request_desc"/>"
                                   class="form-control" rows="3"></textarea>
                     </div>
                 </div>
@@ -67,10 +67,12 @@
                 <div class="form-group">
                     <div class="control-label col-sm-3"></div>
                     <div class="col-sm-8">
-                        <a href="#" onclick="document.forms['requestForm'].submit();" class="btn-save pull-left">СОХРАНИТЬ</a>
+                        <%--СОХРАНИТЬ--%>
+                        <a href="#" onclick="document.forms['requestForm'].submit();" class="btn-save pull-left"><s:message code="save"/></a>
                         <a href="/requestList/list?pageNumber=${pagingParameters.pageNumber}&sortBy=${pagingParameters.sortBy}
+                        <%--ЗАКРЫТЬ--%>
                                     &sortOrder=${pagingParameters.sortOrder}&sortOrderHeader=${pagingParameters.sortOrderHeader}"
-                           class="btn-close pull-right">ЗАКРЫТЬ</a>
+                           class="btn-close pull-right"><s:message code="close"/></a>
                     </div>
                 </div>
             </div>
