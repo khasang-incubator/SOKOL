@@ -24,49 +24,49 @@
             <input type="hidden" id="id" name="id" value="${user.id}">
             <div class="form-body">
                 <div class="form-group">
-                    <label  class="control-label col-sm-3">ID сотрудника</label>
+                    <label  class="control-label col-sm-3"><s:message code="id_employee"/></label>
                     <div class="col-sm-8">
                         <p class="form-control-static">${user.id}</p>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label  class="control-label col-sm-3">Логин</label>
+                    <label  class="control-label col-sm-3"><s:message code="login"/></label>
                     <div class="col-sm-8">
                         <p class="form-control-static">${user.login}</p>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputFio" class="control-label col-sm-3">ФИО сотрудника</label>
+                    <label for="inputFio" class="control-label col-sm-3"><s:message code="fio_employee"/></label>
                     <div class="col-sm-8">
-                        <input name="fio" id="inputFio" class="form-control" placeholder="ФИО сотрудника" value="${user.fio}" required autofocus/>
+                        <input name="fio" id="inputFio" class="form-control" placeholder="<s:message code='fio_employee'/>" value="${user.fio}" required autofocus/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail" class="control-label col-sm-3">Эл. почта</label>
+                    <label for="inputEmail" class="control-label col-sm-3"><s:message code="email"/></label>
                     <div class="col-sm-8">
-                        <input name="email" id="inputEmail" class="form-control" placeholder="Эл. почта." value="${user.email}" required />
+                        <input name="email" id="inputEmail" class="form-control" placeholder="<s:message code='email'/>" value="${user.email}" required />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail" class="control-label col-sm-3">Пароль</label>
+                    <label for="inputEmail" class="control-label col-sm-3"><s:message code="password"/></label>
                     <div class="col-sm-8">
-                        <input name="password" type="password" id="inputPassoword" class="form-control" placeholder="Пароль" value="12345" required />
+                        <input name="password" type="password" id="inputPassoword" class="form-control" placeholder="<s:message code='password'/>" value="12345" required />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputConfirmPassword" class="control-label col-sm-3">Подтверждение пароля</label>
+                    <label for="inputConfirmPassword" class="control-label col-sm-3"><s:message code="confirm_password"/></label>
                     <div class="col-sm-8">
-                        <input name="confirmPassword" type="password" id="inputConfirmPassword" class="form-control" placeholder="Подтверждение пароля" value="" required />
+                        <input name="confirmPassword" type="password" id="inputConfirmPassword" class="form-control" placeholder="<s:message code='confirm_password'/>" value="" required />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Роль</label>
+                    <label class="control-label col-sm-3"><s:message code="role"/></label>
                     <div class="col-sm-8">
                         <p class="form-control-static">${user.role.description}</p>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputDepartmen" class="control-label col-sm-3">Подразделение</label>
+                    <label for="inputDepartmen" class="control-label col-sm-3"><s:message code="department"/> </label>
                     <div class="col-sm-8">
                         <select name="departmentId"  class="form-control" id="inputDepartmen">
                             <c:forEach var="department" items="${departments}">
@@ -83,11 +83,11 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="language" class="control-label col-sm-3">Язык</label>
+                    <label for="language" class="control-label col-sm-3"><s:message code="language"/></label>
                     <div class="col-sm-8">
                         <select name="language" class="form-control" id="language">
-                            <option value="RU">RU</option>
-                            <option value="EN">EN</option>
+                            <option value="RU">Русский</option>
+                            <option value="EN">English</option>
                         </select>
                     </div>
                 </div>
@@ -95,8 +95,8 @@
                     <div class="control-label col-sm-3"></div>
                     <div class="col-sm-8">
 
-                        <a href="#" onclick="document.forms['myprofile'].submit();" class="btn-save pull-left">СОХРАНИТЬ</a>
-                        <a href="/users/list" class="btn-close pull-right">ЗАКРЫТЬ</a>
+                        <a href="#" onclick="document.forms['myprofile'].submit();" class="btn-save pull-left"><s:message code="save"/></a>
+                        <a href="/users/list" class="btn-close pull-right"><s:message code="close"/></a>
                     </div>
                 </div>
 
