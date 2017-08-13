@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
 <!-- Footer -->
@@ -11,13 +12,16 @@
                         <ul class="list-inline">
                             <li class="footer-menu-divider">&sdot;</li>
                             <li>
-                                <a href="#about">ГЛАВНАЯ</a>
+                                <%--ГЛАВНАЯ--%>
+                                <a href="#about"><s:message code="main"/></a>
                             </li>
                             <li>
-                                <a href="#about">О НАС</a>
+                                <%--НАС--%>
+                                <a href="#about"><s:message code="about_us"/></a>
                             </li>
                             <li>
-                                <a href="#">СЕРВИСЫ</a>
+                                <%--СЕРВИСЫ--%>
+                                <a href="#"><s:message code="services"/></a>
                             </li>
                             <li class="footer-menu-divider">&sdot;</li>
                         </ul>

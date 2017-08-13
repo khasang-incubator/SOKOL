@@ -15,10 +15,12 @@
             <ul class="nav navbar-nav navbar-right">
                 <sec:authorize access="isAnonymous()">
                     <li>
-                        <a href="${root_url}register">Регистрация</a>
+                        <%--Регистрация--%>
+                        <a href="${root_url}register"><s:message code="registration"/></a>
                     </li>
                     <li>
-                        <a href="${root_url}login">Войти</a>
+                        <%--Войти--%>
+                        <a href="${root_url}login"><s:message code="enter"/></a>
                     </li>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
@@ -29,9 +31,12 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">${user.getUsername()}
                             <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/myprofile">Мой профиль</a></li>
-                            <li><a href="#">Справка</a></li>
-                            <li><a href="/static/j_spring_security_logout">Выход</a></li>
+                            <%--Мой профиль--%>
+                            <li><a href="/myprofile"><s:message code="my_profile"/></a></li>
+                            <%--Справка--%>
+                            <li><a href="#"><s:message code="help"/></a></li>
+                            <%--Выход--%>
+                            <li><a href="/static/j_spring_security_logout"><s:message code="exit"/></a></li>
                         </ul>
                     </li>
                 </sec:authorize>
