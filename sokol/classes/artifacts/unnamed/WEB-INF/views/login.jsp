@@ -7,7 +7,8 @@
 <s:url var="authUrl" value="/static/j_spring_security_check"/>
     <div class="login-frame" >
     <form class="form-signin" action="${authUrl}" method="post">
-        <h2 class="form-signin-heading">Вход</h2>
+        <%--Вход--%>
+        <h2 class="form-signin-heading"><s:message code="entry"/></h2>
         <c:if test="${not empty msg}">
             <div class="msg">${msg}</div>
         </c:if>
@@ -15,20 +16,24 @@
             <div class="error">${error}</div>
         </c:if>
         <div class="username-fld" >
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input name="j_username" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <%--Email address--%>
+        <label for="inputEmail" class="sr-only"><s:message code="email"/></label>
+        <input name="j_username" type="email" id="inputEmail" class="form-control" placeholder="<s:message code="email"/>" required autofocus>
         </div>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input name="j_password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <%--Password--%>
+        <label for="inputPassword" class="sr-only"><s:message code="password"/></label>
+        <input name="j_password" type="password" id="inputPassword" class="form-control" placeholder="<s:message code="password"/>" required>
         <div class="checkbox">
             <label>
                 <%--<input type="checkbox" id="j_remember" name="_spring_security_remember_me" > Remember me--%>
-                <input type="checkbox" id="j_remember" name="remember-me" > Remember me
+                    <%--Remember me--%>
+                <input type="checkbox" id="j_remember" name="remember-me" > <s:message code="remember_me"/>
             </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
-
-        <a class="btn btn-lg btn-info btn-block" href="/register">Регистрация</a>
+        <%--Войти--%>
+        <button class="btn btn-lg btn-primary btn-block" type="submit"><s:message code="enter"/></button>
+        <%--Регистрация--%>
+        <a class="btn btn-lg btn-info btn-block" href="/register"><s:message code="registration"/></a>
     </form>
     </div>
 </div> <!-- /container -->
