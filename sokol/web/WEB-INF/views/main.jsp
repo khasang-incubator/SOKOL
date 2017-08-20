@@ -13,6 +13,13 @@
                     <li>
                         <a href="${root}register">РЕГИСТРАЦИЯ</a>
                     </li>
+                    <li>
+                        <select class="selectpicker lang rus" style="height: 30px" data-width="70px" onchange="document.location= '/?mylocale='+this.value">
+                            <option class="language-bar rus" onclick="alert('eng')" value="ru"></option>
+                            <option class="language-bar eng" selected="1" onclick="alert('eng')" value="en"></option>
+                        </select>
+
+                    </li>
 
                 </ul>
                 <div class="navbar-collapse collapse">

@@ -4,6 +4,7 @@ import io.khasang.sokol.dao.DepartmentDao;
 import io.khasang.sokol.dao.RequestDao;
 import io.khasang.sokol.dao.RoleDao;
 import io.khasang.sokol.dao.UserDao;
+import io.khasang.sokol.entity.Department;
 import io.khasang.sokol.entity.User;
 import io.khasang.sokol.model.CreateTable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import java.util.*;
+import java.util.stream.*;
 
 import java.util.Date;
 import java.util.logging.Logger;
@@ -48,7 +51,10 @@ public class MyProfileController {
 
     private void fillDictionaries(Model model) {
         model.addAttribute("roles", roleDao.getAll());
-        model.addAttribute("departments", departmentDao.getAll());
+        List<Department> deps = departmentDao.getAll();
+        model.addAttribute("departments",
+                deps.stream().filter(d -> d.getDeleted() == null || d.getDeleted() == false)
+                        .collect(Collectors.toList()));
     }
 
     protected User getCurrentUser() {

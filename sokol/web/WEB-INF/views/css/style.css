@@ -457,3 +457,31 @@ a.graph-btn:hover{
 .login-frame .form-control{
 	height: 30px;
 }
+.language-bar{
+	height: 24px;
+	width: 24px;
+}
+.language-bar.rus{
+	background: transparent url("../img/rus.png")  no-repeat right center;
+}
+.language-bar.eng{
+	background: transparent url("../img/eng.png")  no-repeat right center;
+}
+.lang{
+	margin-top: 10px;
+}
+.lang .btn{
+	padding-top: 4px;
+	padding-bottom: 4px;
+	background-color: transparent;
+}
+
+.lang.rus .btn .filter-option{
+	background: transparent url("../img/rus.png")  no-repeat left center;
+	color: transparent;
+}
+.lang .dropdown-menu inner li a:hover,
+.lang .dropdown-menu inner li a:visited{
+	border:none;
+	background-color: transparent;
+}

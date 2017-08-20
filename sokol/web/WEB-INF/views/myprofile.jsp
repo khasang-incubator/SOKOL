@@ -71,6 +71,7 @@
                         <select name="departmentId"  class="form-control" id="inputDepartmen">
                             <c:forEach var="department" items="${departments}">
                                 <c:choose>
+
                                     <c:when test="${department.id == user.department.id}">
                                         <option value="${department.id}" selected="1">${department.title}</option>
                                     </c:when>
