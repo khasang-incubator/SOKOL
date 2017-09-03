@@ -49,7 +49,7 @@ public class RequestTypeController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String showRequestTypes(Model model) {
         model.addAttribute("requestTypes", requestTypeDao.getAll());
-        String requestType = "Типы запросов";
+        String requestType = "request_types";
         model.addAttribute("headerTitle", requestType);
         //model.addAttribute("headerTitle", "Типы запросов");
         return REQUEST_TYPE_LIST_VIEW;

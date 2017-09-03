@@ -100,7 +100,7 @@ public class RequestController {
         requestPageModel.addAttribute("sortOrderHeader", sortOrderHeader);
         requestPageModel.addAttribute("pageNumber", pageNumber);
         requestPageModel.addAttribute("findText", findText);
-        requestPageModel.addAttribute("headerTitle", "ЗАПРОСЫ");
+        requestPageModel.addAttribute("headerTitle", "requests");
         return LIST_VIEW;
     }
 
@@ -159,7 +159,7 @@ public class RequestController {
         List<RequestType> requestTypeAll = requestTypeDao.getAll();
         model.addAttribute("requestTypeAll", requestTypeAll);
         model.addAttribute("pagingParameters", pagingParameters);
-        model.addAttribute("headerTitle", "Новый запрос");
+        model.addAttribute("headerTitle", "new_request");
         return "requestAdd";
     }
 

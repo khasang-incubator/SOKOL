@@ -44,7 +44,7 @@ public class DepartmentController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String showAll(final Model model) {
         model.addAttribute("departmentList", departmentDao.getAll());
-        model.addAttribute("headerTitle", "Департаменты");
+        model.addAttribute("headerTitle", "departments");
         return LIST_VIEW;
     }
 
@@ -81,7 +81,7 @@ public class DepartmentController {
     public String showNew(Model model) {
         model.addAttribute("department", new Department());
 
-        String departmentNew = "Новый департамент";
+        String departmentNew = "new_department";
         //
         model.addAttribute("headerTitle", departmentNew);
         return FORM_VIEW;

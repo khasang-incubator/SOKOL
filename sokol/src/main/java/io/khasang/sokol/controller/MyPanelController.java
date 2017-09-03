@@ -71,7 +71,7 @@ public class MyPanelController {
 
         model.addAttribute("myRequests", myRequests);
         model.addAttribute("forMeRequests", forMeRequests);
-        String myPanel = "МОЯ ПАНЕЛЬ";
+        String myPanel = "my_panel";
 //      model.addAttribute("headerTitle", "МОЯ ПАНЕЛЬ");
         model.addAttribute(locale);
         model.addAttribute("headerTitle", myPanel);

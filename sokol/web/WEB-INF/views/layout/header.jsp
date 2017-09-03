@@ -82,7 +82,7 @@
     </ul>
     <div class="container topnav caption">
         <ul class="nav navbar-nav">
-            <li>${headerTitle}</li>
+            <li><s:message code="${headerTitle}"/></li>
         </ul>
     </div>
 </div>
