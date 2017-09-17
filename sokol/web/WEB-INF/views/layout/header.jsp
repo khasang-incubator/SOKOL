@@ -64,8 +64,12 @@
                             </ul>
                         </li>
                     </sec:authorize>
-                    <li><a href="/mypanel?mylocale=en">EN</a></li>
-                    <li><a href="/mypanel?mylocale=ru">RU</a></li>
+                      <%
+                        String str_ru=request.getContextPath()+"?mylocale=ru";
+                        String str_en=request.getContextPath()+"?mylocale=en";
+                    %>
+                    <li><a href="<%=str_en %>">EN</a></li>
+                    <li><a href="<%=str_ru %>">RU</a></li>
                 </ul>
             </div>
         </div>
