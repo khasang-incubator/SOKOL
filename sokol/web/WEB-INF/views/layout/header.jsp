@@ -64,7 +64,7 @@
                             </ul>
                         </li>
                     </sec:authorize>
-                      <%
+                    <%
                         String str_ru=request.getContextPath()+"?mylocale=ru";
                         String str_en=request.getContextPath()+"?mylocale=en";
                     %>

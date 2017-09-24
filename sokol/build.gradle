@@ -17,16 +17,21 @@ war {
     baseName = 'sokol'
     version = '1'
     webInf{
+        from('web/i18n'){
+            include 'usermsg_en.properties'
+            include 'usermsg_ru.properties'
+            into('/i18n/')
+        }
         from('src/main/resources') {
             include 'util.properties'
             include 'hibernate.properties'
             include 'log4j.properties'
             include 'auth.properties'
             include 'tiles.xml'
-            into('WEB-INF/classes/')
+            into('classes/')
         }
         from ('web/WEB-INF/views') {
-            into('/WEB-INF/views')
+            into('views')
         }
     }
 
