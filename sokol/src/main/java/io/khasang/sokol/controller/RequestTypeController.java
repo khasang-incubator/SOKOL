@@ -96,7 +96,7 @@ public class RequestTypeController {
     public String newRequestType(Model model) {
         model.addAttribute("requestType", new RequestType());
         model.addAttribute("departments", departmentDao.getAll());
-        String newRequestType = "Новый тип запроса";
+        String newRequestType = "new_request_type";
         model.addAttribute("headerTitle", newRequestType);
         configureCancelUrl(model);
         return REQUEST_TYPE_VIEW;
