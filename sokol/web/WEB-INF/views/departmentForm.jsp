@@ -43,26 +43,26 @@
             </div>
         </sf:form>
         <c:choose>
-            <c:when test="${department.id == ''}"> <%-- новый тип запроса --%>
+            <c:when test="${department.id == ''}"> <%-- новый департамент --%>
             </c:when>
-            <c:when test="${department.id != ''}"> <%-- редактирование типа запроса --%>
+            <c:when test="${department.id != ''}"> <%-- редактирование департамента --%>
                 <div class="audit-info">
                     <table>
                         <tr>
                                 <%--АВТОР--%>
                             <th><s:message code="author"/></th>
-                            <td>${requestType.createdBy}</td>
+                            <td>${department.createdBy}</td>
                                 <%--ДАТА СОЗДАНИЯ--%>
                             <th><s:message code="date_of_creation"/></th>
-                            <td>${requestType.createdDate}</td>
+                            <td>${department.createdDate}</td>
                         </tr>
                         <tr>
                                 <%--ИЗМЕНЕНО--%>
                             <th><s:message code="changed"/></th>
-                            <td>${requestType.updatedBy}</td>
+                            <td>${department.updatedBy}</td>
                                 <%--ДАТА ИЗМЕНЕНИЯ--%>
                             <th><s:message code="date_of_change"/></th>
-                            <td>${requestType.updatedDate}</td>
+                            <td>${department.updatedDate}</td>
                         </tr>
                     </table>
                 </div>

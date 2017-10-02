@@ -166,7 +166,7 @@ public class AppInitialiser implements ApplicationListener<ContextRefreshedEvent
         if (admin_role == null) {
             admin_role = new Role();
             admin_role.setId(1);
-            admin_role.setDescription("Адмнистратор");
+            admin_role.setDescription("Администратор");
             admin_role.setName("ROLE_ADMIN");
             admin_role.setCreatedBy("SYSTEM");
             admin_role.setUpdatedBy("SYSTEM");
@@ -180,7 +180,7 @@ public class AppInitialiser implements ApplicationListener<ContextRefreshedEvent
         if (cnt == 0) {
             User admin_user = new User();
             admin_user.setLogin("admin@test.com");
-            admin_user.setFio("Adminisrator");
+            admin_user.setFio("Administrator");
             admin_user.setEnabled(true);
             admin_user.setPassword(new BCryptPasswordEncoder().encode("admin"));
             admin_user.setEmail("admin@test.com");

@@ -154,7 +154,7 @@
                 <div class="form-group">
                     <div class="control-label col-sm-3"></div>
                     <div class="col-sm-8">
-                        <c:if test="${request.status.requestStatusId == '1' && request.assignedTo.id == null}"> <%--статус "новый" и запрос никому не назначе--%>
+                        <c:if test="${request.status.requestStatusId == '1' && request.assignedTo.id == null}"> <%--статус "новый" и запрос никому не назначен--%>
                             <a href="/requestList/assignedTo?requestId=${request.requestId}"
                                class="btn-work pull-left">ВЗЯТЬ В РАБОТУ</a>
                         </c:if>
@@ -171,18 +171,18 @@
                 <tr>
                     <%--АВТОР--%>
                     <th><s:message code="author"/></th>
-                    <td>${requestType.createdBy}</td>
+                    <td>${request.createdBy}</td>
                     <%--ДАТА СОЗДАНИЯ--%>
                     <th><s:message code="date_of_creation"/></th>
-                    <td>${requestType.createdDate}</td>
+                    <td>${request.createdDate}</td>
                 </tr>
                 <tr>
                     <%--ИЗМЕНЕНО--%>
                     <th><s:message code="changed"/></th>
-                    <td>${requestType.updatedBy}</td>
+                    <td>${request.updatedBy}</td>
                     <%--ДАТА ИЗМЕНЕНИЯ--%>
                     <th><s:message code="date_of_change"/></th>
-                    <td>${requestType.updatedDate}</td>
+                    <td>${request.updatedDate}</td>
                 </tr>
             </table>
         </div>
