@@ -13,7 +13,7 @@
 <div class="container">
     <!-- FORM  -->
     <div class="form-wrapper">
-        <sf:form method="post" action="/requestList/edit" id="requestForm" cssClass="form-horizontal"
+        <sf:form method="post" action="/requestList/${request.requestId}" id="requestForm" cssClass="form-horizontal"
                  enctype="multipart/form-data">
             <div class="form-body">
                 <input type="hidden" name="requestId" value="${request.requestId}">

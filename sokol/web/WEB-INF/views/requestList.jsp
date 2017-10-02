@@ -78,11 +78,11 @@
                     <td><c:out value="${lists.status.requestStatusName}"/></td>
                     <td>
                         <a title="Редактирование запроса"
-                           href="/requestList/edit?requestId=${lists.requestId}&pageNumber=${pageNumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}">
+                           <%--href="/requestList/edit?requestId=${lists.requestId}&pageNumber=${pageNumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}">--%>
+                            href="/requestList/${lists.requestId}?pageNumber=${pageNumber}&sortBy=${sortBy}&sortOrder=${sortOrder}&sortOrderHeader=${sortOrderHeader}">
                             <c:out value="${lists.title}"/>
                         </a>
                     </td>
-
                     <td><c:out value="${lists.description}"/></td>
                     <td><c:out value="${lists.createdBy}"/></td>
                     <td><c:out value="${lists.assignedTo.fio}"/></td>
