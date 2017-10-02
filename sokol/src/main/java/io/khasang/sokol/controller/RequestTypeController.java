@@ -49,9 +49,8 @@ public class RequestTypeController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String showRequestTypes(Model model) {
         model.addAttribute("requestTypes", requestTypeDao.getAll());
-        String requestType = "request_types";
-        model.addAttribute("headerTitle", requestType);
-        //model.addAttribute("headerTitle", "Типы запросов");
+        String requestTypes = "request_types";
+        model.addAttribute("headerTitle", requestTypes);
         return REQUEST_TYPE_LIST_VIEW;
     }
 
@@ -60,7 +59,9 @@ public class RequestTypeController {
         RequestType requestType = requestTypeDao.getById(id);
         model.addAttribute("requestType", requestType);
         model.addAttribute("departments", departmentDao.getAll());
-        model.addAttribute("headerTitle", String.format("Тип запроса: %s", requestType.getTitle()));
+        String editRequestType = "request_type";
+        model.addAttribute("headerTitle",  editRequestType);
+        //model.addAttribute("headerTitle", String.format(headerRequestType + ": %s", requestType.getTitle()));
         configureCancelUrl(model);
         return REQUEST_TYPE_VIEW;
     }
@@ -96,7 +97,7 @@ public class RequestTypeController {
     public String newRequestType(Model model) {
         model.addAttribute("requestType", new RequestType());
         model.addAttribute("departments", departmentDao.getAll());
-        String newRequestType = "Новый тип запроса";
+        String newRequestType = "new_request_type";
         model.addAttribute("headerTitle", newRequestType);
         configureCancelUrl(model);
         return REQUEST_TYPE_VIEW;
