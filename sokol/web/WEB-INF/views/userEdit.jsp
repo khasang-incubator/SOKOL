@@ -133,26 +133,26 @@
         </sf:form>
 
         <c:choose>
-            <c:when test="${user.id == ''}"> <%-- новый тип запроса --%>
+            <c:when test="${user.id == ''}"> <%-- новый пользователь --%>
             </c:when>
-            <c:when test="${user.id != ''}"> <%-- редактирование типа запроса --%>
+            <c:when test="${user.id != ''}"> <%-- редактирование поьзователя--%>
                 <div class="audit-info">
                     <table>
                         <tr>
                                 <%--АВТОР--%>
                             <th><s:message code="author"/></th>
-                            <td>${requestType.createdBy}</td>
+                            <td>${user.createdBy}</td>
                                 <%--ДАТА СОЗДАНИЯ--%>
                             <th><s:message code="date_of_creation"/></th>
-                            <td>${requestType.createdDate}</td>
+                            <td>${user.createdDate}</td>
                         </tr>
                         <tr>
                                 <%--ИЗМЕНЕНО--%>
                             <th><s:message code="changed"/></th>
-                            <td>${requestType.updatedBy}</td>
+                            <td>${user.updatedBy}</td>
                                 <%--ДАТА ИЗМЕНЕНИЯ--%>
                             <th><s:message code="date_of_change"/></th>
-                            <td>${requestType.updatedDate}</td>
+                            <td>${user.updatedDate}</td>
                         </tr>
                     </table>
                 </div>

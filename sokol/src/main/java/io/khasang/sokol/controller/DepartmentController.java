@@ -53,7 +53,6 @@ public class DepartmentController {
         Department department = departmentDao.getById(id);
         model.addAttribute("cancelUrl", LIST_MAP);
         model.addAttribute("department", department);
-
         String editDepartment = "edit_department";
         model.addAttribute("headerTitle", editDepartment);
         //model.addAttribute("headerTitle", String.format("Департамент: %s", department.getTitle()));

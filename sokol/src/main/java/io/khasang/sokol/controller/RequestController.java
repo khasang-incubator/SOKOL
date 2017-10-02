@@ -104,56 +104,6 @@ public class RequestController {
         return LIST_VIEW;
     }
 
-
-
-
-   /* @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String requestListPage(Model requestPageModel,
-                                  @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
-                                  @RequestParam(value = "sortBy", required = false) String sortBy,
-                                  @RequestParam(value = "sortOrder", required = false) String sortOrder,
-                                  @RequestParam(value = "findText", required = false) String findText) {
-        pageNumber = (pageNumber == null || pageNumber.equals("")) ? 1 : pageNumber;
-        sortOrder = (sortOrder == null || sortOrder.equals("")) ? "" : sortOrder;
-        sortBy = (sortBy == null || sortBy.equals("")) ? "id" : sortBy;
-        String imgBy = "";
-        String sortOrderHeader = "";
-        List<Request> requestAll;
-        ArrayList<Integer> pageNumbers;
-        Integer pageRows = Integer.parseInt(environment.getRequiredProperty("page.size")); // кол-во записей на странице
-        if (findText == null || findText.equals("")) {
-            Integer countLineOfTable = requestDao.getCountLineOfTable(); // кол-во записей в таблице
-            Integer lastPageNumber = ((countLineOfTable / pageRows) + 1);
-            pageNumbers = totalOfPages(lastPageNumber);
-            requestAll = requestDao.sortingBy((pageNumber - 1) * pageRows, pageRows, sortBy, sortOrder);
-        } else {
-            Integer countLineOfTable = requestDao.getCountLineOfTable(findText); // кол-во записей в таблице
-            Integer lastPageNumber = ((countLineOfTable / pageRows) + 1);
-            pageNumbers = totalOfPages(lastPageNumber);
-            requestAll = requestDao.sortingBy((pageNumber - 1) * pageRows, pageRows, sortBy, sortOrder, findText);
-        }
-        if (sortOrder.equals("ASC")) {
-            imgBy = "sort-up";
-            sortOrderHeader = "DESC";
-        } else if (sortOrder.equals("DESC")) {
-            imgBy = "sort-down";
-            sortOrderHeader = "ASC";
-        } else {
-            sortOrderHeader = "ASC";
-            sortOrder = "ASC";
-        }
-        requestPageModel.addAttribute("requestAll", requestAll);
-        requestPageModel.addAttribute("pageTotal", pageNumbers);
-        requestPageModel.addAttribute("sortBy", sortBy);
-        requestPageModel.addAttribute("imgBy", imgBy);
-        requestPageModel.addAttribute("sortOrder", sortOrder);
-        requestPageModel.addAttribute("sortOrderHeader", sortOrderHeader);
-        requestPageModel.addAttribute("pageNumber", pageNumber);
-        requestPageModel.addAttribute("findText", findText);
-        requestPageModel.addAttribute("headerTitle", "ЗАПРОСЫ");
-        return LIST_VIEW;
-    }*/
-
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String doGetRequestPageAdd(Model model, PagingParameters pagingParameters) {
         List<RequestType> requestTypeAll = requestTypeDao.getAll();
@@ -187,7 +137,7 @@ public class RequestController {
 
     // добавление запроса на редактирование
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+/*    @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String doGetRequestPageEdit(Model model, PagingParameters pagingParameters,
                                        @RequestParam("requestId") Integer requestId) {
         Request request = requestDao.getByRequestId(requestId);
@@ -197,11 +147,26 @@ public class RequestController {
         model.addAttribute("requestTypeAll", requestTypeAll);
         model.addAttribute("requestStatusAll", requestStatusAll);
         model.addAttribute("pagingParameters", pagingParameters);
-        model.addAttribute("headerTitle", String.format("Запрос: %s", request.getTitle()));
+        model.addAttribute("headerTitle", "edit_request");
+        //model.addAttribute("headerTitle", String.format("edit_request: %s", request.getTitle()));
+        return "requestEdit";
+    }*/
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String doGetRequestPageEdit(Model model, PagingParameters pagingParameters, @PathVariable int id) {
+        Request request = requestDao.getByRequestId(id);
+        List<RequestStatus> requestStatusAll = requestStatusDao.getAll();
+        List<RequestType> requestTypeAll = requestTypeDao.getAll();
+        model.addAttribute("request", request);
+        model.addAttribute("requestTypeAll", requestTypeAll);
+        model.addAttribute("requestStatusAll", requestStatusAll);
+        model.addAttribute("pagingParameters", pagingParameters);
+        model.addAttribute("headerTitle", "edit_request");
+        //model.addAttribute("headerTitle", String.format("edit_request: %s", request.getTitle()));
         return "requestEdit";
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+/*    @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String doPostRequestPageEdit(Request request,
                                         PagingParameters pagingParameters,
                                         @RequestParam("requestId") Integer requestId,
@@ -223,7 +188,32 @@ public class RequestController {
         requestDao.saveOrUpdate(update);
         return "redirect:/requestList/list?pageNumber=" + pagingParameters.getPageNumber() + "&sortBy=" + pagingParameters.getSortBy()
                 + "&sortOrder=" + pagingParameters.getSortOrder() + "&sortOrderHeader=" + pagingParameters.getSortOrderHeader();
+    }*/
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+    public String doPostRequestPageEdit(Request request,
+                                        PagingParameters pagingParameters,
+                                        @PathVariable int id,
+                                        @RequestParam("requestStatusId") Integer requestStatusId,
+                                        @RequestParam("requestTypeId") Integer requestTypeId,
+                                        @RequestParam("attachedFile") MultipartFile attachedFile) throws IOException {
+        Request update = requestDao.getByRequestId(id);
+        RequestStatus status = requestStatusDao.getByRequestStatusId(requestStatusId);
+        RequestType requestType = requestTypeDao.getById(requestTypeId);
+        update.setTitle(request.getTitle());
+        update.setDescription(request.getDescription());
+        update.setStatus(status);
+        update.setRequestType(requestType);
+        update.setFile(attachedFile.getBytes());
+        update.setFileName(attachedFile.getOriginalFilename());
+        update.setUpdatedDate(new Date());
+        SecurityContext context = SecurityContextHolder.getContext();
+        update.setUpdatedBy(context.getAuthentication().getName());
+        requestDao.saveOrUpdate(update);
+        return "redirect:/requestList/list?pageNumber=" + pagingParameters.getPageNumber() + "&sortBy=" + pagingParameters.getSortBy()
+                + "&sortOrder=" + pagingParameters.getSortOrder() + "&sortOrderHeader=" + pagingParameters.getSortOrderHeader();
     }
+
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delRequestPage(Model delRequest, @RequestParam("requestId") Integer requestId) {
