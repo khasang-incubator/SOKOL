@@ -59,8 +59,8 @@ public class RequestTypeController {
         RequestType requestType = requestTypeDao.getById(id);
         model.addAttribute("requestType", requestType);
         model.addAttribute("departments", departmentDao.getAll());
-        String headerRequestType = "request_type";
-        model.addAttribute("headerTitle", headerRequestType);
+        String editRequestType = "request_type";
+        model.addAttribute("headerTitle",  editRequestType);
         //model.addAttribute("headerTitle", String.format(headerRequestType + ": %s", requestType.getTitle()));
         configureCancelUrl(model);
         return REQUEST_TYPE_VIEW;

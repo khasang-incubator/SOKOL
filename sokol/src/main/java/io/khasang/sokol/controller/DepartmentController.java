@@ -53,7 +53,10 @@ public class DepartmentController {
         Department department = departmentDao.getById(id);
         model.addAttribute("cancelUrl", LIST_MAP);
         model.addAttribute("department", department);
-        model.addAttribute("headerTitle", String.format("Департамент: %s", department.getTitle()));
+
+        String editDepartment = "edit_department";
+        model.addAttribute("headerTitle", editDepartment);
+        //model.addAttribute("headerTitle", String.format("Департамент: %s", department.getTitle()));
         return FORM_VIEW;
     }
 
@@ -64,7 +67,6 @@ public class DepartmentController {
             department.setCreatedBy(context.getAuthentication().getName());
             department.setUpdatedBy(context.getAuthentication().getName());
             departmentDao.save(department);
-
         } else {
             Department updated = departmentDao.getById(id);
             updated.setTitle(department.getTitle());
@@ -72,7 +74,6 @@ public class DepartmentController {
             SecurityContext context = SecurityContextHolder.getContext();
             updated.setUpdatedBy(context.getAuthentication().getName());
             departmentDao.update(department);
-
         }
         return REDIRECT_TO_LIST;
     }
@@ -80,9 +81,7 @@ public class DepartmentController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String showNew(Model model) {
         model.addAttribute("department", new Department());
-
         String departmentNew = "new_department";
-        //
         model.addAttribute("headerTitle", departmentNew);
         return FORM_VIEW;
     }
