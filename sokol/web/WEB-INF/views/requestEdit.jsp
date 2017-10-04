@@ -67,9 +67,9 @@
                                     <option value="${requestStatus.get(0).requestStatusId}" selected>
                                         <c:out value="${requestStatus.get(0).requestStatusName}"/> <%--"новая"--%>
                                     </option>
-                                    <option value="${requestStatus.get(1).requestStatusId}">
-                                        <c:out value="${requestStatus.get(1).requestStatusName}"/> <%--"в работе"--%>
-                                    </option>
+<%--                                    <option value="${requestStatus.get(1).requestStatusId}">
+                                        <c:out value="${requestStatus.get(1).requestStatusName}"/> &lt;%&ndash;"в работе"&ndash;%&gt;
+                                    </option>--%>
                                 </c:when>
                                 <c:when test="${request.status.requestStatusId == '2'}"> <%--статус "в работе"--%>
                                     <option value="${requestStatus.get(1).requestStatusId}" selected>
