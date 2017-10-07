@@ -18,5 +18,8 @@ package io.khasang.sokol.dao;
 
 import io.khasang.sokol.entity.Department;
 
+import java.util.List;
+
 public interface DepartmentDao extends GenericDao<Department, Integer> {
+
 }

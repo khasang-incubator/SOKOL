@@ -3,7 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
-
+<sec:authentication var="user" property="principal"/>
 
 <c:if test="${errorMessage != null}">
     <div class="alert alert-danger">
@@ -21,6 +21,11 @@
                 <input type="hidden" name="sortBy" value="${pagingParameters.sortBy}">
                 <input type="hidden" name="sortOrder" value="${pagingParameters.sortOrder}">
                 <input type="hidden" name="sortOrderHeader" value="${pagingParameters.sortOrderHeader}">
+
+                <div class="form-group">
+                        ${depName}
+                                ${request.requestType.department.title}
+                </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-3"><s:message code="id_request"/></label>

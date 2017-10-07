@@ -18,11 +18,28 @@ package io.khasang.sokol.dao.impl;
 
 import io.khasang.sokol.dao.DepartmentDao;
 import io.khasang.sokol.entity.Department;
+import io.khasang.sokol.entity.User;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.hibernate.query.Query;
+
+import java.util.List;
+
 
 @Repository
 public class DepartmentDaoImpl extends GenericDaoImpl<Department, Integer> implements DepartmentDao {
     public DepartmentDaoImpl() {
         super(Department.class);
     }
+
+/*    @Override
+    public String departmentName getDepartmentByUser(String userName) {
+        return (String) getSession().createCriteria(User.class)
+                .add(Restrictions.eq("department", userName));
+    }*/
+
+
+
+
 }
