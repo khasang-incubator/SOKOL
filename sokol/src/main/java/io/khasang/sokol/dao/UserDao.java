@@ -33,6 +33,6 @@ public interface UserDao extends GenericDao<User, Integer> {
 
     int getCount();
 
-    List<Department> getDepartmentByUser(String userName);
+    int getNumberDepartmentByUser(String userName);
 
 }

@@ -81,14 +81,10 @@ public class UserDaoImpl extends GenericDaoImpl<User, Integer> implements UserDa
     }
 
     @Override
-    public List<Department> getDepartmentByUser(String userName) {
+    public int getNumberDepartmentByUser(String userName) {
         Session session = getSession();
-        Query query = session.createQuery("select u.department.title from User u WHERE u.login =?");
+        Query query = session.createQuery("select u.department.id from User u WHERE u.login =?");
         query.setParameter(0, userName);
-        //List<Object[]> scoreQuery = query.list();
-        return query.list();
-        //String countResults = query.uniqueResult().toString();
-
-        //return countResults;
+        return (int) query.uniqueResult();
     }
 }
