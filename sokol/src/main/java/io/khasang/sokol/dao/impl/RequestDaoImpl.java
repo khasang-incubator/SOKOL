@@ -150,21 +150,21 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
     }
 
     @Override
-        public List<Request> getRequestFound(String found) {
-            Session session = getSession();
-            Query query = session.createQuery("from Request f WHERE f.title like ? OR f.description like ?");
-            //  Query query = session.createQuery("from Request f WHERE  f.title like '%22%' OR f.description like '%22%'");
-            query.setParameter(0, "%"+found+"%");
-            query.setParameter(1, "%"+found+"%");
+    public List<Request> getRequestFound(String found) {
+        Session session = getSession();
+        Query query = session.createQuery("from Request f WHERE f.title like ? OR f.description like ?");
+        //  Query query = session.createQuery("from Request f WHERE  f.title like '%22%' OR f.description like '%22%'");
+        query.setParameter(0, "%" + found + "%");
+        query.setParameter(1, "%" + found + "%");
 
-            return query.list();
+        return query.list();
         // Session session = getSession();
-      //  Criteria criteria = getSession().createCriteria(Request.class);
-     //   criteria.add(Restrictions.eq("title", found));
-      //  return criteria.list();
-       // return (List<Request>) getSession().createCriteria(Request.class)
-       //         .add(Restrictions.eq("title", found));
-               // .uniqueResult();
+        //  Criteria criteria = getSession().createCriteria(Request.class);
+        //   criteria.add(Restrictions.eq("title", found));
+        //  return criteria.list();
+        // return (List<Request>) getSession().createCriteria(Request.class)
+        //         .add(Restrictions.eq("title", found));
+        // .uniqueResult();
     }
 
     @Override
@@ -190,9 +190,18 @@ public class RequestDaoImpl extends GenericDaoImpl<Request, Integer> implements 
         Session session = getSession();
         String countQ = "Select count (f.requestId) from Request f WHERE f.title like ? OR f.description like ?";
         Query countQuery = session.createQuery(countQ);
-        countQuery.setParameter(0, "%"+findText+"%");
-        countQuery.setParameter(1, "%"+findText+"%");
+        countQuery.setParameter(0, "%" + findText + "%");
+        countQuery.setParameter(1, "%" + findText + "%");
         long countResults = (long) countQuery.uniqueResult();
         return (int) countResults;
     }
+
+    @Override
+    public List<Request> getRequestsByUser(String userName) {
+        User user = userDao.getByLogin(userName);
+        return (List<Request>) getSession().createCriteria(Request.class)
+                .add(Restrictions.eq("createdBy", user))
+                .list();
+    }
+
 }

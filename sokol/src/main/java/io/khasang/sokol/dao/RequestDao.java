@@ -45,4 +45,5 @@ public interface RequestDao extends GenericDao<Request, Integer> {
 
     List<Request> getRequestFound(String found);
 
+    List<Request> getRequestsByUser(String user);
 }

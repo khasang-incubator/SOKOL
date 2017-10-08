@@ -79,4 +79,16 @@ public class UserDaoImpl extends GenericDaoImpl<User, Integer> implements UserDa
         Query countQuery = session.createQuery(countQ);
         return (int) countQuery.uniqueResult();
     }
+
+    @Override
+    public List<Department> getDepartmentByUser(String userName) {
+        Session session = getSession();
+        Query query = session.createQuery("select u.department.title from User u WHERE u.login =?");
+        query.setParameter(0, userName);
+        //List<Object[]> scoreQuery = query.list();
+        return query.list();
+        //String countResults = query.uniqueResult().toString();
+
+        //return countResults;
+    }
 }

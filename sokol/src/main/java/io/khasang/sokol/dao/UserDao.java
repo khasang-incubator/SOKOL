@@ -19,6 +19,7 @@ package io.khasang.sokol.dao;
 import io.khasang.sokol.entity.Department;
 import io.khasang.sokol.entity.User;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 public interface UserDao extends GenericDao<User, Integer> {
@@ -31,5 +32,7 @@ public interface UserDao extends GenericDao<User, Integer> {
     List<User> getUserListByUser(User user);
 
     int getCount();
+
+    List<Department> getDepartmentByUser(String userName);
 
 }
