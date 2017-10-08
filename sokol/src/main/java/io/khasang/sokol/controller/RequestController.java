@@ -158,10 +158,8 @@ public class RequestController {
         List<RequestStatus> requestStatusAll = requestStatusDao.getAll();
         List<RequestType> requestTypeAll = requestTypeDao.getAll();
         SecurityContext context = SecurityContextHolder.getContext();
-        List<Department> departmentTitleByUser = userDao.getDepartmentByUser(context.getAuthentication().getName());
-        //SecurityContext context = SecurityContextHolder.getContext();
-        //model.addAttribute("user2", context.getAuthentication().get.getName());
-        model.addAttribute("departmentTitleByUser", departmentTitleByUser.get(0));
+        Integer numberDepartmentByUser = userDao.getNumberDepartmentByUser(context.getAuthentication().getName());
+        model.addAttribute("numberDepartmentByUser", numberDepartmentByUser);
         model.addAttribute("request", request);
         model.addAttribute("requestTypeAll", requestTypeAll);
         model.addAttribute("requestStatusAll", requestStatusAll);
