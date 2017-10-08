@@ -21,11 +21,11 @@
                 <input type="hidden" name="sortBy" value="${pagingParameters.sortBy}">
                 <input type="hidden" name="sortOrder" value="${pagingParameters.sortOrder}">
                 <input type="hidden" name="sortOrderHeader" value="${pagingParameters.sortOrderHeader}">
-
+<%--
                 <div class="form-group">
-                        ${depName}
+                        ${departmentTitleByUser}
                                 ${request.requestType.department.title}
-                </div>
+                </div>--%>
 
                 <div class="form-group">
                     <label class="control-label col-sm-3"><s:message code="id_request"/></label>
@@ -159,14 +159,26 @@
                 <div class="form-group">
                     <div class="control-label col-sm-3"></div>
                     <div class="col-sm-8">
-                        <c:if test="${request.status.requestStatusId == '1' && request.assignedTo.id == null}"> <%--статус "новый" и запрос никому не назначен--%>
+<%--                        <c:if test="${request.status.requestStatusId == '1' && request.assignedTo.id == null}"> &lt;%&ndash;статус "новый" и запрос никому не назначен&ndash;%&gt;
+                        <a href="/requestList/assignedTo?requestId=${request.requestId}"
+                           class="btn-work pull-left">ВЗЯТЬ В РАБОТУ</a>
+                    </c:if>--%>
+
+                        <c:if test="${request.status.requestStatusId == '1' && departmentTitleByUser == request.requestType.department.title}"> <%--статус "новый" и запрос моего отдела--%>
                             <a href="/requestList/assignedTo?requestId=${request.requestId}"
                                class="btn-work pull-left">ВЗЯТЬ В РАБОТУ</a>
                         </c:if>
                         <a href="/requestList/list?pageNumber=${pagingParameters.pageNumber}&sortBy=${pagingParameters.sortBy}
                                 &sortOrder=${pagingParameters.sortOrder}&sortOrderHeader=${pagingParameters.sortOrderHeader}"
                            class="btn-close pull-right"><s:message code="close"/></a>
-                        <a href="#" onclick="document.forms['requestForm'].submit();" class="btn-save pull-right"><s:message code="save"/></a>
+                            <%--если заявка находится в работе у отдела, в котором работает пользователь, то сохраняем  --%>
+                            <%--или иначе - если отдел, в котором работает пользователь, является отделом, которому назначен запрос (департамент типа запроса), то сохраняем  --%>
+                        <c:if test="${departmentTitleByUser == request.requestType.department.title}">
+                            <a href="#" onclick="document.forms['requestForm'].submit();" class="btn-save pull-right"><s:message code="save"/></a>
+                        </c:if>
+
+
+                        <%--<a href="#" onclick="document.forms['requestForm'].submit();" class="btn-save pull-right"><s:message code="save"/></a>--%>
                     </div>
                 </div>
             </div>
