@@ -58,7 +58,7 @@
     }
 
     function onEditRequest(requestId) {
-        window.location = '/requestList/edit?idRequest=' + requestId+ '&pagenumber=1&sortBy=id&sortOrder=ASC&sortOrderHeader=ASC';
+        window.location = '/requestList/' + requestId+ '?pagenumber=1&sortBy=id&sortOrder=ASC&sortOrderHeader=ASC';
 //        $('#myModal .modal-title').text("Изменить запрос");
 //        $('#requestId').val($('#request-' + requestId).find('.request-id').val());
 //        $('#title').val($('#request-' + requestId).find('.request-title').text());

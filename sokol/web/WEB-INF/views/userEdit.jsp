@@ -107,15 +107,15 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="roleId" class="control-label col-sm-3"><s:message code="language"/></label>
-                    <div class="col-sm-8">
-                        <select name="language" class="form-control" id="language">
-                            <option value="RU">Русский</option>
-                            <option value="EN">English</option>
-                        </select>
-                    </div>
-                </div>
+                <%--<div class="form-group">--%>
+                    <%--<label for="roleId" class="control-label col-sm-3"><s:message code="language"/></label>--%>
+                    <%--<div class="col-sm-8">--%>
+                        <%--<select name="language" class="form-control" id="language">--%>
+                            <%--<option value="RU">Русский</option>--%>
+                            <%--<option value="EN">English</option>--%>
+                        <%--</select>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
 
 
 
