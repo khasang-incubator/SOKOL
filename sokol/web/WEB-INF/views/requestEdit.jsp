@@ -164,29 +164,26 @@
                            class="btn-work pull-left">ВЗЯТЬ В РАБОТУ</a>
                     </c:if>--%>
 
-
-                        <c:if test="${request.status.requestStatusId == '1' && numberDepartmentByUser == request.requestType.department.id}"> <%--статус "новый" и запрос моего отдела--%>
+                        <%--если запрос новый и запрос моего отдела, то могу взять в работу--%>
+                        <c:if test="${request.status.requestStatusId == '1' && numberDepartmentByUser == request.requestType.department.id}">
                             <a href="/requestList/assignedTo?requestId=${request.requestId}"
                                class="btn-work pull-left">ВЗЯТЬ В РАБОТУ</a>
                         </c:if>
 
-                        <c:if test="${request.status.requestStatusId != '1' || numberDepartmentByUser != request.requestType.department.id}"> <%--статус "новый" и запрос моего отдела--%>
+            <%--            <c:if test="${request.status.requestStatusId != '1' || numberDepartmentByUser != request.requestType.department.id}"> &lt;%&ndash;иначе&ndash;%&gt;
                             <a href="#" class="btn btn-info disabled" role="button">ВЗЯТЬ В РАБОТУ</a>
                         </c:if>
+--%>                        <a href="/requestList/list?pageNumber=${pagingParameters.pageNumber}&sortBy=${pagingParameters.sortBy}
+                                 &sortOrder=${pagingParameters.sortOrder}&sortOrderHeader=${pagingParameters.sortOrderHeader}"
+                           class="btn-close pull-right"><s:message code="close"/></a>
 
-
-    <a href="/requestList/list?pageNumber=${pagingParameters.pageNumber}&sortBy=${pagingParameters.sortBy}
-                                &sortOrder=${pagingParameters.sortOrder}&sortOrderHeader=${pagingParameters.sortOrderHeader}"
-                           class="btn-close pull-right disabled"><s:message code="close"/></a>
-
-
-
-
-<%--если заявка находится в работе у отдела, в котором работает пользователь, то сохраняем  --%>
-                            <%--или иначе - если отдел, в котором работает пользователь, является отделом, которому назначен запрос (департамент типа запроса), то сохраняем  --%>
-                        <c:if test="${numberDepartmentByUser == request.requestType.department.id}">
+                        <%--если я создатель, то могу исправлять в любом случае
+                        <%--если я не создатель, то могу править, если заявка моего отдела  --%>
+                         <c:if test="${(request.createdBy == userName)||((numberDepartmentByUser == request.requestType.department.id) && (request.createdBy != userName))}">
                             <a href="#" onclick="document.forms['requestForm'].submit();" class="btn-save pull-right"><s:message code="save"/></a>
                         </c:if>
+
+
 
 
                         <%--<a href="#" onclick="document.forms['requestForm'].submit();" class="btn-save pull-right"><s:message code="save"/></a>--%>
