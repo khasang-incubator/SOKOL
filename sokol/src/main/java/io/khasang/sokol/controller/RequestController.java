@@ -92,6 +92,11 @@ public class RequestController {
             sortOrderHeader = "ASC";
             sortOrder = "ASC";
         }
+        SecurityContext context = SecurityContextHolder.getContext();
+        String userName = context.getAuthentication().getName();
+        Integer numberDepartmentByUser = userDao.getNumberDepartmentByUser(context.getAuthentication().getName());
+        requestPageModel.addAttribute("userName", userName);
+        requestPageModel.addAttribute("numberDepartmentByUser", numberDepartmentByUser);
         requestPageModel.addAttribute("requestAll", requestAll);
         requestPageModel.addAttribute("pageTotal", pageNumbers);
         requestPageModel.addAttribute("sortBy", sortBy);

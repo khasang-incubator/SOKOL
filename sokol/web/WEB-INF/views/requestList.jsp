@@ -87,8 +87,19 @@
                     <td><c:out value="${lists.createdBy}"/></td>
                     <td><c:out value="${lists.assignedTo.fio}"/></td>
                     <td><c:out value="${lists.requestType.title}"/></td>
-                    <td class="del-cell"><a class="del-btn" href="/requestList/delete?requestId=${lists.requestId}"
-                                            onclick="return confirmDeletion(${lists.requestId}, 'запрос')"></a></td>
+
+
+                    <c:if test="${(lists.createdBy == userName)||((numberDepartmentByUser == lists.requestType.department.id))}">
+                        <td class="del-cell"><a class="del-btn" href="/requestList/delete?requestId=${lists.requestId}"
+                                                onclick="return confirmDeletion(${lists.requestId}, 'запрос')"></a></td>
+                    </c:if>
+
+                    <c:if test="${(!(lists.createdBy == userName))&&(!(numberDepartmentByUser == lists.requestType.department.id))}">
+                        <td class="del-cell"><a class="del-no-btn" href="#"></a></td>
+                    </c:if>
+
+
+
                 </tr>
             </c:forEach>
             </tbody>
