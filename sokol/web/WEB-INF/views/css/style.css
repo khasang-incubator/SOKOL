@@ -252,11 +252,19 @@ body{
 	width: 50px;
 	text-align: center;
 }
+
 .list-table .del-cell .del-btn{
 	display: inline-block;
 	width: 20px;
 	height: 20px;
 	background: transparent url("../img/del.png")  no-repeat center center;
+}
+
+.list-table .del-cell .del-no-btn{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: transparent url("../img/del-no.png")  no-repeat center center;
 }
 .list-table .id-cell{
 	width: 50px;
