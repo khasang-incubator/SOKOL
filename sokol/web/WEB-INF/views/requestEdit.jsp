@@ -200,7 +200,10 @@
                 <tr>
                     <%--ИЗМЕНЕНО--%>
                     <th><s:message code="changed"/></th>
-                    <td>${request.updatedBy}</td>
+                    <%--<td>${request.updatedBy}</td>--%>
+                        <%--<td>${request.getSimpleFormatDate(request.updatedBy)}</td>--%>
+                        <td>${simpleCreateDate}</td>
+
                     <%--ДАТА ИЗМЕНЕНИЯ--%>
                     <th><s:message code="date_of_change"/></th>
                     <td>${request.updatedDate}</td>

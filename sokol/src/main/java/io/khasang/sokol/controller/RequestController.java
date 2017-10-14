@@ -160,6 +160,8 @@ public class RequestController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String doGetRequestPageEdit(Model model, PagingParameters pagingParameters, @PathVariable int id) {
         Request request = requestDao.getByRequestId(id);
+        String simpleCreateDate = request.getSimpleFormatDate(request.getCreatedDate());
+        model.addAttribute("simpleCreateDate", simpleCreateDate);
         List<RequestStatus> requestStatusAll = requestStatusDao.getAll();
         List<RequestType> requestTypeAll = requestTypeDao.getAll();
         SecurityContext context = SecurityContextHolder.getContext();
