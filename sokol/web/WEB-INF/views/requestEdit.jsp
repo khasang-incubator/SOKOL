@@ -159,34 +159,30 @@
                 <div class="form-group">
                     <div class="control-label col-sm-3"></div>
                     <div class="col-sm-8">
-<%--                        <c:if test="${request.status.requestStatusId == '1' && request.assignedTo.id == null}"> &lt;%&ndash;статус "новый" и запрос никому не назначен&ndash;%&gt;
-                        <a href="/requestList/assignedTo?requestId=${request.requestId}"
-                           class="btn-work pull-left">ВЗЯТЬ В РАБОТУ</a>
-                    </c:if>--%>
+                        <sec:authorize access="hasAnyRole('ROLE_USER')">
+                            <%--если запрос новый и запрос моего отдела, то могу взять в работу--%>
+                            <c:if test="${request.status.requestStatusId == '1' && numberDepartmentByUser == request.requestType.department.id}">
+                                <a href="/requestList/assignedTo?requestId=${request.requestId}"
+                                   class="btn-work pull-left">ВЗЯТЬ В РАБОТУ</a>
+                            </c:if>
+                            <a href="/requestList/list?pageNumber=${pagingParameters.pageNumber}&sortBy=${pagingParameters.sortBy}
+                                 &sortOrder=${pagingParameters.sortOrder}&sortOrderHeader=${pagingParameters.sortOrderHeader}"
+                               class="btn-close pull-right"><s:message code="close"/></a>
+                            <%--если я создатель, то могу исправлять в любом случае
+                            <%--если я не создатель, то могу править, если заявка моего отдела  --%>
+                            <c:if test="${(request.createdBy == userName)||((numberDepartmentByUser == request.requestType.department.id) && (request.createdBy != userName))}">
+                                <a href="#" onclick="document.forms['requestForm'].submit();" class="btn-save pull-right"><s:message code="save"/></a>
+                            </c:if>
+                        </sec:authorize>
 
-                        <%--если запрос новый и запрос моего отдела, то могу взять в работу--%>
-                        <c:if test="${request.status.requestStatusId == '1' && numberDepartmentByUser == request.requestType.department.id}">
+                        <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
                             <a href="/requestList/assignedTo?requestId=${request.requestId}"
                                class="btn-work pull-left">ВЗЯТЬ В РАБОТУ</a>
-                        </c:if>
-
-            <%--            <c:if test="${request.status.requestStatusId != '1' || numberDepartmentByUser != request.requestType.department.id}"> &lt;%&ndash;иначе&ndash;%&gt;
-                            <a href="#" class="btn btn-info disabled" role="button">ВЗЯТЬ В РАБОТУ</a>
-                        </c:if>
---%>                        <a href="/requestList/list?pageNumber=${pagingParameters.pageNumber}&sortBy=${pagingParameters.sortBy}
+                            <a href="/requestList/list?pageNumber=${pagingParameters.pageNumber}&sortBy=${pagingParameters.sortBy}
                                  &sortOrder=${pagingParameters.sortOrder}&sortOrderHeader=${pagingParameters.sortOrderHeader}"
-                           class="btn-close pull-right"><s:message code="close"/></a>
-
-                        <%--если я создатель, то могу исправлять в любом случае
-                        <%--если я не создатель, то могу править, если заявка моего отдела  --%>
-                         <c:if test="${(request.createdBy == userName)||((numberDepartmentByUser == request.requestType.department.id) && (request.createdBy != userName))}">
+                               class="btn-close pull-right"><s:message code="close"/></a>
                             <a href="#" onclick="document.forms['requestForm'].submit();" class="btn-save pull-right"><s:message code="save"/></a>
-                        </c:if>
-
-
-
-
-                        <%--<a href="#" onclick="document.forms['requestForm'].submit();" class="btn-save pull-right"><s:message code="save"/></a>--%>
+                        </sec:authorize>
                     </div>
                 </div>
             </div>

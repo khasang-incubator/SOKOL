@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <script type="text/javascript">
     function onSearchClick(){
@@ -88,15 +89,21 @@
                     <td><c:out value="${lists.assignedTo.fio}"/></td>
                     <td><c:out value="${lists.requestType.title}"/></td>
 
+                    <sec:authorize access="hasAnyRole('ROLE_USER')">
+                        <c:if test="${(lists.createdBy == userName)||((numberDepartmentByUser == lists.requestType.department.id))}">
+                            <td class="del-cell"><a class="del-btn" href="/requestList/delete?requestId=${lists.requestId}"
+                                                    onclick="return confirmDeletion(${lists.requestId}, 'запрос')"></a></td>
+                        </c:if>
+                        <c:if test="${(!(lists.createdBy == userName))&&(!(numberDepartmentByUser == lists.requestType.department.id))}">
+                            <td class="del-cell"><a class="del-no-btn" href="#"></a></td>
+                        </c:if>
+                    </sec:authorize>
 
-                    <c:if test="${(lists.createdBy == userName)||((numberDepartmentByUser == lists.requestType.department.id))}">
+                    <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
                         <td class="del-cell"><a class="del-btn" href="/requestList/delete?requestId=${lists.requestId}"
                                                 onclick="return confirmDeletion(${lists.requestId}, 'запрос')"></a></td>
-                    </c:if>
+                    </sec:authorize>
 
-                    <c:if test="${(!(lists.createdBy == userName))&&(!(numberDepartmentByUser == lists.requestType.department.id))}">
-                        <td class="del-cell"><a class="del-no-btn" href="#"></a></td>
-                    </c:if>
 
 
 
