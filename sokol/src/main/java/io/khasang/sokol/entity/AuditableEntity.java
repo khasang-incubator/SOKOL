@@ -74,8 +74,7 @@ public abstract class AuditableEntity {
     }
 
     public String getSimpleFormatDate(Date date){
-        SimpleDateFormat dateFormat = null;
-        dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         return  dateFormat.format(date);
     }
 }
