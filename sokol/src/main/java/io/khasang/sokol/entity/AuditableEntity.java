@@ -20,6 +20,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @MappedSuperclass
@@ -36,7 +37,6 @@ public abstract class AuditableEntity {
     protected Date updatedDate;
 
     public AuditableEntity() {
-
         this.createdDate = new Date();
         this.updatedDate = new Date();
     }
@@ -71,5 +71,10 @@ public abstract class AuditableEntity {
 
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
+    }
+
+    public String getSimpleFormatDate(Date date){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        return  dateFormat.format(date);
     }
 }
