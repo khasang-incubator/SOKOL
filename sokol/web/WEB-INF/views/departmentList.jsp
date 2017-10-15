@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:url var="root_url" value="/"/>
 <div class="container">
@@ -26,7 +27,8 @@
                     <c:if test="${list.deleted == false}">
                         <td><c:out value="${list.id}"/></td>
                         <td><a href="/department/${list.id}"> <c:out value="${list.title}"/></a></td>
-                        <td><c:out value="${list.createdDate}"/></td>
+                        <%--<td><c:out value="${list.createdDate}"/></td>--%>
+                        <td><fmt:formatDate pattern = "dd-MM-yyyy HH:mm" value = "${list.createdDate}" /></td>
                         <td class="del-cell"><a class="del-btn" href="/department/delete/${list.id}"
                                                 onclick="return confirmDeletion(${list.id})"></a></td>
                     </c:if>
