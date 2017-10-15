@@ -42,7 +42,7 @@ public class MyProfileController {
         User currentUsr = getCurrentUser();
         model.addAttribute("user", currentUsr);
         fillDictionaries(model);
-        model.addAttribute("headerTitle", "Редактирование пользователя");
+        model.addAttribute("headerTitle", "my_profile");
         return "myprofile";
     }
 
