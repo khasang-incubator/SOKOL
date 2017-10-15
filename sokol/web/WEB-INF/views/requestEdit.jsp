@@ -3,6 +3,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <sec:authentication var="user" property="principal"/>
 
 <c:if test="${errorMessage != null}">
@@ -195,18 +197,15 @@
                     <td>${request.createdBy}</td>
                     <%--ДАТА СОЗДАНИЯ--%>
                     <th><s:message code="date_of_creation"/></th>
-                    <td>${request.createdDate}</td>
+                    <td><fmt:formatDate pattern = "dd-MM-yyyy HH:mm" value = "${request.createdDate}" /></td>
                 </tr>
                 <tr>
                     <%--ИЗМЕНЕНО--%>
                     <th><s:message code="changed"/></th>
-                    <%--<td>${request.updatedBy}</td>--%>
-                        <%--<td>${request.getSimpleFormatDate(request.updatedBy)}</td>--%>
-                        <td>${simpleCreateDate}</td>
-
+                    <td>${request.updatedBy}</td>
                     <%--ДАТА ИЗМЕНЕНИЯ--%>
                     <th><s:message code="date_of_change"/></th>
-                    <td>${request.updatedDate}</td>
+                    <td><fmt:formatDate pattern = "dd-MM-yyyy HH:mm" value = "${request.updatedDate}" /></td>
                 </tr>
             </table>
         </div>

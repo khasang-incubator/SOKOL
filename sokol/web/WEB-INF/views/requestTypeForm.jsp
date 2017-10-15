@@ -2,6 +2,8 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:if test="${errorMessage != null}">
     <div class="alert alert-danger">
@@ -73,10 +75,10 @@
                         <tr>
                             <%--АВТОР--%>
                             <th><s:message code="author"/></th>
-                            <td>${requestType.createdBy}</td>
+                                <td>${requestType.createdBy}</td>
                             <%--ДАТА СОЗДАНИЯ--%>
                             <th><s:message code="date_of_creation"/></th>
-                            <td>${requestType.createdDate}</td>
+                                <td><fmt:formatDate pattern = "dd-MM-yyyy HH:mm" value = "${requestType.createdDate}" /></td>
                         </tr>
                         <tr>
                             <%--ИЗМЕНЕНО--%>
@@ -84,7 +86,7 @@
                             <td>${requestType.updatedBy}</td>
                             <%--ДАТА ИЗМЕНЕНИЯ--%>
                             <th><s:message code="date_of_change"/></th>
-                            <td>${requestType.updatedDate}</td>
+                            <td><fmt:formatDate pattern = "dd-MM-yyyy HH:mm" value = "${requestType.updatedDate}" /></td>
                         </tr>
                     </table>
                 </div>
