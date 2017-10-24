@@ -95,7 +95,7 @@
                                                     onclick="return confirmDeletion(${lists.requestId}, 'запрос')"></a></td>
                         </c:if>
                         <c:if test="${(!(lists.createdBy == userName))&&(!(numberDepartmentByUser == lists.requestType.department.id))}">
-                            <td class="del-cell"><a class="del-no-btn" href="#"></a></td>
+                            <td class="del-cell"><span class="del-no-btn" href="#"></span></td>
                         </c:if>
                     </sec:authorize>
 
