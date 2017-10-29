@@ -18,6 +18,7 @@ package io.khasang.sokol.controller;
 
 import io.khasang.sokol.dao.DepartmentDao;
 import io.khasang.sokol.entity.Department;
+import io.khasang.sokol.service.rest.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,6 +41,9 @@ public class DepartmentController {
 
     @Autowired
     private DepartmentDao departmentDao;
+
+    @Autowired
+    private DepartmentService departmentService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String showAll(final Model model) {
@@ -91,7 +95,14 @@ public class DepartmentController {
         return REDIRECT_TO_LIST;
     }*/
 
+
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteDepartment(@PathVariable int id) {
+        departmentService.deleteDepartment(id);
+        return REDIRECT_TO_LIST;
+    }
+
+/*    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteDepartment(@PathVariable int id) {
         Department updated = departmentDao.getById(id);
         updated.setUpdatedDate(new Date());
@@ -100,5 +111,5 @@ public class DepartmentController {
         updated.setUpdatedBy(context.getAuthentication().getName());
         departmentDao.update(updated);
         return REDIRECT_TO_LIST;
-    }
+    }*/
 }
