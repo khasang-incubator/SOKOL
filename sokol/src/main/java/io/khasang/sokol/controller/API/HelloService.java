@@ -1,4 +1,4 @@
-package io.khasang.sokol.service.rest;
+package io.khasang.sokol.controller.API;
 
 import org.springframework.stereotype.Controller;
 

@@ -2,7 +2,7 @@ package io.khasang.sokol.service.impl;
 
 import io.khasang.sokol.dao.DepartmentDao;
 import io.khasang.sokol.entity.Department;
-import io.khasang.sokol.service.rest.DepartmentService;
+import io.khasang.sokol.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +14,7 @@ import java.util.Date;
 public class DepartmentServiceImpl implements DepartmentService {
    private DepartmentDao departmentDao;
 
+   @Autowired
     public DepartmentServiceImpl(DepartmentDao departmentDao) {
         this.departmentDao = departmentDao;
     }

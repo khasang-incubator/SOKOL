@@ -18,7 +18,7 @@ package io.khasang.sokol.controller;
 
 import io.khasang.sokol.dao.DepartmentDao;
 import io.khasang.sokol.entity.Department;
-import io.khasang.sokol.service.rest.DepartmentService;
+import io.khasang.sokol.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -89,27 +89,9 @@ public class DepartmentController {
         return FORM_VIEW;
     }
 
-/*    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String deleteRequestType(@PathVariable int id) {
-      // departmentDao.delete(departmentDao.getById(id));
-        return REDIRECT_TO_LIST;
-    }*/
-
-
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteDepartment(@PathVariable int id) {
         departmentService.deleteDepartment(id);
         return REDIRECT_TO_LIST;
     }
-
-/*    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String deleteDepartment(@PathVariable int id) {
-        Department updated = departmentDao.getById(id);
-        updated.setUpdatedDate(new Date());
-        updated.setDeleted(true);
-        SecurityContext context = SecurityContextHolder.getContext();
-        updated.setUpdatedBy(context.getAuthentication().getName());
-        departmentDao.update(updated);
-        return REDIRECT_TO_LIST;
-    }*/
 }
