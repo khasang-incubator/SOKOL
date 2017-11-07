@@ -13,7 +13,6 @@ import java.util.Date;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
-    private static final String LIST_MAP = "/department/list";
     private DepartmentDao departmentDao;
 
     @Autowired
@@ -22,47 +21,26 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     public void deleteDepartment(int id) {
+        SecurityContext context = SecurityContextHolder.getContext();
         Department updated = departmentDao.getById(id);
         updated.setUpdatedDate(new Date());
-        updated.setDeleted(true);
-        SecurityContext context = SecurityContextHolder.getContext();
         updated.setUpdatedBy(context.getAuthentication().getName());
+        updated.setDeleted(true);
         departmentDao.update(updated);
     }
 
-    public void addDepartment(Model model) {
-        model.addAttribute("department", new Department());
-        String departmentNew = "new_department";
-        model.addAttribute("headerTitle", departmentNew);
-    }
-
-    public void showAllDepartment(Model model) {
-        model.addAttribute("departmentList", departmentDao.getAll());
-        model.addAttribute("headerTitle", "departments");
-    }
-
-    public void addOrEditDepartment(Model model, int id) {
-       Department department = departmentDao.getById(id);
-        model.addAttribute("cancelUrl", LIST_MAP);
-        model.addAttribute("department", department);
-        String editDepartment = "edit_department";
-        model.addAttribute("headerTitle", editDepartment);
-    }
-
-    public void saveOrUpdateDepartment(int id, Department department){
+    public Department saveOrUpdateDepartment(final Department department) {
+        SecurityContext context = SecurityContextHolder.getContext();
+        department.setUpdatedBy(context.getAuthentication().getName());
+        int id = department.getId();
         if (id == 0) {
-            SecurityContext context = SecurityContextHolder.getContext();
             department.setCreatedBy(context.getAuthentication().getName());
-            department.setUpdatedBy(context.getAuthentication().getName());
-            departmentDao.save(department);
+            id = departmentDao.save(department);
         } else {
-            Department updated = departmentDao.getById(id);
-            updated.setTitle(department.getTitle());
-            updated.setUpdatedDate(new Date());
-            SecurityContext context = SecurityContextHolder.getContext();
-            updated.setUpdatedBy(context.getAuthentication().getName());
+            department.setUpdatedDate(new Date());
             departmentDao.update(department);
         }
+        return departmentDao.getById(id);
     }
 }
 

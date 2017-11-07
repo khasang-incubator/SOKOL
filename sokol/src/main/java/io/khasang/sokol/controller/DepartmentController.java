@@ -16,6 +16,7 @@
 
 package io.khasang.sokol.controller;
 
+import io.khasang.sokol.dao.DepartmentDao;
 import io.khasang.sokol.entity.Department;
 import io.khasang.sokol.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,34 +32,44 @@ public class DepartmentController {
     private static final String REDIRECT_TO_LIST = "redirect:/department/list";
     private static final String FORM_VIEW = "departmentForm";
     private static final String LIST_VIEW = "departmentList";
+    private static final String LIST_MAP = "/department/list";
+    private DepartmentDao departmentDao;
     private DepartmentService departmentService;
 
     @Autowired
-    public DepartmentController(DepartmentService departmentService) {
+    public DepartmentController(DepartmentDao departmentDao, DepartmentService departmentService) {
+        this.departmentDao = departmentDao;
         this.departmentService = departmentService;
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String showAll(final Model model) {
-        departmentService.showAllDepartment(model);
+        model.addAttribute("departmentList", departmentDao.getAll());
+        model.addAttribute("headerTitle", "departments");
         return LIST_VIEW;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(final Model model, @PathVariable int id) {
-        departmentService.addOrEditDepartment(model, id);
+        Department department = departmentDao.getById(id);
+        String editDepartment = "edit_department";
+        model.addAttribute("cancelUrl", LIST_MAP);
+        model.addAttribute("department", department);
+        model.addAttribute("headerTitle", editDepartment);
         return FORM_VIEW;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public String updateDepartment(@PathVariable int id, final Department department) {
-        departmentService.saveOrUpdateDepartment(id, department);
+    public String saveOrUpdateDepartment(@PathVariable int id, final Department department) {
+        departmentService.saveOrUpdateDepartment(department);
         return REDIRECT_TO_LIST;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addDepartment(final Model model) {
-        departmentService.addDepartment(model);
+        String departmentNew = "new_department";
+        model.addAttribute("department", new Department());
+        model.addAttribute("headerTitle", departmentNew);
         return FORM_VIEW;
     }
 
