@@ -156,6 +156,16 @@ public class Request extends AuditableEntity {
     public void setAssignedDate(Date assignedDate) {
         this.assignedDate = assignedDate;
     }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "requestId=" + requestId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", createdBy='" + createdBy + '\'' +
+                '}';
+    }
 }
 
 

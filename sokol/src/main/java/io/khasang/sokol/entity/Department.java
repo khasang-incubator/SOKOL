@@ -39,8 +39,8 @@ public class Department extends AuditableEntity {
 /*    @OneToMany(mappedBy = "department")
     private List<Request> requests = new ArrayList<>();*/
 
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RequestType> requestTypes = new ArrayList<>();
+ /*   @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RequestType> requestTypes = new ArrayList<>();*/
 
     public Department() {
         this.setDeleted(false);
@@ -62,9 +62,9 @@ public class Department extends AuditableEntity {
         this.title = title;
     }
 
-    public List<RequestType> getRequestTypes() {
+  /*  public List<RequestType> getRequestTypes() {
         return requestTypes;
-    }
+    }*/
 
     public Boolean getDeleted() {
         return isDeleted;
@@ -74,9 +74,9 @@ public class Department extends AuditableEntity {
         isDeleted = deleted;
     }
 
-    public void setRequestTypes(List<RequestType> requestTypes) {
+   /* public void setRequestTypes(List<RequestType> requestTypes) {
         this.requestTypes = requestTypes;
-    }
+    }*/
 
     /*    public int getId() {
         return id;
