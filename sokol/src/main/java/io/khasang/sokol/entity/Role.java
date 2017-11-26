@@ -24,8 +24,8 @@ import java.util.Set;
 //@NamedQuery(name = "Role.findById", query = "select distinct r from Role r where r.id = :id")
 @Table(name = "ROLES")
 public class Role extends AuditableEntity {
-    @OneToMany(mappedBy = "role")
-    Set<User> userSet = new HashSet<>();
+/*    @OneToMany(mappedBy = "role")
+    Set<User> userSet = new HashSet<>();*/
     @Id
     private int id;
     @Column(name = "ROLE_NAME")
@@ -60,11 +60,11 @@ public class Role extends AuditableEntity {
         this.name = name;
     }
 
-    public Set<User> getUserSet() {
+/*    public Set<User> getUserSet() {
         return userSet;
     }
 
     public void setUserSet(Set<User> userSet) {
         this.userSet = userSet;
-    }
+    }*/
 }

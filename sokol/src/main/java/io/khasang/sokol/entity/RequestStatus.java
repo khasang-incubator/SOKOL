@@ -30,8 +30,8 @@ public class RequestStatus {
     private String requestStatusName;
 
 
-    @OneToMany(mappedBy = "requestType", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Request> requests = new HashSet<>();
+/*    @OneToMany(mappedBy = "requestType", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Request> requests = new HashSet<>();*/
 
     public Integer getRequestStatusId() {
         return requestStatusId;
@@ -49,13 +49,13 @@ public class RequestStatus {
         this.requestStatusName = requestStatusName;
     }
 
-    public Set<Request> getRequests() {
+/*    public Set<Request> getRequests() {
         return requests;
     }
 
     public void setRequests(Set<Request> requests) {
         this.requests = requests;
-    }
+    }*/
 }
 
 

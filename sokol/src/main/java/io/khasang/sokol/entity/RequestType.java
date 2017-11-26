@@ -34,8 +34,8 @@ public class RequestType extends AuditableEntity {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @OneToMany(mappedBy = "requestType", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Request> requests = new ArrayList<>();
+/*    @OneToMany(mappedBy = "requestType", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Request> requests = new ArrayList<>();*/
 
 //    @OneToMany(mappedBy = "requestType", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private Set<Field> fields = new HashSet<>();
