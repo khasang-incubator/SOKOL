@@ -5,34 +5,33 @@ import io.khasang.sokol.dao.RequestDao;
 import io.khasang.sokol.entity.Department;
 import io.khasang.sokol.entity.Request;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
-@Controller
-@RequestMapping(value = "/getJSON")
-public class RestController {
+//@Controller
+@RestController
+@RequestMapping(value = "/api/v1")
+public class ApiV1Controller {
 
     private DepartmentDao departmentDao;
     private RequestDao requestDao;
 
-    public RestController(DepartmentDao departmentDao, RequestDao requestDao) {
+    public ApiV1Controller(DepartmentDao departmentDao, RequestDao requestDao) {
         this.departmentDao = departmentDao;
         this.requestDao = requestDao;
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/DepartmentAll", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/departments", method = RequestMethod.GET)
     public List<Department> departments() {
         //List<Department> departmentList = departmentDao.getAll();
         //return departmentList;
         return departmentDao.getAll();
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/RequestAll", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/requests", method = RequestMethod.GET)
     public List<Request> requests() {
         //List<Request> requestList = requestDao.getAll();
         //return requestList;

@@ -16,6 +16,8 @@
 
 package io.khasang.sokol.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,11 +38,13 @@ public class Department extends AuditableEntity {
     @Column(name = "IS_DELETED")
     private Boolean isDeleted;
 
+  //  @JsonIgnore
 /*    @OneToMany(mappedBy = "department")
-    private List<Request> requests = new ArrayList<>();*/
+    private List<Request> requests = new ArrayList<>();
 
- /*   @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RequestType> requestTypes = new ArrayList<>();*/
+ //   @JsonIgnore
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RequestType> requestTypes = new ArrayList<>()*/;
 
     public Department() {
         this.setDeleted(false);

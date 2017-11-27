@@ -32,9 +32,9 @@ public class Request extends AuditableEntity {
     private String description;
     @Column(name = "CREATED_BY")
     private String createdBy;
-/*    @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "DEPARTMENTS")
-    private Department department;*/
+    private Department department;
     @ManyToOne
     @JoinColumn(name = "ASSIGNED_TO")
     private User assignedTo;
