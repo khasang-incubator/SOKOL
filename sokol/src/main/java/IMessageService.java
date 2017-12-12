@@ -1,4 +1,4 @@
 public interface IMessageService {
     String getMessaage();
-    void setMessage(String message);
+    //void setMessage(String message);
 }
