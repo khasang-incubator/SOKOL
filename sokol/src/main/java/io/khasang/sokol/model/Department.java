@@ -21,7 +21,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "DEPARTMENTS")
-public class Department implements Serializable {
+public class Department extends AuditableEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "DEPARTMENT_ID")
