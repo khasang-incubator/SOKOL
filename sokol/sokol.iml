@@ -5,6 +5,7 @@
       <configuration>
         <fileset id="fileset" name="Config" removed="false">
           <file>file://$MODULE_DIR$/src/main/java/io/khasang/sokol/SokolApplication.java</file>
+          <file>file://$MODULE_DIR$/web/config.xml</file>
         </fileset>
       </configuration>
     </facet>

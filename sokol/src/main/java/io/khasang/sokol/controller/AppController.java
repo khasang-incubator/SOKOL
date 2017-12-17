@@ -21,6 +21,7 @@ public class AppController {
         departmentRepository.save(new Department("buh5"));
         departmentRepository.save(new Department("buh6"));
         departmentRepository.save(new Department("buh7"));
+        departmentRepository.save(new Department("buh8"));
         return "Done";
     }
 
