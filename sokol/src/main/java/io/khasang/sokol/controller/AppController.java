@@ -16,14 +16,14 @@ public class AppController {
     @Autowired
     private DepartmentRepository departmentRepository;
 
-    @GetMapping("/save")
+/*    @GetMapping("/save")
     public String save() {
         departmentRepository.save(new Department("buh5"));
         departmentRepository.save(new Department("buh6"));
         departmentRepository.save(new Department("buh7"));
         departmentRepository.save(new Department("buh8"));
         return "Done";
-    }
+    }*/
 
     @GetMapping("/findall")
     public String findall() {
