@@ -1,0 +1,13 @@
+spring:
+  jpa:
+    generate-ddl: true
+#    database: POSTGRESQL
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: create-drop
+  datasource:
+#    platform: postgres
+    url: jdbc:postgresql://localhost:5432/sokol2
+    username: root
+    password: root
+#    driverClassName: org.postgresql.Driver
