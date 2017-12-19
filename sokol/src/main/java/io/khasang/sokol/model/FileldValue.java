@@ -16,6 +16,8 @@
 
 package io.khasang.sokol.model;
 
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;

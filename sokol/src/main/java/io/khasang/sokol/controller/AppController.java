@@ -1,7 +1,5 @@
 package io.khasang.sokol.controller;
 
-
-import io.khasang.sokol.model.Department;
 import io.khasang.sokol.repositories.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -16,11 +16,14 @@
 
 package io.khasang.sokol.model;
 
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
+@EqualsAndHashCode
 public class FieldValueKey implements Serializable {
     @Column(name = "FIELD_ID")
     private Integer fieldId;
