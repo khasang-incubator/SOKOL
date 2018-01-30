@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+</head>
+
+<body>
+    <div class="container">
+
+        <a th:href="@{/department/add}">НОВЫЙ </a>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="department : ${departmentList}">
+                <td th:text="${department.id}" th:name="id"></td>
+                <td>
+                    <a th:title="Редактирование"
+                       th:href="@{/department/edit/{id}(id=${department.id})}"
+                       th:text="${department.title}">
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/department/delete/{id}(id=${department.id})}">DELETE</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

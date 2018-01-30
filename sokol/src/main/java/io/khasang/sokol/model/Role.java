@@ -17,13 +17,11 @@
 package io.khasang.sokol.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 //@NamedQuery(name = "Role.findById", query = "select distinct r from Role r where r.id = :id")
 @Table(name = "ROLES")
-public class Role extends AuditableEntity {
+public class Role extends AbstractBaseEntity {
 /*    @OneToMany(mappedBy = "role")
     Set<User> userSet = new HashSet<>();*/
     @Id

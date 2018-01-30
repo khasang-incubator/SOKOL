@@ -21,7 +21,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "FIELDS")
-public class Field extends AuditableEntity implements Serializable {
+public class Field extends AbstractBaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FIELD_ID")

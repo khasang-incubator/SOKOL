@@ -22,7 +22,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "REQUESTS")
-public class Request extends AuditableEntity implements Serializable {
+public class Request extends AbstractBaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "REQUEST_ID")

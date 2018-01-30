@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @MappedSuperclass
-public abstract class AuditableEntity {
+public abstract class AbstractBaseEntity {
     @Column(name = "CREATED_BY")
     protected String createdBy;
     @Column(name = "CREATED_DATE")
@@ -36,7 +36,7 @@ public abstract class AuditableEntity {
     @Temporal(TemporalType.TIMESTAMP)
     protected Date updatedDate;
 
-    public AuditableEntity() {
+    public AbstractBaseEntity() {
         this.createdDate = new Date();
         this.updatedDate = new Date();
     }

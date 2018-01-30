@@ -16,8 +16,6 @@
 
 package io.khasang.sokol.model;
 
-import lombok.EqualsAndHashCode;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -26,7 +24,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "FIELD_VALUES")
-public class FileldValue extends AuditableEntity {
+public class FileldValue extends AbstractBaseEntity {
     @Id
     private FieldValueKey fieldValueKey;
 

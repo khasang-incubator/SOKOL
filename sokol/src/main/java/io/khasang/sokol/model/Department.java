@@ -21,11 +21,11 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "DEPARTMENTS")
-public class Department extends AuditableEntity implements Serializable {
+public class Department extends AbstractBaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "DEPARTMENT_ID")
-    private int id;
+    private long id;
 
     @Column(name = "TITLE")
     private String title;
@@ -45,11 +45,11 @@ public class Department extends AuditableEntity implements Serializable {
                 '}';
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

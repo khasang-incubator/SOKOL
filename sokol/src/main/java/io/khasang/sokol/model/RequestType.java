@@ -17,12 +17,10 @@
 package io.khasang.sokol.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "REQUEST_TYPES")
-public class RequestType extends AuditableEntity {
+public class RequestType extends AbstractBaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "REQUEST_TYPE_ID")
