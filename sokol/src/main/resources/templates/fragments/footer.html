@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+      <!--xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">-->
+<head>
+</head>
+<body>
+<div th:fragment="footer">
+
+    <div class="container">
+
+        <footer>
+            <nav class="navbar navbar-inverse navbar-fixed-bottom page-footer">
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="sokol-cr">
+                            Sokol IT &copy; 2018
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+<!--                        <li><a href="#"><s:message code="about_us"/></a></li>
+                        <li><a href="#"><s:message code="services"/></a></li>
+                        <li><a href="#"><s:message code="contacts"/></a></li>-->
+                        <li><a href="#">about_us</a></li>
+                        <li><a href="#">services</a></li>
+                        <li><a href="#">contacts</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- this is footer -->
+            <!--            <span sec:authorize="isAuthenticated()">
+                | Logged user: <span sec:authentication="name"></span> |
+                Roles: <span sec:authentication="principal.authorities"></span> |
+                <a th:href="@{/logout}">Sign Out</a>
+            </span>-->
+
+<!--            <script type="text/javascript"
+                    src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+        </footer>
+    </div>
+
+</div>
+</body>
+</html>
