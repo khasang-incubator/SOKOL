@@ -35,6 +35,11 @@ public class AppController {
         model.addAttribute("departmentList", departmentList);
         return "departmentList";
     }
+
+    @RequestMapping({"/home"})
+    public String home(Model model) {
+        return "home";
+    }
 }
 
 
