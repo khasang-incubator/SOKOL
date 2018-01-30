@@ -1,18 +1,24 @@
 package io.khasang.sokol.controller;
 
-import io.khasang.sokol.repositories.DepartmentRepository;
+import io.khasang.sokol.model.Department;
+import io.khasang.sokol.repository.DepartmentRepository;
+import io.khasang.sokol.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 
-@RestController
+
+@Controller
 @RequestMapping(value = "/sokol")
 public class AppController {
 
     @Autowired
-    private DepartmentRepository departmentRepository;
+    private DepartmentService departmentService;
 
 /*    @GetMapping("/save")
     public String save() {
@@ -23,9 +29,11 @@ public class AppController {
         return "Done";
     }*/
 
-    @GetMapping("/findall")
-    public String findall() {
-        return departmentRepository.findAll().toString();
+    @RequestMapping({"/list"})
+    public String departmentList(Model model) {
+        List<Department> departmentList = departmentService.getAll();
+        model.addAttribute("departmentList", departmentList);
+        return "departmentList";
     }
 }
 
