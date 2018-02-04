@@ -30,19 +30,16 @@ public class Department extends AbstractBaseEntity implements Serializable {
     @Column(name = "TITLE")
     private String title;
 
-    public Department() {
-    }
+    @Column(name = "IS_DELETED")
+    private Boolean isDeleted;
 
-    public Department(String title) {
+    public Department(String title, Boolean isDeleted) {
         this.title = title;
+        this.isDeleted = isDeleted;
     }
 
-    @Override
-    public String toString() {
-        return "Department{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                '}';
+    public Department() {
+        this.isDeleted = false;
     }
 
     public long getId() {
@@ -60,4 +57,13 @@ public class Department extends AbstractBaseEntity implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
 }
+
