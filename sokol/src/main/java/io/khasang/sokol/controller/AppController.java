@@ -1,14 +1,14 @@
 package io.khasang.sokol.controller;
 
 import io.khasang.sokol.model.Department;
+import io.khasang.sokol.model.Greeting;
 import io.khasang.sokol.repository.DepartmentRepository;
+import io.khasang.sokol.repository.GreetingRepository;
 import io.khasang.sokol.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,25 +18,21 @@ import java.util.List;
 public class AppController {
 
     @Autowired
-    private DepartmentService departmentService;
+    private GreetingRepository greetingRepository;
 
-/*    @GetMapping("/save")
-    public String save() {
-        departmentRepository.save(new Department("buh5"));
-        departmentRepository.save(new Department("buh6"));
-        departmentRepository.save(new Department("buh7"));
-        departmentRepository.save(new Department("buh8"));
-        return "Done";
-    }*/
-
-    @RequestMapping({"/list"})
-    public String departmentList(Model model) {
-        List<Department> departmentList = departmentService.getAll();
-        model.addAttribute("departmentList", departmentList);
-        return "departmentList";
+    @GetMapping("/greeting")
+    public String greetingForm(Model model) {
+        model.addAttribute("greeting", new Greeting());
+        return "greeting";
     }
 
-    @RequestMapping({"/home"})
+    @PostMapping("/greeting")
+    public void greetingSubmit(@ModelAttribute Greeting greeting) {
+        greetingRepository.save(greeting);
+        //return "result";
+    }
+
+    @GetMapping({"/home"})
     public String home(Model model) {
         return "home";
     }
