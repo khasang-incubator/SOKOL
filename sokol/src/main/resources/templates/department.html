@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Depatrment add</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<div class="container">
+        <form action="#" th:action="@{/sokol/department/add}" th:object="${department}" method="post">
+            <p>Id: <input type="text" th:field="*{id}" /></p>
+            <p>Message: <input type="text" th:field="*{title}" /></p>
+            <p><input type="submit" value="Save" />
+            <a th:href="@{/sokol/department/list}" class="btn-close pull-right">Cancel </a>
+            </p>
+        </form>
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>
