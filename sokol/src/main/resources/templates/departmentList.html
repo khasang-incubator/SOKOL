@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Boot Thymeleaf + Spring Security</title>
+    <title>Depatrment List</title>
 
     <div th:replace="fragments/header :: header-css"/>
 
@@ -13,53 +13,45 @@
 <div class="container">
     <div class="table-header">
         <!--НОВЫЙ-->
-        <a th:href="@{/department/add}" class="create-btn btn-danger">НОВЫЙ </a>
+        <a th:href="@{/sokol/department/add}" class="create-btn btn-danger">НОВЫЙ </a>
     </div>
     <table class="table table-striped">
-        <thead>
-        <tr>
-        <th>#</th>
-        <!--НАЗВАНИЕ-->
-        <th>Название</th>
-        <!--СОЗДАНО-->
-        <th>Создано</th>
-        <!--УДАЛИТЬ-->
-        <th>Удалить</th>
-        </tr>
-        </thead>
+       <thead>
+         <tr>
+         <th>#</th>
+         <th>Название</th><!--НАЗВАНИЕ-->
+         <th>Создано</th>   <!--СОЗДАНО-->
+         <th>Удалить</th><!--УДАЛИТЬ-->
+         </tr>
+       </thead>
        <tbody>
-       <!--The time is: <strong th:text="${#dates.format(now, 'dd/MMM/yyyy HH:mm')}">31/12/2015 15:00</strong>-->
             <tr th:each="department : ${departmentList}">
                 <td th:text="${department.id}" th:name="id"></td>
                 <td>
                     <a th:title="Редактирование"
-                       th:href="@{/department/edit/{id}(id=${department.id})}"
+                       th:href="@{/sokol/department/edit/{id}(id=${department.id})}"
                        th:text="${department.title}">
                     </a>
                 </td>
 
                 <td th:text="${department.createdDate}">
                 </td>
-                <!--<td th:text="${#dates.format(department.createdDate, 'dd/MM/yyyy HH:mm')}"></td>-->
-                <!--<td th:text="${#dates.format(department.createdDate, 'dd-MM-yyyy HH:mm')}">-->
-                <!--<td th:text="${#dates.format(department.createdDate, 'dd/MM/yyyy HH:mm')}"></td>-->
-
-
 
                 <td>
-                    <a th:href="@{/department/delete/{id}(id=${department.id})}">DELETE</a>
+                    <a th:href="@{/sokol/department/delete/{id}(id=${department.id})}">DELETE</a>
                 </td>
             </tr>
         </tbody>
     </table>
-
-
 </div>
 <!-- /.container -->
-
 <div th:replace="fragments/footer :: footer"/>
 
 </body>
 </html>
 
 
+<!--The time is: <strong th:text="${#dates.format(now, 'dd/MMM/yyyy HH:mm')}">31/12/2015 15:00</strong>-->
+<!--<td th:text="${#dates.format(department.createdDate, 'dd/MM/yyyy HH:mm')}"></td>-->
+<!--<td th:text="${#dates.format(department.createdDate, 'dd-MM-yyyy HH:mm')}">-->
+<!--<td th:text="${#dates.format(department.createdDate, 'dd/MM/yyyy HH:mm')}"></td>-->
