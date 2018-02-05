@@ -7,8 +7,39 @@
 <div th:fragment="footer">
 
     <div class="container">
-
         <footer>
+            <nav class="navbar navbar-default  navbar-static-bottom" role="navigation">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-lg-12">
+                            <ul class="list-inline">
+                                <li class="footer-menu-divider">&sdot;</li>
+                                <li>
+                                    <!--ГЛАВНАЯ-->
+                                    <a href="#about">main</a>
+                                </li>
+                                <li>
+                                    <!--НАС-->
+                                    <a href="#about">about_us</a>
+                                </li>
+                                <li>
+                                    <!--СЕРВИСЫ-->
+                                    <a href="#">services</a>
+                                </li>
+                                <li class="footer-menu-divider">&sdot;</li>
+                            </ul>
+                            <div class="social">
+                                <a href="javascript: alert('Under construction')" class="net1"></a>
+                                <a href="javascript: alert('Under construction')" class="net2"></a>
+                                <a href="javascript: alert('Under construction')" class="net3"></a>
+                                <a href="javascript: alert('Under construction')" class="net4"></a>
+                            </div>
+                            <p class="copyright text-muted small"> Sokol IT &copy; 2018</p>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+<!--
             <nav class="navbar navbar-inverse navbar-fixed-bottom page-footer">
                 <div class="container-fluid">
                     <ul class="nav navbar-nav navbar-right">
@@ -17,25 +48,26 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav">
-<!--                        <li><a href="#"><s:message code="about_us"/></a></li>
+&lt;!&ndash;                        <li><a href="#"><s:message code="about_us"/></a></li>
                         <li><a href="#"><s:message code="services"/></a></li>
-                        <li><a href="#"><s:message code="contacts"/></a></li>-->
+                        <li><a href="#"><s:message code="contacts"/></a></li>&ndash;&gt;
                         <li><a href="#">about_us</a></li>
                         <li><a href="#">services</a></li>
                         <li><a href="#">contacts</a></li>
                     </ul>
                 </div>
             </nav>
-            <!-- this is footer -->
-            <!--            <span sec:authorize="isAuthenticated()">
+            &lt;!&ndash; this is footer &ndash;&gt;
+            &lt;!&ndash;            <span sec:authorize="isAuthenticated()">
                 | Logged user: <span sec:authentication="name"></span> |
                 Roles: <span sec:authentication="principal.authorities"></span> |
                 <a th:href="@{/logout}">Sign Out</a>
-            </span>-->
+            </span>&ndash;&gt;
 
-<!--            <script type="text/javascript"
-                    src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+&lt;!&ndash;            <script type="text/javascript"
+                    src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>&ndash;&gt;
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+-->
         </footer>
     </div>
 
