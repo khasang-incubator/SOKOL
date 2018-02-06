@@ -3,7 +3,7 @@
     <div th:fragment="header-css">
         <!-- this is header-css -->
         <link rel="stylesheet" type="text/css"
-              href="/bootstrap/3.3.7/css/bootstrap.min.css" />
+              href="//css/bootstrap.min.css" />
 
         <link rel="stylesheet" th:href="@{/css/main.css}"
               href="../../css/main.css" />
@@ -49,7 +49,7 @@
                         </li>
                     </sec:authorize>-->
                 </ul>
-                <!--<a class="navbar-brand" href="#"><img src="${root_url}img/Logo1.png"/></a> -->
+                <a class="navbar-brand" href="#"><img th:src="@{/img/Logo1.png}"/></a>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <!--Главная-->
@@ -88,9 +88,10 @@
 
     <div class="info-line">
         <ul class="nav navbar-nav navbar-right">
-<!--            <li class="wing">
-                <img src="${root_url}img/wing.png"/>
-            </li>-->
+            <li class="wing">
+                <img th:src="@{/img/wing.png}" />
+
+            </li>
         </ul>
         <div class="container topnav caption">
 <!--            <ul class="nav navbar-nav">
@@ -98,18 +99,6 @@
             </ul>-->
         </div>
     </div>
-<!--    <nav class="navbar navbar-inverse">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" th:href="@{/}">Spring Boot</a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a th:href="@{/}">Home</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>-->
 </div>
 
 </body>

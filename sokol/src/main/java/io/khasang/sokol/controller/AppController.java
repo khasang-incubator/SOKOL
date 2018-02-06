@@ -20,6 +20,11 @@ public class AppController {
     @Autowired
     private GreetingRepository greetingRepository;
 
+    @GetMapping("/")
+    public String main() {
+        return "main";
+    }
+
     @GetMapping("/greeting")
     public String greetingForm(Model model) {
         model.addAttribute("greeting", new Greeting());
@@ -35,6 +40,13 @@ public class AppController {
     @GetMapping({"/home"})
     public String home(Model model) {
         return "home";
+    }
+
+
+
+    @GetMapping("/layuot")
+    public String layuot(Model model) {
+        return "layuot";
     }
 }
 
