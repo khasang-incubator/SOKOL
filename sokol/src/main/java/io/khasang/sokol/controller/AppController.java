@@ -62,6 +62,10 @@ public class AppController {
         return "testdrop";
     }
 
+    @GetMapping("/layuot")
+    public String layuot() {
+        return "layuot";
+    }
 }
 
 
