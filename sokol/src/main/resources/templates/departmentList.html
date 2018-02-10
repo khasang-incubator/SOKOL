@@ -6,7 +6,7 @@
     <div th:replace="fragments/header :: header-css"/>
 
 </head>
-<body>
+<body class="sokol-list-view">
 
 <div th:replace="fragments/header :: header"/>
 
@@ -15,34 +15,36 @@
         <!--НОВЫЙ-->
         <a th:href="@{/sokol/department/add}" class="create-btn btn-danger">НОВЫЙ </a>
     </div>
-    <table class="table table-striped">
-       <thead>
-         <tr>
-         <th>#</th>
-         <th>Название</th><!--НАЗВАНИЕ-->
-         <th>Создано</th>   <!--СОЗДАНО-->
-         <th>Удалить</th><!--УДАЛИТЬ-->
-         </tr>
-       </thead>
-       <tbody>
-            <tr th:each="department : ${departmentList}">
-                <td th:text="${department.id}" th:name="id"></td>
-                <td>
-                    <a th:title="Редактирование"
-                       th:href="@{/sokol/department/edit/{id}(id=${department.id})}"
-                       th:text="${department.title}">
-                    </a>
-                </td>
+    <div class="table table-wrapper">
+        <table class="list-table">
+           <thead>
+             <tr>
+             <th>#</th>
+             <th>Название</th><!--НАЗВАНИЕ-->
+             <th>Создано</th>   <!--СОЗДАНО-->
+             <th>Удалить</th><!--УДАЛИТЬ-->
+             </tr>
+           </thead>
+           <tbody>
+                <tr th:each="department : ${departmentList}">
+                    <td th:text="${department.id}" th:name="id"></td>
+                    <td>
+                        <a th:title="Редактирование"
+                           th:href="@{/sokol/department/edit/{id}(id=${department.id})}"
+                           th:text="${department.title}">
+                        </a>
+                    </td>
 
-                <td th:text="${department.createdDate}">
-                </td>
+                    <td th:text="${department.createdDate}">
+                    </td>
 
-                <td>
-                    <a th:href="@{/sokol/department/delete/{id}(id=${department.id})}">DELETE</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                    <td class="del-cell">
+                        <a class="del-btn" th:href="@{/sokol/department/delete/{id}(id=${department.id})}"></a>
+                    </td>
+                </tr>
+           </tbody>
+        </table>
+    </div>
 </div>
 <!-- /.container -->
 <div th:replace="fragments/footer :: footer"/>
