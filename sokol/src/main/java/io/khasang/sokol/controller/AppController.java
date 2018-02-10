@@ -37,17 +37,31 @@ public class AppController {
         //return "result";
     }
 
+    @GetMapping({"/main"})
+    public String main(Model model) {
+        return "main";
+    }
+
     @GetMapping({"/home"})
     public String home(Model model) {
         return "home";
     }
 
-
-
-    @GetMapping("/layuot")
+    @GetMapping("/footer")
     public String layuot(Model model) {
-        return "layuot";
+        return "footer";
     }
+
+    @GetMapping("/header")
+    public String header() {
+        return "header";
+    }
+
+    @GetMapping("/testdrop")
+    public String testdrop() {
+        return "testdrop";
+    }
+
 }
 
 
