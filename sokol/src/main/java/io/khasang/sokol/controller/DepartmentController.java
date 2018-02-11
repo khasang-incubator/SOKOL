@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -23,7 +24,6 @@ public class DepartmentController {
 
     @GetMapping({"/list"})
     public String departmentList(Model model) {
-        //List<Department> departmentList = departmentService.getAll();
         List<Department> departmentList = departmentRepository.findAll();
         model.addAttribute("departmentList", departmentList);
         return "departmentList";
@@ -33,6 +33,12 @@ public class DepartmentController {
     public String departmentForm(Model model) {
         model.addAttribute("department", new Department());
         return "department";
+    }
+
+    @PostMapping("/add")
+    public String departmentSubmit(@ModelAttribute Department department) {
+        departmentRepository.save(department);
+        return REDIRECT_TO_LIST;
     }
 
     @GetMapping("/edit/{id}")
@@ -46,18 +52,19 @@ public class DepartmentController {
     public String departmentEdit(@PathVariable long id, Department departmentDetails) {
         Department department = departmentRepository.getOne(id);
         department.setTitle(departmentDetails.getTitle());
+        department.setUpdatedDate(new Date());
         return "department";
     }
 
-    @PostMapping("/add")
-    public String departmentSubmit(@ModelAttribute Department department) {
-        departmentRepository.save(department);
+/*    @GetMapping("/delete/{id}")
+    public String departmentDelete(@PathVariable long id) {
+        departmentRepository.delete(id);
         return REDIRECT_TO_LIST;
-    }
+    }*/
 
     @GetMapping("/delete/{id}")
     public String departmentDelete(@PathVariable long id) {
-        departmentRepository.delete(id);
+        departmentService.departmentDelete(id);
         return REDIRECT_TO_LIST;
     }
 
