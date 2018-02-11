@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2017 Sokol Development Team
+ * Copyright 2016-2018 Sokol Development Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ public class RequestType extends AbstractBaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "REQUEST_TYPE_ID")
-    private int id;
+    private long id;
 
     @Column(name = "TITLE")
     private String title;
@@ -46,11 +46,11 @@ public class RequestType extends AbstractBaseEntity {
     @JoinColumn(name = "DEPARTMENT_ID")
     private Department department;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
