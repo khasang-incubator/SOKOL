@@ -2,6 +2,7 @@ package io.khasang.sokol.controller;
 
 import io.khasang.sokol.model.Department;
 import io.khasang.sokol.model.RequestType;
+import io.khasang.sokol.repository.DepartmentRepository;
 import io.khasang.sokol.repository.RequestTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,9 @@ public class RequestTypeController {
     @Autowired
     RequestTypeRepository requestTypeRepository;
 
+    @Autowired
+    DepartmentRepository departmentRepository;
+
     @GetMapping({"/list"})
     public String requestTypeList(Model model) {
         List<RequestType> requestTypeList = requestTypeRepository.findAll();
@@ -31,6 +35,7 @@ public class RequestTypeController {
 
     @GetMapping("add")
     public String requestTypeForm(Model model) {
+        model.addAttribute("allDepartments", departmentRepository.findAll());
         model.addAttribute("requestType", new RequestType());
         return REQUEST_TYPE_FORM;
     }
