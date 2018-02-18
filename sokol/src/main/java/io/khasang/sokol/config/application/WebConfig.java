@@ -72,12 +72,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     TilesConfigurer tilesConfigurer() {
         TilesConfigurer tiles = new TilesConfigurer();
-        //tiles.setDefinitions("/WEB-INF/views/layout/tiles.xml");
+  //      tiles.setDefinitions("/WEB-INF/views/layout/tiles.xml");
         tiles.setDefinitions("classpath:tiles.xml");
 //        tiles.setDefinitions("file: web/WEB-INF/views/layout/tiles.xml"); // for junit
 //        tiles.setDefinitionsFactoryClass(TilesDefinitionsConfig.class); // for java config
 //        // Add apache tiles definitions
-//        TilesDefinitionsConfig.addDefinitions();
+       TilesDefinitionsConfig.addDefinitions();
         tiles.setCheckRefresh(true);
         return tiles;
     }
