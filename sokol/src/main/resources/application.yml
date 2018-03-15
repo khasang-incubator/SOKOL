@@ -1,0 +1,15 @@
+spring:
+   jpa:
+      generate-ddl: true
+      database: POSTGRESQL
+      show-sql: true
+      hibernate:
+         ddl-auto: update
+         use-new-id-generator-mappings: true
+   datasource:
+      platform: postgres
+      url: jdbc:postgresql://localhost:5432/sokol
+      username: root
+      password: root
+
+
