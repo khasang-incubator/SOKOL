@@ -57,7 +57,7 @@ public class DepartmentController {
     }
 
     @PostMapping("/edit/{id}")
-    public String departmentEdit(@PathVariable long id, Department departmentDetails) {
+    public String departmentPost(@PathVariable long id, Department departmentDetails) {
         Department department = departmentRepository.getOne(id);
         department.setTitle(departmentDetails.getTitle());
         department.setUpdatedDate(new Date());
