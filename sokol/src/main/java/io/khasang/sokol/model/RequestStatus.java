@@ -25,28 +25,28 @@ import java.util.Set;
 public class RequestStatus {
     @Id
     @Column(name = "REQUEST_STATUS_ID")
-    private Integer requestStatusId;
+    private long id;
     @Column(name = "REQUEST_STATUS_NAME")
-    private String requestStatusName;
+    private String name;
 
 
 /*    @OneToMany(mappedBy = "requestType", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Request> requests = new HashSet<>();*/
 
-    public Integer getRequestStatusId() {
-        return requestStatusId;
+    public long getId() {
+        return id;
     }
 
-    public void setRequestStatusId(Integer requestStatusId) {
-        this.requestStatusId = requestStatusId;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getRequestStatusName() {
-        return requestStatusName;
+    public String getName() {
+        return name;
     }
 
-    public void setRequestStatusName(String requestStatusName) {
-        this.requestStatusName = requestStatusName;
+    public void setName(String name) {
+        this.name = name;
     }
 
 /*    public Set<Request> getRequests() {

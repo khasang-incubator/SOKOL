@@ -13,7 +13,7 @@
 <div class="container">
     <div class="table-header">
         <!--НОВЫЙ-->
-        <a th:href="@{/sokol/requestList/add}" class="create-btn btn-danger">НОВЫЙ </a>
+        <a th:href="@{/sokol/request/add}" class="create-btn btn-danger">НОВЫЙ </a>
     </div>
     <div class="table table-wrapper">
         <table class="list-table">
@@ -32,18 +32,21 @@
             <tbody>
             <tr th:each="request : ${requestList}">
                 <td th:text="${request.id}" th:name="id"></td>
+                <td th:text="${request.status.name}"></td>
                 <td>
                     <a th:title="Редактирование"
-                       th:href="@{/sokol/requestList/edit/{id}(id=${request.id})}"
+                       th:href="@{/sokol/request/edit/{id}(id=${request.id})}"
                        th:text="${request.title}">
                     </a>
                 </td>
-
-                <td th:text="${request.createdDate}">
-                </td>
+                <td th:text="${request.description}"></td>
+                <td th:text="${request.createdBy}"></td>
+                <td th:text="${request.updatedBy}"></td>
+                <td th:text="${request.requestType.title}"></td>
+                <!--<td th:text="${request.createdDate}"></td>-->
 
                 <td class="del-cell">
-                    <a class="del-btn" th:href="@{/sokol/requestList/delete/{id}(id=${request.id})}"></a>
+                    <a class="del-btn" th:href="@{/sokol/request/delete/{id}(id=${request.id})}"></a>
                 </td>
             </tr>
             </tbody>
