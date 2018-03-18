@@ -12,11 +12,9 @@ import io.khasang.sokol.repository.RequestTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -56,14 +54,45 @@ public class RequestController {
     @PostMapping("/add")
     public String requestSubmit(@ModelAttribute Request request) {
         RequestStatus status = requestStatusRepository.findOne(1L);
-        //RequestType requestType = requestTypeDao.getById(requestTypeId);
         request.setStatus(status);
         request.setVersion(1);
         requestRepository.save(request);
         return REQUEST_REDIRECT_TO_LIST;
     }
 
+    @GetMapping("/edit/{id}")
+    public String requestEdit(Model model, @PathVariable long id) {
+        model.addAttribute("allRequestTypes", requestTypeRepository.findAllByIsDeletedIsFalse());
+        Request request = requestRepository.findOne(id);
+        model.addAttribute("request", request);
+        model.addAttribute("headerTitle", REQUEST_LIST_HEADER_TITLE_EDIT);
+        return "requestForm";
+    }
 
+    @PostMapping("/edit/{id}")
+    public String requestPost(@PathVariable long id, Request requestDetails) {
+        Request request = requestRepository.getOne(id);
+   //     request.setCreatedDate(requestDetails.getCreatedDate());
+        request.setTitle(requestDetails.getTitle());
+        request.setDescription(requestDetails.getDescription());
+        request.setRequestType(requestDetails.getRequestType());
+        request.setStatus(requestDetails.getStatus());
+        request.setUpdatedDate(new Date());
+
+
+
+
+   //     requestRepository.save(request);
+        return REQUEST_REDIRECT_TO_LIST;
+    }
 }
 
-
+/*    @PostMapping("/edit/{id}")
+    public String departmentEdit(@PathVariable long id, RequestType requestTypeDetails) {
+        RequestType requestType = requestTypeRepository.getOne(id);
+        requestType.setTitle(requestTypeDetails.getTitle());
+        requestType.setDescription(requestTypeDetails.getDescription());
+        requestType.setDepartment(requestTypeDetails.getDepartment());
+        requestType.setUpdatedDate(new Date());
+        return REQUEST_TYPE_FORM;
+    }*/
