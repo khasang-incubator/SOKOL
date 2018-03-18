@@ -2,21 +2,22 @@
 <head>
     <div th:fragment="header-css">
         <!-- this is header-css -->
-        <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
-        <link th:href="@{/css/signin.css}" type="text/css" rel="stylesheet" />
+        <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+        <link th:href="@{/css/signin.css}" type="text/css" rel="stylesheet"/>
         <!-- Custom CSS    -->
-        <link th:href="@{/css/style.css}" rel="stylesheet" />
+        <link th:href="@{/css/style.css}" rel="stylesheet"/>
         <!-- Custom Fonts -->
-        <link href="//font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
-              type="text/css" />
+        <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
+              rel="stylesheet"
+              type="text/css"/>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css"
-              rel="stylesheet" />
+              rel="stylesheet"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     </div>
 </head>
- <div th:fragment="header">
+<div th:fragment="header">
     <!-- this is header -->
     <nav class="navbar navbar-default navbar-static-top topnav header" role="navigation">
         <div class="container topnav">
@@ -46,13 +47,14 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="/">Главная</a></li>
-                        <li><a href="#">Запросы</a></li>
+                        <li><a th:href="@{/sokol/request/list}">Запросы</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Настройки<b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Настройки<b
+                                    class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a th:href="@{/sokol/department/list}">departments</a></li>
-                                <li><a href="#">users</a></li>
-                                <li><a th:href="@{/sokol/requestType/list}">request_types</a></li>
+                                <li><a th:href="@{/sokol/department/list}">Департатменты</a></li>
+                                <li><a href="#">Пользователи</a></li>
+                                <li><a th:href="@{/sokol/requestType/list}">Типы запросов</a></li>
                             </ul>
                         </li>
                         <li><a href="#">EN</a></li>
@@ -66,15 +68,15 @@
     <div class="info-line">
         <ul class="nav navbar-nav navbar-right">
             <li class="wing">
-                <img th:src="@{/img/wing.png}" />
+                <img th:src="@{/img/wing.png}"/>
             </li>
         </ul>
         <div class="container topnav caption">
             <ul class="nav navbar-nav">
-                <li>headerTitle</li>
+                <p th:text="${headerTitle}"/>
             </ul>
         </div>
     </div>
- </div>
+</div>
 </html>
 

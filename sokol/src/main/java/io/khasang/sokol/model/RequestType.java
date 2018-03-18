@@ -17,10 +17,11 @@
 package io.khasang.sokol.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "REQUEST_TYPES")
-public class RequestType extends AbstractBaseEntity {
+public class RequestType extends AbstractBaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "REQUEST_TYPE_ID")
@@ -31,6 +32,9 @@ public class RequestType extends AbstractBaseEntity {
 
     @Column(name = "DESCRIPTION")
     private String description;
+
+    @Column(name = "IS_DELETED")
+    private Boolean isDeleted;
 
 /*    @OneToMany(mappedBy = "requestType", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Request> requests = new ArrayList<>();*/
@@ -45,6 +49,15 @@ public class RequestType extends AbstractBaseEntity {
     @ManyToOne
     @JoinColumn(name = "DEPARTMENT_ID")
     private Department department;
+
+    public RequestType() {
+        this.isDeleted = false;
+    }
+
+    public RequestType(Boolean isDeleted, Department department) {
+        this.isDeleted = isDeleted;
+        this.department = department;
+    }
 
     public long getId() {
         return id;
@@ -70,6 +83,14 @@ public class RequestType extends AbstractBaseEntity {
         this.description = description;
     }
 
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
     public Department getDepartment() {
         return department;
     }
@@ -77,4 +98,6 @@ public class RequestType extends AbstractBaseEntity {
     public void setDepartment(Department department) {
         this.department = department;
     }
+
+
 }

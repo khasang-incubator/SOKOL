@@ -1,13 +1,15 @@
 package io.khasang.sokol.service.Impl;
 
 import io.khasang.sokol.model.RequestType;
-import io.khasang.sokol.repository.DepartmentRepository;
 import io.khasang.sokol.repository.RequestTypeRepository;
 import io.khasang.sokol.service.RequestTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
+@Service
 public class RequestTypeServiceImpl implements RequestTypeService {
 
     @Autowired
@@ -16,5 +18,13 @@ public class RequestTypeServiceImpl implements RequestTypeService {
     @Override
     public List<RequestType> getAll() {
         return requestTypeRepository.findAll();
+    }
+
+    @Override
+    public void requestTypeDelete(long id) {
+        RequestType requestType = requestTypeRepository.getOne(id);
+        requestType.setDeleted(true);
+        requestType.setUpdatedDate(new Date());
+        requestTypeRepository.save(requestType);
     }
 }

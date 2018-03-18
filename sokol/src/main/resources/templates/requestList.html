@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Request List</title>
+
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body class="sokol-list-view">
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <div class="table-header">
+        <!--НОВЫЙ-->
+        <a th:href="@{/sokol/request/add}" class="create-btn btn-danger">НОВЫЙ </a>
+    </div>
+    <div class="table table-wrapper">
+        <table class="list-table">
+            <thead>
+            <tr>
+                <th style="width: 3%">#</th>
+                <th style="width: 8%">Статус</th>
+                <th style="width: 14%">Название</th><!--НАЗВАНИЕ-->
+                <th style="width: 14%">Описание</th>
+                <th style="width: 8%">Создатель</th>
+                <th style="width: 10%">Исполнитель</th>
+                <th style="width: 8%">Тип</th>
+                <th style="width: 5%">Удалить</th><!--УДАЛИТЬ-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="request : ${requestList}">
+                <td th:text="${request.id}" th:name="id"></td>
+                <td th:text="${request.status.name}"></td>
+                <td>
+                    <a th:title="Редактирование"
+                       th:href="@{/sokol/request/edit/{id}(id=${request.id})}"
+                       th:text="${request.title}">
+                    </a>
+                </td>
+                <td th:text="${request.description}"></td>
+                <td th:text="${request.createdBy}"></td>
+                <td th:text="${request.updatedBy}"></td>
+                <td th:text="${request.requestType.title}"></td>
+                <!--<td th:text="${request.createdDate}"></td>-->
+
+                <td class="del-cell">
+                    <a class="del-btn" th:href="@{/sokol/request/delete/{id}(id=${request.id})}"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- /.container -->
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

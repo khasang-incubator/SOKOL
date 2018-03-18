@@ -33,6 +33,7 @@ public class Department extends AbstractBaseEntity implements Serializable {
     @Column(name = "IS_DELETED")
     private Boolean isDeleted;
 
+
     public Department(String title, Boolean isDeleted) {
         this.title = title;
         this.isDeleted = isDeleted;

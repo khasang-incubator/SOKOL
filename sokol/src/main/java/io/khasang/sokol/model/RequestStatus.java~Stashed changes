@@ -17,12 +17,13 @@
 package io.khasang.sokol.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "REQUEST_STATUSES")
-public class RequestStatus {
+public class RequestStatus implements Serializable {
     @Id
     @Column(name = "REQUEST_STATUS_ID")
     private long id;
@@ -32,6 +33,14 @@ public class RequestStatus {
 
 /*    @OneToMany(mappedBy = "requestType", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Request> requests = new HashSet<>();*/
+
+    public RequestStatus() {
+    }
+
+    public RequestStatus(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public long getId() {
         return id;
@@ -48,7 +57,6 @@ public class RequestStatus {
     public void setName(String name) {
         this.name = name;
     }
-
 /*    public Set<Request> getRequests() {
         return requests;
     }

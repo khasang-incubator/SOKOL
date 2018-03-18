@@ -30,7 +30,7 @@
                 <td th:text="${requestType.id}" th:name="id"></td>
                 <td>
                     <a th:title="Редактирование"
-                       th:href="@{/sokol/requestType/{id}(id=${requestType.id})}"
+                       th:href="@{/sokol/requestType/edit/{id}(id=${requestType.id})}"
                        th:text="${requestType.title}">
                     </a>
                 </td>

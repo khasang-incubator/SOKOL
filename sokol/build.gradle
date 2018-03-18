@@ -45,4 +45,3 @@ dependencies {
     testCompile('org.springframework.security:spring-security-test')
 }
 
-

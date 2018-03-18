@@ -26,28 +26,33 @@ public class Request extends AbstractBaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "REQUEST_ID")
-    private Integer requestId;
+    private long id;
+
     @Column(name = "TITLE")
     private String title;
+
     @Column(name = "DESCRIPTION")
     private String description;
+
     @Column(name = "CREATED_BY")
     private String createdBy;
-    @ManyToOne
-    @JoinColumn(name = "DEPARTMENTS")
-    private Department department;
+
     @ManyToOne
     @JoinColumn(name = "ASSIGNED_TO")
     private User assignedTo;
+
     @Column(name = "ASSIGNED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date assignedDate;
+
     @ManyToOne
     @JoinColumn(name = "REQUEST_STATUS_ID")
     private RequestStatus status;
+
     @ManyToOne
     @JoinColumn(name = "REQUEST_TYPE_ID")
     private RequestType requestType;
+
     @Version
     private int version;
 
@@ -60,12 +65,12 @@ public class Request extends AbstractBaseEntity implements Serializable {
     public Request() {
     }
 
-    public Integer getRequestId() {
-        return requestId;
+    public long getId() {
+        return id;
     }
 
-    public void setRequestId(Integer requestId) {
-        this.requestId = requestId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -126,14 +131,6 @@ public class Request extends AbstractBaseEntity implements Serializable {
         this.assignedTo = assignedTo;
     }
 
-/*    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }*/
-
     public byte[] getFile() {
         return file;
     }
@@ -158,15 +155,6 @@ public class Request extends AbstractBaseEntity implements Serializable {
         this.assignedDate = assignedDate;
     }
 
-    @Override
-    public String toString() {
-        return "Request{" +
-                "requestId=" + requestId +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", createdBy='" + createdBy + '\'' +
-                '}';
-    }
 }
 
 
