@@ -67,7 +67,7 @@ public class RequestTypeController {
     }
 
     @PostMapping("/edit/{id}")
-    public String departmentEdit(@PathVariable long id, RequestType requestTypeDetails) {
+    public String requestTypeEdit(@PathVariable long id, RequestType requestTypeDetails) {
         RequestType requestType = requestTypeRepository.getOne(id);
         requestType.setTitle(requestTypeDetails.getTitle());
         requestType.setDescription(requestTypeDetails.getDescription());
