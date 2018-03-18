@@ -38,10 +38,6 @@ public class Request extends AbstractBaseEntity implements Serializable {
     private String createdBy;
 
     @ManyToOne
-    @JoinColumn(name = "DEPARTMENTS")
-    private Department department;
-
-    @ManyToOne
     @JoinColumn(name = "ASSIGNED_TO")
     private User assignedTo;
 
@@ -75,14 +71,6 @@ public class Request extends AbstractBaseEntity implements Serializable {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
     }
 
     public String getTitle() {
@@ -142,14 +130,6 @@ public class Request extends AbstractBaseEntity implements Serializable {
     public void setAssignedTo(User assignedTo) {
         this.assignedTo = assignedTo;
     }
-
-/*    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }*/
 
     public byte[] getFile() {
         return file;
