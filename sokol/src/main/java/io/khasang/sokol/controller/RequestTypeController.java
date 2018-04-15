@@ -51,7 +51,7 @@ public class RequestTypeController {
         return REQUEST_TYPE_FORM;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/save")
     public String requestTypeSubmit(@ModelAttribute RequestType requestType) {
         requestTypeRepository.save(requestType);
         return REDIRECT_TO_LIST;
@@ -66,15 +66,6 @@ public class RequestTypeController {
         return REQUEST_TYPE_FORM;
     }
 
-    @PostMapping("/edit/{id}")
-    public String requestTypePost(@PathVariable long id, RequestType requestTypeDetails) {
-        RequestType requestType = requestTypeRepository.getOne(id);
-        requestType.setTitle(requestTypeDetails.getTitle());
-        requestType.setDescription(requestTypeDetails.getDescription());
-        requestType.setDepartment(requestTypeDetails.getDepartment());
-        requestType.setUpdatedDate(new Date());
-        return REQUEST_TYPE_FORM;
-    }
 
     @GetMapping("/delete/{id}")
     public String requestTypeDelete(@PathVariable long id) {
