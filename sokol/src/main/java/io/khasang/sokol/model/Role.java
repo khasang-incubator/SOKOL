@@ -16,20 +16,23 @@
 
 package io.khasang.sokol.model;
 
-import lombok.*;
-import org.springframework.data.rest.core.annotation.HandleAfterSave;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 //@NamedQuery(name = "Role.findById", query = "select distinct r from Role r where r.id = :id")
 @Table(name = "ROLES")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class Role extends AbstractBaseEntity {
+@Data
+public class Role implements Serializable {
 
     @Id
     @Column(name = "ROLE_ID")
