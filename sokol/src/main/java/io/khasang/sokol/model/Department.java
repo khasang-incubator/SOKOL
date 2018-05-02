@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "DEPARTMENTS")
@@ -48,4 +47,3 @@ public class Department extends AbstractBaseEntity {
         this.deleted = deleted;
     }
 }
-
