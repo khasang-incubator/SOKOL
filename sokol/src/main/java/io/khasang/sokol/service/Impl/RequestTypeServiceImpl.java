@@ -14,8 +14,12 @@ import java.util.List;
 @NoArgsConstructor
 public class RequestTypeServiceImpl implements RequestTypeService {
 
-    @Autowired
     private RequestTypeRepository requestTypeRepository;
+
+    @Autowired
+    public RequestTypeServiceImpl(RequestTypeRepository requestTypeRepository) {
+        this.requestTypeRepository = requestTypeRepository;
+    }
 
     @Override
     public List<RequestType> getAll() {
