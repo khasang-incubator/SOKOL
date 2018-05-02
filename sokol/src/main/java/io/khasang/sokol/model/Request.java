@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2017 Sokol Development Team
+ * Copyright 2016-2018 Sokol Development Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package io.khasang.sokol.model;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,7 +24,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "REQUESTS")
+@Getter
+@Setter
 public class Request extends AbstractBaseEntity implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "REQUEST_ID")
@@ -63,98 +68,8 @@ public class Request extends AbstractBaseEntity implements Serializable {
     private byte[] file;
 
     public Request() {
+        super();
     }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    @Override
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public int getVersion() {
-        return version;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
-    }
-
-    public RequestStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(RequestStatus status) {
-        this.status = status;
-    }
-
-    public RequestType getRequestType() {
-        return requestType;
-    }
-
-    public void setRequestType(RequestType requestType) {
-        this.requestType = requestType;
-    }
-
-    public User getAssignedTo() {
-        return assignedTo;
-    }
-
-    public void setAssignedTo(User assignedTo) {
-        this.assignedTo = assignedTo;
-    }
-
-    public byte[] getFile() {
-        return file;
-    }
-
-    public void setFile(byte[] file) {
-        this.file = file;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public Date getAssignedDate() {
-        return assignedDate;
-    }
-
-    public void setAssignedDate(Date assignedDate) {
-        this.assignedDate = assignedDate;
-    }
-
 }
 
 

@@ -1,11 +1,8 @@
 package io.khasang.sokol.controller;
 
 
-import com.sun.org.apache.regexp.internal.RE;
-import io.khasang.sokol.model.Department;
 import io.khasang.sokol.model.Request;
 import io.khasang.sokol.model.RequestStatus;
-import io.khasang.sokol.model.RequestType;
 import io.khasang.sokol.repository.RequestRepository;
 import io.khasang.sokol.repository.RequestStatusRepository;
 import io.khasang.sokol.repository.RequestTypeRepository;
@@ -36,7 +33,7 @@ public class RequestController {
 
     @GetMapping({"/list"})
     public String requestList(Model model) {
-        //List<Request> requestList = requestRepository.findAllByIsDeletedIsFalse();
+        //List<Request> requestList = requestRepository.findAllByDeletedIsFalse();
         List<Request> requestList = requestRepository.findAll();
         model.addAttribute("requestList", requestList);
         model.addAttribute("headerTitle", REQUEST_LIST_HEADER_TITLE_LIST);
@@ -45,7 +42,7 @@ public class RequestController {
 
     @GetMapping("/add")
     public String requestForm(Model model) {
-        model.addAttribute("allRequestTypes", requestTypeRepository.findAllByIsDeletedIsFalse());
+        model.addAttribute("allRequestTypes", requestTypeRepository.findAllByDeletedIsFalse());
         model.addAttribute("request", new Request());
         model.addAttribute("headerTitle", REQUEST_LIST_HEADER_TITLE_ADD);
         return "requestForm";
@@ -62,7 +59,7 @@ public class RequestController {
 
     @GetMapping("/edit/{id}")
     public String requestEdit(Model model, @PathVariable long id) {
-        model.addAttribute("allRequestTypes", requestTypeRepository.findAllByIsDeletedIsFalse());
+        model.addAttribute("allRequestTypes", requestTypeRepository.findAllByDeletedIsFalse());
         Request request = requestRepository.findOne(id);
         model.addAttribute("request", request);
         model.addAttribute("headerTitle", REQUEST_LIST_HEADER_TITLE_EDIT);

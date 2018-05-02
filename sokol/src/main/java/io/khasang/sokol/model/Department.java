@@ -13,15 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package io.khasang.sokol.model;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "DEPARTMENTS")
-public class Department extends AbstractBaseEntity implements Serializable {
+@Getter
+@Setter
+public class Department extends AbstractBaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "DEPARTMENT_ID")
@@ -31,40 +36,16 @@ public class Department extends AbstractBaseEntity implements Serializable {
     private String title;
 
     @Column(name = "IS_DELETED")
-    private Boolean isDeleted;
-
-
-    public Department(String title, Boolean isDeleted) {
-        this.title = title;
-        this.isDeleted = isDeleted;
-    }
+    private Boolean deleted = false;
 
     public Department() {
-        this.isDeleted = false;
+        super();
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
+    public Department(String title, Boolean deleted) {
+        this();
         this.title = title;
-    }
-
-    public Boolean getDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
+        this.deleted = deleted;
     }
 }
 

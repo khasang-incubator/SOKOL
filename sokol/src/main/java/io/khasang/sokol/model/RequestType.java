@@ -13,14 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package io.khasang.sokol.model;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "REQUEST_TYPES")
+@Getter
+@Setter
 public class RequestType extends AbstractBaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,7 +38,7 @@ public class RequestType extends AbstractBaseEntity implements Serializable {
     private String description;
 
     @Column(name = "IS_DELETED")
-    private Boolean isDeleted;
+    private Boolean deleted = false;
 
 /*    @OneToMany(mappedBy = "requestType", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Request> requests = new ArrayList<>();*/
@@ -51,53 +55,6 @@ public class RequestType extends AbstractBaseEntity implements Serializable {
     private Department department;
 
     public RequestType() {
-        this.isDeleted = false;
+        super();
     }
-
-    public RequestType(Boolean isDeleted, Department department) {
-        this.isDeleted = isDeleted;
-        this.department = department;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String tittle) {
-        this.title = tittle;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Boolean getDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-
 }

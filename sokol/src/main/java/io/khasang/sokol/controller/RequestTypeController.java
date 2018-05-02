@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -36,7 +35,7 @@ public class RequestTypeController {
     @GetMapping({"/list"})
     public String requestTypeList(Model model) {
         //List<RequestType> requestTypeList = requestTypeRepository.findAll();
-        List<RequestType> requestTypeList = requestTypeRepository.findAllByIsDeletedIsFalse();
+        List<RequestType> requestTypeList = requestTypeRepository.findAllByDeletedIsFalse();
         model.addAttribute("requestTypeList", requestTypeList);
         model.addAttribute("headerTitle", REQUEST_TYPE_LIST_HEADER_TITLE_LIST);
         return REQUEST_TYPE_LIST;
@@ -45,7 +44,7 @@ public class RequestTypeController {
     @GetMapping("/add")
     public String requestTypeForm(Model model) {
         //model.addAttribute("allDepartments", departmentRepository.findAll());
-        model.addAttribute("allDepartments", departmentRepository.findAllByIsDeletedIsFalse());
+        model.addAttribute("allDepartments", departmentRepository.findAllByDeletedIsFalse());
         model.addAttribute("requestType", new RequestType());
         model.addAttribute("headerTitle", REQUEST_TYPE_LIST_HEADER_TITLE_ADD);
         return REQUEST_TYPE_FORM;

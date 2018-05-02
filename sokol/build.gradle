@@ -38,7 +38,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
     compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time', version: '2.1.0.RELEASE'
-    compileOnly('org.projectlombok:lombok')
+    compileOnly('org.projectlombok:lombok:1.16.20')
 
     runtime('org.postgresql:postgresql')
     testCompile('org.springframework.boot:spring-boot-starter-test')

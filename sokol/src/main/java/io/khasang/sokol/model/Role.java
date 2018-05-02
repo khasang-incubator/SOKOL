@@ -16,11 +16,17 @@
 
 package io.khasang.sokol.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 //@NamedQuery(name = "Role.findById", query = "select distinct r from Role r where r.id = :id")
 @Table(name = "ROLES")
+@Getter
+@Setter
 public class Role extends AbstractBaseEntity {
 /*    @OneToMany(mappedBy = "role")
     Set<User> userSet = new HashSet<>();*/
@@ -32,37 +38,6 @@ public class Role extends AbstractBaseEntity {
     private String description;
 
     public Role() {
+        super();
     }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-/*    public Set<User> getUserSet() {
-        return userSet;
-    }
-
-    public void setUserSet(Set<User> userSet) {
-        this.userSet = userSet;
-    }*/
 }

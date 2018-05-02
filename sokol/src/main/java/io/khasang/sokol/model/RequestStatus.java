@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2017 Sokol Development Team
+ * Copyright 2016-2018 Sokol Development Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,8 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package io.khasang.sokol.model;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -22,40 +25,20 @@ import java.util.Set;
 
 @Entity
 @Table(name = "REQUEST_STATUSES")
+@Getter
+@Setter
+@NoArgsConstructor
 public class RequestStatus {
+
     @Id
     @Column(name = "REQUEST_STATUS_ID")
     private long id;
+
     @Column(name = "REQUEST_STATUS_NAME")
     private String name;
 
-
 /*    @OneToMany(mappedBy = "requestType", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Request> requests = new HashSet<>();*/
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-/*    public Set<Request> getRequests() {
-        return requests;
-    }
-
-    public void setRequests(Set<Request> requests) {
-        this.requests = requests;
-    }*/
 }
 
 

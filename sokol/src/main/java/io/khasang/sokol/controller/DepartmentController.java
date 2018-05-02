@@ -3,7 +3,6 @@ package io.khasang.sokol.controller;
 import io.khasang.sokol.model.Department;
 import io.khasang.sokol.repository.DepartmentRepository;
 import io.khasang.sokol.service.DepartmentService;
-import io.khasang.sokol.service.RequestTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +27,7 @@ public class DepartmentController {
 
     @GetMapping({"/list"})
     public String departmentList(Model model) {
-        List<Department> departmentList = departmentRepository.findAllByIsDeletedIsFalse();
+        List<Department> departmentList = departmentRepository.findAllByDeletedIsFalse();
         //List<Department> departmentList = departmentRepository.findAll();
         model.addAttribute("departmentList", departmentList);
         model.addAttribute("headerTitle", DEPARTMENT_TYPE_LIST_HEADER_TITLE_LIST);
