@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2017 Sokol Development Team
+ * Copyright 2016-2018 Sokol Development Team
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package io.khasang.sokol.model;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +26,6 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-//@NamedQuery(name = "Role.findById", query = "select distinct r from Role r where r.id = :id")
 @Table(name = "ROLES")
 @NoArgsConstructor
 @AllArgsConstructor

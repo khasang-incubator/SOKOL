@@ -18,20 +18,24 @@ package io.khasang.sokol.model;
 //import io.khasang.sokol.validators.PasswordMatcher;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
 
 @Entity
 @Table(name = "USERS")
 @Getter
 @Setter
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
 //@PasswordMatcher(payload=Severity.WARNING.class)
 public class User extends AbstractBaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
@@ -66,8 +70,4 @@ public class User extends AbstractBaseEntity {
 
     @Version
     private int version;
-
-    public User() {
-        super();
-    }
 }
