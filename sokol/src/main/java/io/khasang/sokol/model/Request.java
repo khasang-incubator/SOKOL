@@ -15,18 +15,21 @@
  */
 package io.khasang.sokol.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "REQUESTS")
 @Getter
 @Setter
-public class Request extends AbstractBaseEntity implements Serializable {
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class Request extends AbstractBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -66,10 +69,6 @@ public class Request extends AbstractBaseEntity implements Serializable {
 
     @Column(name = "FILE")
     private byte[] file;
-
-    public Request() {
-        super();
-    }
 }
 
 

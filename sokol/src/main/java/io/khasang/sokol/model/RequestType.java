@@ -15,17 +15,21 @@
  */
 package io.khasang.sokol.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "REQUEST_TYPES")
 @Getter
 @Setter
-public class RequestType extends AbstractBaseEntity implements Serializable {
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class RequestType extends AbstractDeletableEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "REQUEST_TYPE_ID")
@@ -37,24 +41,7 @@ public class RequestType extends AbstractBaseEntity implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @Column(name = "IS_DELETED")
-    private Boolean deleted = false;
-
-/*    @OneToMany(mappedBy = "requestType", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Request> requests = new ArrayList<>();*/
-
-//    @OneToMany(mappedBy = "requestType", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<Field> fields = new HashSet<>();
-
-/*    @ManyToOne
-    @JoinColumn(name = "DEPARTMENT_ID", foreignKey = @ForeignKey(name = "DEPARTMENT_ID_FK"))
-    private Department department;*/
-
     @ManyToOne
     @JoinColumn(name = "DEPARTMENT_ID")
     private Department department;
-
-    public RequestType() {
-        super();
-    }
 }

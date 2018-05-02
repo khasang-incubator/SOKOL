@@ -16,9 +16,8 @@
 
 package io.khasang.sokol.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.rest.core.annotation.HandleAfterSave;
 
 import javax.persistence.*;
 
@@ -27,17 +26,15 @@ import javax.persistence.*;
 @Table(name = "ROLES")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Role extends AbstractBaseEntity {
-/*    @OneToMany(mappedBy = "role")
-    Set<User> userSet = new HashSet<>();*/
+
     @Id
+    @Column(name = "ROLE_ID")
     private int id;
+
     @Column(name = "ROLE_NAME")
     private String name;
-    @Column(name = "ROLE_DESC")
-    private String description;
-
-    public Role() {
-        super();
-    }
 }

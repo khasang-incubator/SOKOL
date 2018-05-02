@@ -28,7 +28,7 @@ import javax.persistence.*;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class Department extends AbstractBaseEntity {
+public class Department extends AbstractDeletableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,13 +37,4 @@ public class Department extends AbstractBaseEntity {
 
     @Column(name = "TITLE")
     private String title;
-
-    @Column(name = "IS_DELETED")
-    private Boolean deleted = false;
-
-    public Department(String title, Boolean deleted) {
-        this();
-        this.title = title;
-        this.deleted = deleted;
-    }
 }
