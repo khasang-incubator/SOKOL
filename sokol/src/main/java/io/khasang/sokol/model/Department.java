@@ -15,7 +15,9 @@
  */
 package io.khasang.sokol.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -25,6 +27,8 @@ import java.io.Serializable;
 @Table(name = "DEPARTMENTS")
 @Getter
 @Setter
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
 public class Department extends AbstractBaseEntity {
 
     @Id
@@ -37,10 +41,6 @@ public class Department extends AbstractBaseEntity {
 
     @Column(name = "IS_DELETED")
     private Boolean deleted = false;
-
-    public Department() {
-        super();
-    }
 
     public Department(String title, Boolean deleted) {
         this();
