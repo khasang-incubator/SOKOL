@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Request Type Form</title>
-    <div th:replace="fragments/header :: header-css"/>
+    <div th:replace="fragments/header :: header-css"></div>
 </head>
 <body class="sokol-list-view">
-<div th:replace="fragments/header :: header"/>
+<div th:replace="fragments/header :: header"></div>
 <div class="container">
     <div class="form-wrapper">
         <form action="#" id="requestTypeForm" th:action="@{/sokol/requestType/save}" th:object="${requestType}"
