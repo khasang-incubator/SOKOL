@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/sokol/request")
+@RequestMapping(value = "/request")
 public class RequestController {
     private static final String REQUEST_REDIRECT_TO_LIST = "redirect:/sokol/request/list";
     private static final String REQUEST_LIST_HEADER_TITLE_LIST = "Запросы";
