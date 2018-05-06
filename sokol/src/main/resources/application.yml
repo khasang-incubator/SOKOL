@@ -11,5 +11,7 @@ spring:
       url: jdbc:postgresql://localhost:5432/sokol
       username: root
       password: root
-
+server:
+  port: 8080
+  contextPath: /sokol
 
