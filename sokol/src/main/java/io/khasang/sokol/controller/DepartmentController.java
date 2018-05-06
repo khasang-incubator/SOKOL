@@ -28,7 +28,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/department")
 public class DepartmentController {
-    private static final String REDIRECT_TO_LIST = "redirect:/sokol/department/list";
+    private static final String REDIRECT_TO_LIST = "redirect:/department/list";
     private static final String DEPARTMENT_TYPE_LIST_HEADER_TITLE_LIST = "Департаменты";
     private static final String DEPARTMENT_TYPE_LIST_HEADER_TITLE_ADD = "Добавление департамента";
     private static final String DEPARTMENT_TYPE_LIST_HEADER_TITLE_EDIT = "Редактирование департамента";

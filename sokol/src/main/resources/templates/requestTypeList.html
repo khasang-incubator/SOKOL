@@ -12,7 +12,7 @@
 
 <div class="container">
     <div class="table-header">
-        <a th:href="@{/sokol/requestType/add}" class="create-btn btn-danger">НОВЫЙ </a>
+        <a th:href="@{/requestType/add}" class="create-btn btn-danger">НОВЫЙ </a>
     </div>
     <div class="table table-wrapper">
         <table class="list-table">
@@ -30,7 +30,7 @@
                 <td th:text="${requestType.id}" th:name="id"></td>
                 <td>
                     <a th:title="Редактирование"
-                       th:href="@{/sokol/requestType/edit/{id}(id=${requestType.id})}"
+                       th:href="@{/requestType/edit/{id}(id=${requestType.id})}"
                        th:text="${requestType.title}">
                     </a>
                 </td>
@@ -40,7 +40,7 @@
                 </td>-->
 
                 <td class="del-cell">
-                    <a class="del-btn" th:href="@{/sokol/requestType/delete/{id}(id=${requestType.id})}"></a>
+                    <a class="del-btn" th:href="@{/requestType/delete/{id}(id=${requestType.id})}"></a>
                 </td>
             </tr>
             </tbody>

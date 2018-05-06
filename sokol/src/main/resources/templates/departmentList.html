@@ -13,7 +13,7 @@
 <div class="container">
     <div class="table-header">
         <!--НОВЫЙ-->
-        <a th:href="@{/sokol/department/add}" class="create-btn btn-danger">НОВЫЙ </a>
+        <a th:href="@{/department/add}" class="create-btn btn-danger">НОВЫЙ </a>
     </div>
     <div class="table table-wrapper">
         <table class="list-table">
@@ -30,7 +30,7 @@
                     <td th:text="${department.id}" th:name="id"></td>
                     <td>
                         <a th:title="Редактирование"
-                           th:href="@{/sokol/department/edit/{id}(id=${department.id})}"
+                           th:href="@{/department/edit/{id}(id=${department.id})}"
                            th:text="${department.title}">
                         </a>
                     </td>
@@ -39,7 +39,7 @@
                     </td>
 
                     <td class="del-cell">
-                        <a class="del-btn" th:href="@{/sokol/department/delete/{id}(id=${department.id})}"></a>
+                        <a class="del-btn" th:href="@{/department/delete/{id}(id=${department.id})}"></a>
                     </td>
                 </tr>
            </tbody>

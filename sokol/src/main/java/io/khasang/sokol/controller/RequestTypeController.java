@@ -14,7 +14,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/requestType")
 public class RequestTypeController {
-    private static final String REDIRECT_TO_LIST = "redirect:/sokol/requestType/list";
+    private static final String REDIRECT_TO_LIST = "redirect:/requestType/list";
     private static final String LIST_URL = "/requestType/list";
     private static final String REQUEST_TYPE_FORM = "requestTypeForm";
     private static final String REQUEST_TYPE_LIST = "requestTypeList";

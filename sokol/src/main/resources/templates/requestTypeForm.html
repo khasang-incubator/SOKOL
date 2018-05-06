@@ -8,7 +8,7 @@
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
     <div class="form-wrapper">
-        <form action="#" id="requestTypeForm" th:action="@{/sokol/requestType/save}" th:object="${requestType}"
+        <form action="#" id="requestTypeForm" th:action="@{/requestType/save}" th:object="${requestType}"
               cssClass="form-horizontal" method="post">
             <div class="form-body">
                 <div class="form-group" th:if="${requestType.id}">
@@ -49,7 +49,7 @@
                     <div class="control-label col-sm-3"></div>
                     <div class="col-sm-8">
                         <a href="#" onclick="document.forms['requestTypeForm'].submit();" class="btn-save pull-left">SAVE</a>
-                        <a th:href="@{/sokol/requestType/list}" class="btn-close pull-right">CANCEL</a>
+                        <a th:href="@{/requestType/list}" class="btn-close pull-right">CANCEL</a>
                     </div>
                 </div>
             </div>
