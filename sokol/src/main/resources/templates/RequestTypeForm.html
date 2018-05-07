@@ -1,53 +1,10 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Request Type Form</title>
-    <div th:replace="fragments/header :: header-css"/>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
-<body class="sokol-list-view">
-<div th:replace="fragments/header :: header"/>
-<div class="container">
-    <div class="form-wrapper">
-        <form action="#" id="requestTypeForm" th:action="@{/sokol/requestType/add}" th:object="${requestType}"
-              cssClass="form-horizontal" method="post">
-            <div class="form-body">
-                <div class="form-group">
-                    <label class="control-label col-sm-3">Номер типа запроса</label>
-                    <div class="col-sm-8">
-                        <input type="text" th:field="*{id}" class="form-control"/>
-                    </div>
-                </div>
+<body>
 
-                <div class="form-group">
-                    <label class="control-label col-sm-3">Описание</label>
-                    <div class="col-sm-8">
-                        <textarea th:field="*{title}" class="form-control"></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-3">Департамент</label>
-                    <div class="col-sm-8">
-                        <select th:field="*{department}" class="form-control">
-                            <option th:each="department : ${allDepartments}"
-                                    th:value="${department.id}"
-                                    th:text="${department.title}">
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="control-label col-sm-3"></div>
-                    <div class="col-sm-8">
-                        <a href="#" onclick="document.forms['requestTypeForm'].submit();" class="btn-save pull-left">SAVE</a>
-                        <a th:href="@{/sokol/requestType/list}" class="btn-close pull-right">CANCEL</a>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<div th:replace="fragments/footer :: footer"/>
 </body>
 </html>
