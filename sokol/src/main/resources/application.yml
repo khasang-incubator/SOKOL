@@ -14,4 +14,9 @@ spring:
 server:
   port: 8080
   contextPath: /sokol
+security:
+  basic:
+    enabled: true
+  sessions: stateless
+
 
