@@ -25,7 +25,7 @@ public class RoleServiceTest {
     @Test
     public void adminRoleWasCreated() {
         doReturn(false).when(roleRepository).exists(RoleService.ADMIN_ID);
-        roleService.initDefaults();
+        roleService.initDefaultRoles();
         verify(roleRepository).exists(RoleService.ADMIN_ID);
         verify(roleRepository).save(adminRole);
     }
@@ -33,7 +33,7 @@ public class RoleServiceTest {
     @Test
     public void adminRoleAlreadyExists() {
         doReturn(true).when(roleRepository).exists(RoleService.ADMIN_ID);
-        roleService.initDefaults();
+        roleService.initDefaultRoles();
         verify(roleRepository).exists(RoleService.ADMIN_ID);
         verify(roleRepository, never()).save(adminRole);
     }
@@ -41,7 +41,7 @@ public class RoleServiceTest {
     @Test
     public void userRoleWasCreated() {
         doReturn(false).when(roleRepository).exists(RoleService.USER_ID);
-        roleService.initDefaults();
+        roleService.initDefaultRoles();
         verify(roleRepository).exists(RoleService.USER_ID);
         verify(roleRepository).save(userRole);
     }
@@ -49,7 +49,7 @@ public class RoleServiceTest {
     @Test
     public void userRoleAlreadyExists() {
         doReturn(true).when(roleRepository).exists(RoleService.USER_ID);
-        roleService.initDefaults();
+        roleService.initDefaultRoles();
         verify(roleRepository).exists(RoleService.USER_ID);
         verify(roleRepository, never()).save(userRole);
     }
