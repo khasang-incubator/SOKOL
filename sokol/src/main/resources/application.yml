@@ -12,11 +12,9 @@ spring:
       username: root
       password: root
 server:
-  port: 8080
-  contextPath: /sokol
+   port: 8080
+   contextPath: /sokol
 security:
-  basic:
-    enabled: true
-  sessions: stateless
-
-
+   basic:
+      enabled: true
+   sessions: stateless
