@@ -1,9 +1,6 @@
 package io.khasang.sokol.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.khasang.sokol.model.Department;
 import io.khasang.sokol.service.DepartmentService;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,19 +10,18 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(DepartmentController.class)
 @AutoConfigureMockMvc(secure = false)
 public class DepartmentControllerTest {
-
-    @Autowired
-    ObjectMapper objectMapper;
 
     @Autowired
     private MockMvc mockMvc;
@@ -35,26 +31,21 @@ public class DepartmentControllerTest {
 
     @Before
     public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
+//        Department dept1 = new Department(1L, "DeptA");
+//        Department dept2 = new Department(2L, "DeptB");
+//        Department dept3 = new Department(3L, "DeptC");
+//        List<Department> expectedDepartments = Arrays.asList(dept1, dept2, dept3);
     }
 
     @Test
-    public void greetingShouldReturnDefaultMessage() throws Exception {
-        Department dept1 = new Department(1L, "DeptA");
-        Department dept2 = new Department(2L, "DeptB");
-        Department dept3 = new Department(3L, "DeptC");
-        List<Department> expectedDepartments = Arrays.asList(dept1, dept2, dept3);
+    public void checkList() throws Exception {
+        mockMvc.perform(get("/department/list")).andExpect(status().isOk());
+    }
 
-        when(service.findAllByDeletedIsFalse()).thenReturn(expectedDepartments);
-
-//        given(service.getAllEmployees()).willReturn(allEmployees);
-
-//        mockMvc.perform(get("/department/list")
-//                .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$", hasSize(expectedDepartments.size())));
+    @Test
+    public void checkAdd() throws Exception {
+        mockMvc.perform(post("/department/add"))
+                .andExpect(MockMvcResultMatchers.redirectedUrl(DepartmentController.REDIRECTION_PATH));
+        verify(service).saveDepartment(any());
     }
 }
