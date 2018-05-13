@@ -1,5 +1,6 @@
 package io.khasang.sokol.controller;
 
+import io.khasang.sokol.model.Department;
 import io.khasang.sokol.service.DepartmentService;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +13,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -31,15 +36,18 @@ public class DepartmentControllerTest {
 
     @Before
     public void setUp() throws Exception {
-//        Department dept1 = new Department(1L, "DeptA");
-//        Department dept2 = new Department(2L, "DeptB");
-//        Department dept3 = new Department(3L, "DeptC");
-//        List<Department> expectedDepartments = Arrays.asList(dept1, dept2, dept3);
+
     }
 
     @Test
     public void checkList() throws Exception {
+        Department dept1 = new Department(1L, "DeptA");
+        Department dept2 = new Department(2L, "DeptB");
+        Department dept3 = new Department(3L, "DeptC");
+        List<Department> expectedDepartments = Arrays.asList(dept1, dept2, dept3);
+        doReturn(expectedDepartments).when(service).findAllByDeletedIsFalse();
         mockMvc.perform(get("/department/list")).andExpect(status().isOk());
+        verify(service).findAllByDeletedIsFalse();
     }
 
     @Test
