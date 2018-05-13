@@ -1,5 +1,6 @@
 package io.khasang.sokol.config;
 
+import io.khasang.sokol.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,8 +23,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/home", "/about").permitAll()
-                .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                .antMatchers("/user/**").hasAnyRole("USER")
+                .antMatchers("/admin/**").hasAnyRole(RoleService.ADMIN_NAME)
+                .antMatchers("/user/**").hasAnyRole(RoleService.USER_NAME)
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

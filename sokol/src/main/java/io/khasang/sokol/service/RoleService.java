@@ -22,10 +22,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RoleService {
-    static final Integer ADMIN_ID = 1;
-    static final String ADMIN_NAME = "ROLE_ADMIN";
-    static final Integer USER_ID = 2;
-    static final String USER_NAME = "ROLE_USER";
+    public static final Integer ADMIN_ID = 1;
+    public static final String ADMIN_NAME = "ROLE_ADMIN";
+    public static final Integer USER_ID = 2;
+    public static final String USER_NAME = "ROLE_USER";
 
     private RoleRepository roleRepository;
 
