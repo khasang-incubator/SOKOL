@@ -23,8 +23,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/home", "/about").permitAll()
-                .antMatchers("/admin/**").hasAnyRole(RoleService.ADMIN_NAME)
-                .antMatchers("/user/**").hasAnyRole(RoleService.USER_NAME)
+                .antMatchers("/admin/**").hasAnyRole("ADMIN")
+                .antMatchers("/user/**").hasAnyRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -42,8 +42,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.inMemoryAuthentication()
-                .withUser("user").password("password").roles(RoleService.USER_NAME)
+                .withUser("user").password("password").roles("USER")
                 .and()
-                .withUser("admin").password("password").roles(RoleService.ADMIN_NAME);
+                .withUser("admin").password("password").roles("ADMIN");
     }
 }
