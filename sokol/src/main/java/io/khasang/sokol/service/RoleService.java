@@ -34,12 +34,14 @@ public class RoleService {
         this.roleRepository = roleRepository;
     }
 
-    public void initDefaults() {
-        if (!roleRepository.exists(ADMIN_ID)) {
-            roleRepository.save(new Role(ADMIN_ID, ADMIN_NAME));
-        }
-        if (!roleRepository.exists(USER_ID)) {
-            roleRepository.save(new Role(USER_ID, USER_NAME));
+    public void initDefaultRoles() {
+        initRole(ADMIN_ID, ADMIN_NAME);
+        initRole(USER_ID, USER_NAME);
+    }
+
+    private void initRole(Integer id, String name) {
+        if (!roleRepository.exists(id)) {
+            roleRepository.save(new Role(id, name));
         }
     }
 }

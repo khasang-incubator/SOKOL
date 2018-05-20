@@ -15,10 +15,7 @@
  */
 package io.khasang.sokol.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -28,6 +25,7 @@ import javax.persistence.*;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
+@AllArgsConstructor
 public class Department extends AbstractDeletableEntity {
 
     @Id
