@@ -18,25 +18,57 @@ package io.khasang.sokol.model;
 //import io.khasang.sokol.validators.PasswordMatcher;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.lang.annotation.Documented;
+import java.util.Collection;
+import java.util.List;
 
+@Builder
 @Entity
-@Table(name = "USERS")
+@Table(name = "USERS2")
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
+@AllArgsConstructor
 //@PasswordMatcher(payload=Severity.WARNING.class)
-public class User extends AbstractBaseEntity {
+public class User extends AbstractBaseEntity implements UserDetails {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    long id;
+
+    //@ManyToOne
+   // @JoinColumn(name = "ROLE_ID")
+
+   // @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role")
+    @ElementCollection(fetch = FetchType.EAGER)
+  //  @BatchSize(size = 200)
+
+    private List<Roles2> authorities;
+    //private String authorities;
+    private String password;
+
+    @Size(min = 3, max = 20)
+    //@NotNull
+    private String username;
+    private boolean accountNonExpired;
+    private boolean accountNonLocked;
+    private boolean credentialsNonExpired;
+    private boolean enabled;
+
+/*    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
@@ -69,5 +101,6 @@ public class User extends AbstractBaseEntity {
     private String language;
 
     @Version
-    private int version;
+    private int version;*/
 }
+
