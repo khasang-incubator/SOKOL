@@ -1,18 +1,24 @@
 package io.khasang.sokol.config;
 
 import io.khasang.sokol.service.RoleService;
+import io.khasang.sokol.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
+@EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-   // @Autowired
-   // private AccessDeniedHandler accessDeniedHandler;
+    // @Autowired
+    // private AccessDeniedHandler accessDeniedHandler;
 
     // roles admin allow to access /admin/**
     // roles user allow to access /user/**
@@ -34,16 +40,27 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll()
                 .and();
-                //.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+        //.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+    }
+
+    @Autowired
+    UserService userService;
+
+    @Bean
+    public PasswordEncoder bcryptPasswordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 
     // create two users, admin and user
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.inMemoryAuthentication()
+        auth
+                .userDetailsService(userService)
+                .passwordEncoder(bcryptPasswordEncoder());
+       /* auth.inMemoryAuthentication()
                 .withUser("user").password("password").roles("USER")
                 .and()
                 .withUser("admin").password("password").roles("ADMIN");
+    }*/
     }
 }
