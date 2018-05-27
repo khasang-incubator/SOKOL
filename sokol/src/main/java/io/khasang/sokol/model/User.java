@@ -46,27 +46,32 @@ public class User extends AbstractBaseEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
-    //@ManyToOne
-   // @JoinColumn(name = "ROLE_ID")
-
-   // @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
-  //  @BatchSize(size = 200)
 
     private List<Roles2> authorities;
-    //private String authorities;
     private String password;
 
     @Size(min = 3, max = 20)
-    //@NotNull
     private String username;
+
     private boolean accountNonExpired;
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
     private boolean enabled;
+
+    @Column(name = "FIO")
+    private String fio;
+
+    @Column(name = "LANGUAGE")
+    private String language;
+
+    @ManyToOne
+    private Department department;
+
+
 
 /*    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
