@@ -24,8 +24,8 @@ public class UserService implements UserDetailsService {
     public void init() {
         if (!(userRepository.findByUsername("username") == null)) {
             userRepository.save(User.builder()
-                    .username("username10")
-                    .password("password10")
+                    .username("username12")
+                    .password("password12")
                     .authorities(Collections.singletonList(Roles2.USER))
                     .accountNonExpired(true)
                     .accountNonLocked(true)

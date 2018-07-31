@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/department")
+@RequestMapping(value = "/admin/department")
 public class DepartmentController {
     public static final String REDIRECTION_PATH = "/department/list";
     private static final String REDIRECT_TO_LIST = "redirect:" + REDIRECTION_PATH;
