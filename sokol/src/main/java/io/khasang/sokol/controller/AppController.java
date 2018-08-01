@@ -40,7 +40,7 @@ public class AppController {
 
     @GetMapping("/header")
     public String header() {
-        return "/header";
+        return "/fragments/header";
     }
 
 
