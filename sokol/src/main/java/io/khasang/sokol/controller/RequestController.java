@@ -31,7 +31,7 @@ public class RequestController {
     @Autowired
     RequestStatusRepository requestStatusRepository;
 
-    @GetMapping({"/list"})
+    @GetMapping("/list")
     public String requestList(Model model) {
         //List<Request> requestList = requestRepository.findAllByDeletedIsFalse();
         List<Request> requestList = requestRepository.findAll();

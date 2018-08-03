@@ -18,6 +18,8 @@ package io.khasang.sokol.service;
 import io.khasang.sokol.model.RequestType;
 import io.khasang.sokol.repository.RequestTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -36,6 +38,27 @@ public class RequestTypeService {
     public List<RequestType> getAll() {
         return requestTypeRepository.findAll();
     }
+
+    public void save(RequestType requestTypeDetails) {
+        SecurityContext context = SecurityContextHolder.getContext();
+        String userName = context.getAuthentication().getName();
+        if (requestTypeDetails.getId() == 0) { // create RequestType
+            requestTypeDetails.setCreatedBy(userName);
+            requestTypeRepository.save(requestTypeDetails);
+        } else {
+            // update RequestType
+            RequestType requestType = requestTypeRepository.getOne(requestTypeDetails.getId());
+            requestType.setUpdatedBy(userName);
+            requestType.setUpdatedDate(new Date());
+            requestType.setTitle(requestTypeDetails.getTitle());
+            requestType.setDescription(requestTypeDetails.getDescription());
+            requestType.setDepartment(requestTypeDetails.getDepartment());
+            requestTypeRepository.save(requestType);
+        }
+    }
+
+
+
 
     public void requestTypeDelete(long id) {
         RequestType requestType = requestTypeRepository.getOne(id);

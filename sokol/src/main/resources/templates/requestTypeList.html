@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Request Type List</title>
+
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body class="sokol-list-view">
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <div class="table-header">
+        <a th:href="@{/admin/requestType/add}" class="create-btn btn-danger">НОВЫЙ </a>
+    </div>
+    <div class="table table-wrapper">
+        <table class="list-table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Департамент</th>
+                <th>Удалить</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="requestType : ${requestTypeList}">
+                <td th:text="${requestType.id}" th:name="id"></td>
+                <td>
+                    <a th:title="Редактирование"
+                       th:href="@{/admin/requestType/edit/{id}(id=${requestType.id})}"
+                       th:text="${requestType.title}">
+                    </a>
+                </td>
+                <td th:text="${requestType.description}" th:name="description"></td>
+                <td th:text="${requestType.department.title}"></td>
+<!--                <td th:text="${department.createdDate}">
+                </td>-->
+
+                <td class="del-cell">
+                    <a class="del-btn" th:href="@{/admin/requestType/delete/{id}(id=${requestType.id})}"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- /.container -->
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

@@ -13,7 +13,7 @@
 <div class="container">
     <div class="table-header">
         <!--НОВЫЙ-->
-        <a th:href="@{/request/add}" class="create-btn btn-danger">НОВЫЙ </a>
+        <a th:href="@{/admin/request/add}" class="create-btn btn-danger">НОВЫЙ </a>
     </div>
     <div class="table table-wrapper">
         <table class="list-table">
@@ -35,7 +35,7 @@
                 <td th:text="${request.status.name}"></td>
                 <td>
                     <a th:title="Редактирование"
-                       th:href="@{/request/edit/{id}(id=${request.id})}"
+                       th:href="@{/admin/request/edit/{id}(id=${request.id})}"
                        th:text="${request.title}">
                     </a>
                 </td>
@@ -46,7 +46,7 @@
                 <!--<td th:text="${request.createdDate}"></td>-->
 
                 <td class="del-cell">
-                    <a class="del-btn" th:href="@{/request/delete/{id}(id=${request.id})}"></a>
+                    <a class="del-btn" th:href="@{/admin/request/delete/{id}(id=${request.id})}"></a>
                 </td>
             </tr>
             </tbody>

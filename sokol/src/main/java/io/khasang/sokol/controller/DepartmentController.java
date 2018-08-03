@@ -18,6 +18,8 @@ package io.khasang.sokol.controller;
 import io.khasang.sokol.model.Department;
 import io.khasang.sokol.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +30,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/admin/department")
 public class DepartmentController {
-    public static final String REDIRECTION_PATH = "/department/list";
+    public static final String REDIRECTION_PATH = "/admin/department/list";
     private static final String REDIRECT_TO_LIST = "redirect:" + REDIRECTION_PATH;
     private static final String DEPARTMENT_TYPE_LIST_HEADER_TITLE_LIST = "Департаменты";
     private static final String DEPARTMENT_TYPE_LIST_HEADER_TITLE_ADD = "Добавление департамента";
@@ -53,12 +55,12 @@ public class DepartmentController {
     public String departmentForm(Model model) {
         model.addAttribute("department", new Department());
         model.addAttribute("headerTitle", DEPARTMENT_TYPE_LIST_HEADER_TITLE_ADD);
-        return "department";
+        return "departmentForm";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/save")
     public String departmentSubmit(@ModelAttribute Department department) {
-        departmentService.saveDepartment(department);
+        departmentService.save(department);
         return REDIRECT_TO_LIST;
     }
 
@@ -67,16 +69,19 @@ public class DepartmentController {
         Department department = departmentService.findOne(id);
         model.addAttribute("department", department);
         model.addAttribute("headerTitle", DEPARTMENT_TYPE_LIST_HEADER_TITLE_EDIT);
-        return "department";
+        return "departmentForm";
     }
 
-    @PostMapping("/edit/{id}")
+/*    @PostMapping("/edit/{id}")
     public String departmentPost(@PathVariable long id, Department departmentDetails) {
+        SecurityContext context = SecurityContextHolder.getContext();
+        String userName = context.getAuthentication().getName();
         Department department = departmentService.findOne(id);
+        department.setUpdatedBy(userName);
         department.setTitle(departmentDetails.getTitle());
         department.setUpdatedDate(new Date());
-        return "department";
-    }
+        return "departmentForm";
+    }*/
 
 /*    @GetMapping("/delete/{id}")
     public String departmentDelete(@PathVariable long id) {

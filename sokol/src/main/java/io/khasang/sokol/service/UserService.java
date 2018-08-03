@@ -1,6 +1,5 @@
 package io.khasang.sokol.service;
 
-import io.khasang.sokol.model.Roles2;
 import io.khasang.sokol.model.User;
 import io.khasang.sokol.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

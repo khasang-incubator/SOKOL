@@ -24,16 +24,16 @@ public class AppController {
     @Autowired
     RequestRepository requestRepository;
 
-    @GetMapping("/")
+/*    @GetMapping("/")
     public String requestList(Model model) {
         List<Request> requestList = requestRepository.findAll();
         model.addAttribute("requestList", requestList);
         model.addAttribute("headerTitle", "Запросы");
         return "requestList";
-    }
+    }*/
 
 
-    @GetMapping("/main")
+    @GetMapping("/")
     public String index() {
         return "/main";
     }
@@ -103,10 +103,7 @@ public class AppController {
 
 
 
-        @PostMapping("/login")
-        public String loginSubmit() {
-            return "main";
-        }
+
 
 
 
@@ -118,6 +115,13 @@ public class AppController {
         return "login";
     }
 
+/*    @PostMapping("/login")
+    public String loginSubmit(Model model) {
+        List<Request> requestList = requestRepository.findAll();
+        model.addAttribute("requestList", requestList);
+        model.addAttribute("headerTitle", "Запросы");
+        return "requestList";
+    }*/
 
     @GetMapping("/403")
     public String error403() {

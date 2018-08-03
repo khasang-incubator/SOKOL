@@ -5,6 +5,8 @@ import io.khasang.sokol.repository.DepartmentRepository;
 import io.khasang.sokol.repository.RequestTypeRepository;
 import io.khasang.sokol.service.RequestTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +16,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/admin/requestType")
 public class RequestTypeController {
-    private static final String REDIRECT_TO_LIST = "redirect:/requestType/list";
+    private static final String REDIRECT_TO_LIST = "redirect:/admin/requestType/list";
     private static final String LIST_URL = "/requestType/list";
     private static final String REQUEST_TYPE_FORM = "requestTypeForm";
     private static final String REQUEST_TYPE_LIST = "requestTypeList";
@@ -52,7 +54,7 @@ public class RequestTypeController {
 
     @PostMapping("/save")
     public String requestTypeSubmit(@ModelAttribute RequestType requestType) {
-        requestTypeRepository.save(requestType);
+        requestTypeService.save(requestType);
         return REDIRECT_TO_LIST;
     }
 

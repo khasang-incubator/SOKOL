@@ -18,6 +18,8 @@ package io.khasang.sokol.service;
 import io.khasang.sokol.model.Department;
 import io.khasang.sokol.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -41,8 +43,20 @@ public class DepartmentService {
         return departmentRepository.findAllByDeletedIsFalse();
     }
 
-    public Department saveDepartment(Department department) {
-        return departmentRepository.save(department);
+    public void save(Department departmentDetails) {
+        SecurityContext context = SecurityContextHolder.getContext();
+        String userName = context.getAuthentication().getName();
+        if (departmentDetails.getId() == 0) { // create department
+            departmentDetails.setCreatedBy(userName);
+            departmentRepository.save(departmentDetails);
+        } else {
+            // update department
+            Department department = departmentRepository.getOne(departmentDetails.getId());
+            department.setUpdatedBy(userName);
+            department.setUpdatedDate(new Date());
+            department.setTitle(departmentDetails.getTitle());
+            departmentRepository.save(department);
+        }
     }
 
     public Department findOne(long departmentId) {
