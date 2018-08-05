@@ -6,6 +6,7 @@ import io.khasang.sokol.model.RequestStatus;
 import io.khasang.sokol.repository.RequestRepository;
 import io.khasang.sokol.repository.RequestStatusRepository;
 import io.khasang.sokol.repository.RequestTypeRepository;
+import io.khasang.sokol.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +18,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/admin/request")
 public class RequestController {
-    private static final String REQUEST_REDIRECT_TO_LIST = "redirect:/request/list";
+    private static final String REQUEST_REDIRECT_TO_LIST = "redirect:/admin/request/list";
     private static final String REQUEST_LIST_HEADER_TITLE_LIST = "Запросы";
     private static final String REQUEST_LIST_HEADER_TITLE_ADD = "Добавление запроса";
     private static final String REQUEST_LIST_HEADER_TITLE_EDIT = "Редактирование запроса";
@@ -30,6 +31,9 @@ public class RequestController {
 
     @Autowired
     RequestStatusRepository requestStatusRepository;
+
+    @Autowired
+    RequestService requestService;
 
     @GetMapping("/list")
     public String requestList(Model model) {
@@ -48,48 +52,29 @@ public class RequestController {
         return "requestForm";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/save")
     public String requestSubmit(@ModelAttribute Request request) {
-        RequestStatus status = requestStatusRepository.findOne(1L);
-        request.setStatus(status);
-        request.setVersion(1);
-        requestRepository.save(request);
+        requestService.save(request);
         return REQUEST_REDIRECT_TO_LIST;
     }
 
     @GetMapping("/edit/{id}")
     public String requestEdit(Model model, @PathVariable long id) {
         model.addAttribute("allRequestTypes", requestTypeRepository.findAllByDeletedIsFalse());
+        //model.addAttribute("allRequestStatus", requestStatusRepository.findAllByDeletedIsFalse());
+        model.addAttribute("allRequestStatus", requestStatusRepository.findAll());
         Request request = requestRepository.findOne(id);
         model.addAttribute("request", request);
         model.addAttribute("headerTitle", REQUEST_LIST_HEADER_TITLE_EDIT);
         return "requestForm";
     }
 
-    @PostMapping("/edit/{id}")
-    public String requestPost(@PathVariable long id, Request requestDetails) {
-        Request request = requestRepository.getOne(id);
-   //     request.setCreatedDate(requestDetails.getCreatedDate());
-        request.setTitle(requestDetails.getTitle());
-        request.setDescription(requestDetails.getDescription());
-        request.setRequestType(requestDetails.getRequestType());
-        request.setStatus(requestDetails.getStatus());
-        request.setUpdatedDate(new Date());
-
-
-
-
-   //     requestRepository.save(request);
+    @GetMapping("/delete/{id}")
+    public String requestDelete(@PathVariable long id) {
+        requestService.requestDelete(id);
         return REQUEST_REDIRECT_TO_LIST;
     }
+
+
 }
 
-/*    @PostMapping("/edit/{id}")
-    public String departmentEdit(@PathVariable long id, RequestType requestTypeDetails) {
-        RequestType requestType = requestTypeRepository.getOne(id);
-        requestType.setTitle(requestTypeDetails.getTitle());
-        requestType.setDescription(requestTypeDetails.getDescription());
-        requestType.setDepartment(requestTypeDetails.getDepartment());
-        requestType.setUpdatedDate(new Date());
-        return REQUEST_TYPE_FORM;
-    }*/

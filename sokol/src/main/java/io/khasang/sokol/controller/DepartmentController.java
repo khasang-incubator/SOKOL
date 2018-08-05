@@ -72,23 +72,6 @@ public class DepartmentController {
         return "departmentForm";
     }
 
-/*    @PostMapping("/edit/{id}")
-    public String departmentPost(@PathVariable long id, Department departmentDetails) {
-        SecurityContext context = SecurityContextHolder.getContext();
-        String userName = context.getAuthentication().getName();
-        Department department = departmentService.findOne(id);
-        department.setUpdatedBy(userName);
-        department.setTitle(departmentDetails.getTitle());
-        department.setUpdatedDate(new Date());
-        return "departmentForm";
-    }*/
-
-/*    @GetMapping("/delete/{id}")
-    public String departmentDelete(@PathVariable long id) {
-        departmentRepository.delete(id);
-        return REDIRECT_TO_LIST;
-    }*/
-
     @GetMapping("/delete/{id}")
     public String departmentDelete(@PathVariable long id) {
         departmentService.departmentDelete(id);

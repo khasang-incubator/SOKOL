@@ -57,9 +57,6 @@ public class RequestTypeService {
         }
     }
 
-
-
-
     public void requestTypeDelete(long id) {
         RequestType requestType = requestTypeRepository.getOne(id);
         requestType.setDeleted(true);

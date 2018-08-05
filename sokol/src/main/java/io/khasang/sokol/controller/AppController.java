@@ -16,22 +16,8 @@ import java.util.List;
 @Controller
 public class AppController {
 
-    /*    @GetMapping("/")
-        public String main() {
-            return "/main";
-        }*/
-
     @Autowired
     RequestRepository requestRepository;
-
-/*    @GetMapping("/")
-    public String requestList(Model model) {
-        List<Request> requestList = requestRepository.findAll();
-        model.addAttribute("requestList", requestList);
-        model.addAttribute("headerTitle", "Запросы");
-        return "requestList";
-    }*/
-
 
     @GetMapping("/")
     public String index() {
@@ -41,12 +27,6 @@ public class AppController {
     @GetMapping("/header")
     public String header() {
         return "/fragments/header";
-    }
-
-
-    @GetMapping("/home")
-    public String home() {
-        return "/login2";
     }
 
     @GetMapping("/layout")
@@ -59,69 +39,11 @@ public class AppController {
         return "/about";
     }
 
-    /*    @GetMapping("/index")
-        public String home() {
-            return "/home";
-        }*/
-    /*
 
-
-        @GetMapping("/footer")
-        public String layuot(Model model) {
-            return "footer";
-        }
-
-        @GetMapping("/header")
-        public String header() {
-            return "header";
-        }
-
-        @GetMapping("/testdrop")
-        public String testdrop() {
-            return "testdrop";
-        }
-
-        @GetMapping("/layuot")
-        public String layuot() {
-            return "layuot";
-        }
-
-        @GetMapping("/admin")
-        public String admin() {
-            return "/admin";
-        }
-
-        @GetMapping("/user")
-        public String user() {
-            return "/user";
-        }
-
-        @GetMapping("/about")
-        public String about() {
-            return "/about";
-        }
-
-
-
-
-
-
-
-
-
-        SecurityContext context = SecurityContextHolder.getContext();*/
     @GetMapping("/login")
     public String login() {
         return "login";
     }
-
-/*    @PostMapping("/login")
-    public String loginSubmit(Model model) {
-        List<Request> requestList = requestRepository.findAll();
-        model.addAttribute("requestList", requestList);
-        model.addAttribute("headerTitle", "Запросы");
-        return "requestList";
-    }*/
 
     @GetMapping("/403")
     public String error403() {
