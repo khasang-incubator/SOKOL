@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Panel</title>
+
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+
+<body class="sokol-list-view">
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <!-- SCREEN  -->
+
+    <div class="mypanel-wrapper">
+        <div class="row">
+            <div class="col col-md-6 mypanel-col">
+                <span class="col-header">ВХОДЯЩИЕ</span>
+                <div class="panel panel-sokol">
+                    <div class="panel-heading">КОЛИЧЕСТВО ЗАПРОСОВ</div>
+                    <div class="panel-body">
+                        <table class="score">
+                            <tr>
+                                НОВЫЕ
+                                ВЫПОЛНЯЮТСЯ
+                                ВЫПОЛНЕНО
+<!--                                <th><s:message code="new_items"/></th>
+                                <th><s:message code="in_progress"/></th>
+                                <th><s:message code="done"/></th>-->
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="panel panel-sokol">
+                    <div class="panel-heading">ПРОИЗВОДИТЕЛЬНОСТЬ</div>
+                    <div class="panel-body">
+                        <a href="#" class="graph-btn">for_day</a>
+                        <a href="#" class="graph-btn active">for_week</a>
+                        <a href="#" class="graph-btn">for_month</a>
+                        <a href="#" class="graph-btn">for_year</a>
+                        <div class="box">
+                            <canvas id="lineLeftChart" height="300" width="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-sokol">
+                    <div class="panel-heading">ЗАПРОСЫ</div>
+                    <div class="panel-body">
+                        <table class="list-table">
+                            <thead>
+                            <th><a href="#">ID</a></th>
+                            НАЗВАНИЕ
+                            <th><a href="#" class="sort-up">title</a></th>
+                            СТАТУС
+                            <th><a href="#" class="sort-down">status</a></th>
+                            </thead>
+                            <tbody>
+                            123
+<!--                            <c:forEach var="request" items="${forMeRequests}" step="1" varStatus="loopStatus">
+                                <tr class="${loopStatus.index % 2 == 0 ? 'alt' : ''}">
+                                    <td class="id-cell">${request.requestId}</td>
+                                    <td><a href="javascript: onEditRequest(${request.requestId})">${request.title}</a></td>
+                                    <td>${request.status.requestStatusName}</td>
+                                </tr>
+                            </c:forEach>-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col col-md-6  mypanel-col right">
+                <span class="col-header">ИСХОДЯЩИЕ</span>
+                <div class="panel panel-sokol">
+                    <div class="panel-heading">КОЛИЧЕСТВО ЗАПРОСОВ</div>
+                    <div class="panel-body">
+                        <table class="score">
+                            <tr>
+                                НОВЫЕ
+                                ВЫПОЛНЯЮТСЯ
+                                ВЫПОЛНЕНО
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>12</td>
+                                <td>13</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="panel panel-sokol">
+                    <div class="panel-heading">ПРОИЗВОДИТЕЛЬНОСТЬ</div>
+                    <div class="panel-body">
+                        <a href="#" class="graph-btn">ЗА ДЕНЬ</a>
+                        <a href="#" class="graph-btn active">ЗА НЕДЕЛЮ</a>
+                        <a href="#" class="graph-btn">ЗА МЕСЯЦ</a>
+                        <a href="#" class="graph-btn">ЗА ГОД</a>
+                        <div class="box">
+                            <canvas id="lineRightChart" height="300" width="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-sokol">
+                        <div class="panel-heading">ЗАПРОСЫ</div>
+                             <div class="panel-body">
+                                <table class="list-table">
+                                        <thead>
+                                        <th><a href="#">ID</a></th>
+                                        НАЗВАНИЕ
+                                        <th><a href="#" class="sort-up">title</a></th>
+                                        СТАТУС
+                                        <th><a href="#" class="sort-down">status</a></th>
+                                        </thead>
+                                        <tbody>
+                                        456
+                                        <!--<c:forEach var="request" items="${myRequests}" step="1" varStatus="loopStatus">
+                                            <tr class="${loopStatus.index % 2 == 0 ? 'alt' : ''}">
+                                                <td class="id-cell">${request.requestId}</td>
+                                                <td><a href="javascript: onEditRequest(${request.requestId})">${request.title}</a></td>
+                                                <td>${request.status.requestStatusName}</td>
+                                            </tr>
+                                        </c:forEach>-->
+                                        </tbody>
+                                </table>
+                             </div>
+                        </div>
+                </div>
+            </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
+
