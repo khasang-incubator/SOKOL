@@ -39,7 +39,6 @@ public class AppController {
         return "/about";
     }
 
-
     @GetMapping("/login")
     public String login() {
         return "login";
