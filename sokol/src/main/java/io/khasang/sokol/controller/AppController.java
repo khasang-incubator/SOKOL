@@ -44,6 +44,11 @@ public class AppController {
         return "login";
     }
 
+    @GetMapping("/mypanel")
+    public String mypanel() {
+        return "/mypanel";
+    }
+
     @GetMapping("/403")
     public String error403() {
         return "/error/403";
