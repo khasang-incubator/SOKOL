@@ -33,7 +33,7 @@ import java.util.List;
 
 @Builder
 @Entity
-@Table(name = "USERS2")
+@Table(name = "USERS")
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
@@ -51,7 +51,7 @@ public class User extends AbstractBaseEntity implements UserDetails {
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
 
-    private List<Roles2> authorities;
+    private List<Roles> authorities;
     private String password;
 
     @Size(min = 3, max = 20)

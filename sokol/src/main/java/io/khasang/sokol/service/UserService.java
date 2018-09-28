@@ -1,6 +1,6 @@
 package io.khasang.sokol.service;
 
-import io.khasang.sokol.model.Roles2;
+import io.khasang.sokol.model.Roles;
 import io.khasang.sokol.model.User;
 import io.khasang.sokol.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    @PostConstruct
+/*    @PostConstruct
     public void init() {
         if (!(userRepository.findByUsername("username") == null)) {
             userRepository.save(User.builder()
@@ -34,7 +34,7 @@ public class UserService implements UserDetailsService {
                     .build()
             );
         }
-    }
+    }*/
 
     public UserDetails loadUserByUsername(@NotNull String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username);

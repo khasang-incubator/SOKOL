@@ -1,6 +1,6 @@
+/*
 package io.khasang.sokol;
 
-import io.khasang.sokol.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -28,3 +28,4 @@ public class SokolApplicationDataLoader implements ApplicationRunner {
         return new Java8TimeDialect();
     }
 }
+*/
