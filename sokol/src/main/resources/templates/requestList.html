@@ -13,7 +13,7 @@
 <div class="container">
     <div class="table-header">
         <!--НОВЫЙ-->
-        <a th:href="@{/admin/request/add}" class="create-btn btn-danger">НОВЫЙ </a>
+        <a th:href="@{/admin/request/add}" class="create-btn btn-danger">НОВЫЙ</a>
     </div>
     <div class="table table-wrapper">
         <table class="list-table">
@@ -21,7 +21,15 @@
             <tr>
                 <th style="width: 3%">#</th>
                 <th style="width: 8%">Статус</th>
-                <th style="width: 14%">Название</th><!--НАЗВАНИЕ-->
+                <!--<th style="width: 14%" th:text="${requestList.getTotalPages()}">-->
+                <th style="width: 14%">
+<!--                    <a href="/admin/request/listSort" class="${sortBy.equals('title')? imgBy : ''}">НАЗВАНИЕ
+                    </a>-->
+                    <a th:href="@{/admin/request/listSort/{imgBy}(imgBy=${imgBy})}" th:class="${imgBy}">НАЗВАНИЕ
+
+                        <!--<a href="/sokol/admin/request/listSort?sortBy=title" class="sort-up">НАЗВАНИЕ-->
+                   </a>
+                </th><!--НАЗВАНИЕ-->
                 <th style="width: 14%">Описание</th>
                 <th style="width: 8%">Создатель</th>
                 <th style="width: 10%">Исполнитель</th>
@@ -49,6 +57,26 @@
                     <a class="del-btn" th:href="@{/admin/request/delete/{id}(id=${request.id})}"></a>
                 </td>
             </tr>
+
+            <!--<tr th:each="request : ${requestList}">
+                <td th:text="${request.id}" th:name="id"></td>
+                <td th:text="${request.status.name}"></td>
+                <td>
+                    <a th:title="Редактирование"
+                       th:href="@{/admin/request/edit/{id}(id=${request.id})}"
+                       th:text="${request.title}">
+                    </a>
+                </td>
+                <td th:text="${request.description}"></td>
+                <td th:text="${request.createdBy}"></td>
+                <td th:text="${request.updatedBy}"></td>
+                <td th:text="${request.requestType.title}"></td>
+                &lt;!&ndash;<td th:text="${request.createdDate}"></td>&ndash;&gt;
+
+                <td class="del-cell">
+                    <a class="del-btn" th:href="@{/admin/request/delete/{id}(id=${request.id})}"></a>
+                </td>
+            </tr>-->
             </tbody>
         </table>
     </div>

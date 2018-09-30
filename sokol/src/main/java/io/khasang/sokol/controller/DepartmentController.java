@@ -16,8 +16,12 @@
 package io.khasang.sokol.controller;
 
 import io.khasang.sokol.model.Department;
+import io.khasang.sokol.repository.DepartmentRepository;
 import io.khasang.sokol.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -37,10 +41,18 @@ public class DepartmentController {
     private static final String DEPARTMENT_TYPE_LIST_HEADER_TITLE_EDIT = "Редактирование департамента";
 
     private DepartmentService departmentService;
+    private DepartmentRepository departmentRepository;
 
-    @Autowired
+
+/*    @Autowired
     public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
+    }*/
+
+    @Autowired
+    public DepartmentController(DepartmentService departmentService, DepartmentRepository departmentRepository) {
+        this.departmentService = departmentService;
+        this.departmentRepository = departmentRepository;
     }
 
     @GetMapping({"/list"})
@@ -50,6 +62,25 @@ public class DepartmentController {
         model.addAttribute("headerTitle", DEPARTMENT_TYPE_LIST_HEADER_TITLE_LIST);
         return "departmentList";
     }
+
+    @GetMapping({"/list2"})
+    public String departmentListPage(Model model) {
+        Page<Department> pageDepartmentList = departmentRepository.findAllByDeletedIsFalse(new PageRequest(0, 10, new Sort(Sort.DEFAULT_DIRECTION, "title")));
+        model.addAttribute("departmentList", pageDepartmentList.getContent());
+        model.addAttribute("headerTitle", DEPARTMENT_TYPE_LIST_HEADER_TITLE_LIST);
+        return "departmentList";
+    }
+
+    @GetMapping({"/list3"})
+    public String departmentListPage3(Model model) {
+        Page<Department> pageDepartmentList = departmentRepository.findAllByDeletedIsFalse(new PageRequest(0, 10, new Sort(Sort.DEFAULT_DIRECTION, "id")));
+        final Sort sort = pageDepartmentList.getSort();
+        model.addAttribute("departmentList", pageDepartmentList.getContent());
+        model.addAttribute("headerTitle", DEPARTMENT_TYPE_LIST_HEADER_TITLE_LIST);
+        return "departmentList";
+    }
+
+
 
     @GetMapping("/add")
     public String departmentForm(Model model) {

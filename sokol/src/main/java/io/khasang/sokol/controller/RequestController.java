@@ -8,6 +8,9 @@ import io.khasang.sokol.repository.RequestStatusRepository;
 import io.khasang.sokol.repository.RequestTypeRepository;
 import io.khasang.sokol.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,12 +40,59 @@ public class RequestController {
 
     @GetMapping("/list")
     public String requestList(Model model) {
-        //List<Request> requestList = requestRepository.findAllByDeletedIsFalse();
         List<Request> requestList = requestRepository.findAll();
         model.addAttribute("requestList", requestList);
+        String imgBy = "sort-up";
+        model.addAttribute("imgBy", imgBy);
         model.addAttribute("headerTitle", REQUEST_LIST_HEADER_TITLE_LIST);
         return "requestList";
     }
+
+    @GetMapping("/list2")
+    public String requestList2(Model model) {
+        Page<Request> pageRequestList;
+        pageRequestList = requestRepository.findAll(new PageRequest(0, 10, new Sort(Sort.Direction.ASC, "id")));
+
+        model.addAttribute("requestList", pageRequestList);
+        //String imgBy = "sort-up";
+      //  model.addAttribute("imgBy", imgBy);
+        model.addAttribute("headerTitle", REQUEST_LIST_HEADER_TITLE_LIST);
+        return "requestList";
+    }
+
+
+    @GetMapping("/listSort/{imgBy}")
+    //public String requestListSort(Model model, @PathVariable String imgBy, @PathVariable String sortBy) {
+    public String requestListSort(Model model, @PathVariable String imgBy) {
+        Page<Request> pageRequestList;
+        //sortBy = (sortBy == null || sortBy.equals("")) ? "id" : sortBy;
+        if (imgBy.equals("sort-up")) {
+            pageRequestList = requestRepository.findAll(new PageRequest(0, 10, new Sort(Sort.Direction.ASC, "title")));
+            //pageRequestList = requestRepository.findAll(new PageRequest(0, 10, new Sort(Sort.Direction.ASC, sortBy)));
+            imgBy = "sort-down";
+        } else {
+            imgBy = "sort-up";
+            pageRequestList = requestRepository.findAll(new PageRequest(0, 10, new Sort(Sort.Direction.DESC, "title")));
+            //pageRequestList = requestRepository.findAll(new PageRequest(0, 10, new Sort(Sort.Direction.DESC, sortBy)));
+        }
+        model.addAttribute("imgBy", imgBy);
+        //pageRequestList.getSort().toString();
+        model.addAttribute("requestList", pageRequestList);
+        model.addAttribute("headerTitle", REQUEST_LIST_HEADER_TITLE_LIST);
+        return "requestList";
+    }
+
+
+/*    @GetMapping({"/list3"})
+    public String departmentListPage3(Model model) {
+        Page<Department> pageDepartmentList = departmentRepository.findAllByDeletedIsFalse(new PageRequest(0, 10, new Sort(Sort.DEFAULT_DIRECTION, "id")));
+        final Sort sort = pageDepartmentList.getSort();
+        model.addAttribute("departmentList", pageDepartmentList.getContent());
+        model.addAttribute("headerTitle", DEPARTMENT_TYPE_LIST_HEADER_TITLE_LIST);
+        return "departmentList";
+    }
+    */
+
 
     @GetMapping("/add")
     public String requestForm(Model model) {
