@@ -21,16 +21,17 @@
             <tr>
                 <th style="width: 3%">#</th>
                 <th style="width: 8%">Статус</th>
-                <!--<th style="width: 14%" th:text="${requestList.getTotalPages()}">-->
                 <th style="width: 14%">
-<!--                    <a href="/admin/request/listSort" class="${sortBy.equals('title')? imgBy : ''}">НАЗВАНИЕ
-                    </a>-->
-                    <a th:href="@{/admin/request/listSort/{imgBy}(imgBy=${imgBy})}" th:class="${imgBy}">НАЗВАНИЕ
-
-                        <!--<a href="/sokol/admin/request/listSort?sortBy=title" class="sort-up">НАЗВАНИЕ-->
-                   </a>
-                </th><!--НАЗВАНИЕ-->
-                <th style="width: 14%">Описание</th>
+                     <a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy='title')}"
+                       th:class="${sortBy.equals('title')? imgBy : ''}">НАЗВАНИЕ
+                    </a>
+                </th>
+                <th style="width: 14%">
+                    <!--<a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy=${sortBy})}"-->
+                    <a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy='description')}"
+                       th:class="${sortBy.equals('description')? imgBy : ''}">ОПИСАНИЕ
+                    </a>
+                </th>
                 <th style="width: 8%">Создатель</th>
                 <th style="width: 10%">Исполнитель</th>
                 <th style="width: 8%">Тип</th>
