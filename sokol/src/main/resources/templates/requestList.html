@@ -19,7 +19,11 @@
         <table class="list-table">
             <thead>
             <tr>
-                <th style="width: 3%">#</th>
+                <th style="width: 3%">
+                    <a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy='id')}"
+                       th:class="${sortBy.equals('id')? imgBy : ''}">#
+                    </a>
+                </th>
                 <th style="width: 8%">Статус</th>
                 <th style="width: 14%">
                      <a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy='title')}"
