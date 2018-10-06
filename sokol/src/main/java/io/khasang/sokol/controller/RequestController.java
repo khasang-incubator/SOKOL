@@ -45,7 +45,7 @@ public class RequestController {
         Page<Request> pageRequestList = requestRepository.findAll(pageable);
         model.addAttribute("requestList", pageRequestList.getContent());
         model.addAttribute("imgBy", "sort-up");
-        model.addAttribute("sortBy", "title");
+        model.addAttribute("sortBy", "id");
         model.addAttribute("headerTitle", REQUEST_LIST_HEADER_TITLE_LIST);
         return "requestList";
     }
@@ -55,11 +55,11 @@ public class RequestController {
         Page<Request> pageRequestList;
      //   sortBy = (sortBy == null || sortBy.equals("")) ? "id" : sortBy;
         if (imgBy.equals("sort-up")) {
-            pageRequestList = requestRepository.findAll(new PageRequest(0, 10, new Sort(Sort.Direction.ASC, sortBy)));
+            pageRequestList = requestRepository.findAll(new PageRequest(0, 10, new Sort(Sort.Direction.DESC, sortBy)));
             imgBy = "sort-down";
         } else {
             imgBy = "sort-up";
-            pageRequestList = requestRepository.findAll(new PageRequest(0, 10, new Sort(Sort.Direction.DESC, sortBy)));
+            pageRequestList = requestRepository.findAll(new PageRequest(0, 10, new Sort(Sort.Direction.ASC, sortBy)));
         }
         model.addAttribute("imgBy", imgBy);
         model.addAttribute("sortBy", sortBy);
