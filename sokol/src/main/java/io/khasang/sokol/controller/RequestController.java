@@ -53,7 +53,6 @@ public class RequestController {
     @GetMapping("/listSort")
     public String requestListSort(Model model, @RequestParam("imgBy") String imgBy, @RequestParam("sortBy") String sortBy) {
         Page<Request> pageRequestList;
-     //   sortBy = (sortBy == null || sortBy.equals("")) ? "id" : sortBy;
         if (imgBy.equals("sort-up")) {
             pageRequestList = requestRepository.findAll(new PageRequest(0, 10, new Sort(Sort.Direction.DESC, sortBy)));
             imgBy = "sort-down";
