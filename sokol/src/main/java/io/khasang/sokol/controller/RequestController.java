@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping(value = "/admin/request")
@@ -27,6 +30,7 @@ public class RequestController {
     private static final String REQUEST_LIST_HEADER_TITLE_LIST = "Запросы";
     private static final String REQUEST_LIST_HEADER_TITLE_ADD = "Добавление запроса";
     private static final String REQUEST_LIST_HEADER_TITLE_EDIT = "Редактирование запроса";
+    private static int currentPage = 1;
 
     @Autowired
     RequestRepository requestRepository;
@@ -41,14 +45,38 @@ public class RequestController {
     RequestService requestService;
 
     @GetMapping("/list")
-    public String requestList(Model model, @PageableDefault(sort = "id") Pageable pageable) {
+    public String requestList(Model model,
+                              @PageableDefault(sort = "id", size = 5) Pageable pageable,
+                              @RequestParam(value = "pageNumber", defaultValue = "0") Integer pageNumber) {
+        pageable = new PageRequest(pageNumber, 5);
         Page<Request> pageRequestList = requestRepository.findAll(pageable);
+        //model.addAttribute("requestList", pageRequestList.getContent());
+        model.addAttribute("requestList", pageRequestList);
+        model.addAttribute("imgBy", "sort-up");
+        model.addAttribute("sortBy", "id");
+        model.addAttribute("headerTitle", REQUEST_LIST_HEADER_TITLE_LIST);
+        int totalPages = pageRequestList.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+        return "requestList";
+    }
+
+/*    @GetMapping("/list")
+    public String requestList(Model model, @RequestParam("page") Optional<Integer> page) {
+        Pageable pageable
+        page.ifPresent(p -> currentPage = p);
+        Page<Request> pageRequestList = requestRepository. ..findAll(PageRequest.of(currentPage - 1, 5));
         model.addAttribute("requestList", pageRequestList.getContent());
         model.addAttribute("imgBy", "sort-up");
         model.addAttribute("sortBy", "id");
         model.addAttribute("headerTitle", REQUEST_LIST_HEADER_TITLE_LIST);
         return "requestList";
-    }
+    }*/
+
 
     @GetMapping("/listSort")
     public String requestListSort(Model model, @RequestParam("imgBy") String imgBy, @RequestParam("sortBy") String sortBy) {

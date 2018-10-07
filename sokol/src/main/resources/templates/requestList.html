@@ -55,7 +55,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="request : ${requestList}">
+            <tr th:each="request : ${requestList.content}">
                 <td th:text="${request.id}" th:name="id"></td>
                 <td th:text="${request.status.name}"></td>
                 <td>
@@ -75,30 +75,37 @@
                 </td>
             </tr>
 
-            <!--<tr th:each="request : ${requestList}">
-                <td th:text="${request.id}" th:name="id"></td>
-                <td th:text="${request.status.name}"></td>
-                <td>
-                    <a th:title="Редактирование"
-                       th:href="@{/admin/request/edit/{id}(id=${request.id})}"
-                       th:text="${request.title}">
-                    </a>
-                </td>
-                <td th:text="${request.description}"></td>
-                <td th:text="${request.createdBy}"></td>
-                <td th:text="${request.updatedBy}"></td>
-                <td th:text="${request.requestType.title}"></td>
-                &lt;!&ndash;<td th:text="${request.createdDate}"></td>&ndash;&gt;
-
-                <td class="del-cell">
-                    <a class="del-btn" th:href="@{/admin/request/delete/{id}(id=${request.id})}"></a>
-                </td>
-            </tr>-->
             </tbody>
+        </table>
+
+        <!--//pagination-->
+        <table>
+            <tr>
+                <td>Страницы:</td>
+                <td>
+                    <ul class="pagination">
+                        <li>
+                            <a th:if="${requestList.hasPrevious()}"
+                               th:href="@{'/admin/request/list'(pageNumber=${requestList.number-1})}">&laquo;</a>
+                        </li>
+
+                        <li th:each="pageNumber : ${pageNumbers}">
+                            <a th:href="@{'/admin/request/list'(pageNumber=${pageNumber-1})}"
+                               th:text="${pageNumber}">
+                            </a>
+                        </li>
+
+                        <li>
+                            <a th:if="${requestList.hasNext()}"
+                               th:href="@{'/admin/request/list'(pageNumber=${requestList.number+1})}">&raquo;</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
         </table>
     </div>
 </div>
-<!-- /.container -->
+
 <div th:replace="fragments/footer :: footer"/>
 
 </body>
