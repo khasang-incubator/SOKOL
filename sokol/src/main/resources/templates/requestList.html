@@ -20,34 +20,37 @@
             <thead>
             <tr>
                 <th style="width: 3%">
-                    <a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy='id')}"
+                    <a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy=${sortBy}, sortByNext='id')}"
                        th:class="${sortBy.equals('id')? imgBy : ''}">#
                     </a>
                 </th>
-                <th style="width: 8%">Статус</th>
+                <th style="width: 8%">
+                    <a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy=${sortBy}, sortByNext='status')}"
+                       th:class="${sortBy.equals('status')? imgBy : ''}">СТАТУС
+                    </a>
+                 </th>
                 <th style="width: 14%">
-                    <a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy='title')}"
+                    <a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy=${sortBy}, sortByNext='title')}"
                        th:class="${sortBy.equals('title')? imgBy : ''}">НАЗВАНИЕ
                     </a>
                 </th>
                 <th style="width: 14%">
-                    <!--<a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy=${sortBy})}"-->
-                    <a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy='description')}"
+                    <a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy=${sortBy},sortByNext='description')}"
                        th:class="${sortBy.equals('description')? imgBy : ''}">ОПИСАНИЕ
                     </a>
                 </th>
                 <th style="width: 8%">
-                    <a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy='createdBy')}"
+                    <a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy=${sortBy},sortByNext='createdBy')}"
                        th:class="${sortBy.equals('createdBy')? imgBy : ''}">СОЗДАТЕЛЬ
                     </a>
                 </th>
                 <th style="width: 10%">
-                    <a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy='assignedTo')}"
+                    <a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy=${sortBy},sortByNext='assignedTo')}"
                        th:class="${sortBy.equals('assignedTo')? imgBy : ''}">ИСПОЛНИТЕЛЬ
                     </a>
                 </th>
                 <th style="width: 8%">
-                    <a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy='requestType')}"
+                    <a th:href="@{'/admin/request/listSort'(imgBy=${imgBy},sortBy=${sortBy},sortByNext='requestType')}"
                        th:class="${sortBy.equals('requestType')? imgBy : ''}">ТИП
                     </a>
                 </th>
@@ -86,18 +89,18 @@
                     <ul class="pagination">
                         <li>
                             <a th:if="${requestList.hasPrevious()}"
-                               th:href="@{'/admin/request/list'(pageNumber=${requestList.number-1})}">&laquo;</a>
+                               th:href="@{'/admin/request/listPagination'(pageNumbers=${pageNumbers},imgBy=${imgBy},sortBy=${sortBy},pageNumber=${requestList.number-1})}">&laquo;</a>
                         </li>
 
                         <li th:each="pageNumber : ${pageNumbers}">
-                            <a th:href="@{'/admin/request/list'(pageNumber=${pageNumber-1})}"
+                            <a th:href="@{'/admin/request/listPagination'(pageNumbers=${pageNumbers},imgBy=${imgBy},sortBy=${sortBy},pageNumber=${pageNumber-1})}"
                                th:text="${pageNumber}">
                             </a>
                         </li>
 
                         <li>
                             <a th:if="${requestList.hasNext()}"
-                               th:href="@{'/admin/request/list'(pageNumber=${requestList.number+1})}">&raquo;</a>
+                               th:href="@{'/admin/request/listPagination'(pageNumbers=${pageNumbers},imgBy=${imgBy},sortBy=${sortBy},pageNumber=${requestList.number+1})}">&raquo;</a>
                         </li>
                     </ul>
                 </td>

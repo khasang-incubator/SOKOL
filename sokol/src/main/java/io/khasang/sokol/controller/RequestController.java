@@ -45,15 +45,12 @@ public class RequestController {
     RequestService requestService;
 
     @GetMapping("/list")
-    public String requestList(Model model,
-                              @PageableDefault(sort = "id", size = 5) Pageable pageable,
-                              @RequestParam(value = "pageNumber", defaultValue = "0") Integer pageNumber) {
-        pageable = new PageRequest(pageNumber, 5);
-        Page<Request> pageRequestList = requestRepository.findAll(pageable);
-        //model.addAttribute("requestList", pageRequestList.getContent());
+    public String requestList(Model model) {
+        Page<Request> pageRequestList = requestRepository.findAll(new PageRequest(0, 5, new Sort(Sort.Direction.ASC, "id")));
         model.addAttribute("requestList", pageRequestList);
         model.addAttribute("imgBy", "sort-up");
         model.addAttribute("sortBy", "id");
+        model.addAttribute("sortByNext", "id");
         model.addAttribute("headerTitle", REQUEST_LIST_HEADER_TITLE_LIST);
         int totalPages = pageRequestList.getTotalPages();
         if (totalPages > 0) {
@@ -65,35 +62,56 @@ public class RequestController {
         return "requestList";
     }
 
-/*    @GetMapping("/list")
-    public String requestList(Model model, @RequestParam("page") Optional<Integer> page) {
-        Pageable pageable
-        page.ifPresent(p -> currentPage = p);
-        Page<Request> pageRequestList = requestRepository. ..findAll(PageRequest.of(currentPage - 1, 5));
-        model.addAttribute("requestList", pageRequestList.getContent());
-        model.addAttribute("imgBy", "sort-up");
-        model.addAttribute("sortBy", "id");
-        model.addAttribute("headerTitle", REQUEST_LIST_HEADER_TITLE_LIST);
-        return "requestList";
-    }*/
-
-
     @GetMapping("/listSort")
-    public String requestListSort(Model model, @RequestParam("imgBy") String imgBy, @RequestParam("sortBy") String sortBy) {
-        Page<Request> pageRequestList;
-        if (imgBy.equals("sort-up")) {
-            pageRequestList = requestRepository.findAll(new PageRequest(0, 10, new Sort(Sort.Direction.DESC, sortBy)));
-            imgBy = "sort-down";
+    public String requestListSort(Model model,
+                                  @RequestParam("imgBy") String imgBy,
+                                  @RequestParam("sortBy") String sortBy,
+                                  @RequestParam("sortByNext") String sortByNext) {
+        Sort.Direction direction;
+        if (sortBy.equals(sortByNext)) {
+            if (imgBy.equals("sort-up")) {
+                direction = Sort.Direction.DESC;
+                imgBy = "sort-down";
+            } else {
+                imgBy = "sort-up";
+                direction = Sort.Direction.ASC;
+            }
         } else {
+            direction = Sort.Direction.ASC;
             imgBy = "sort-up";
-            pageRequestList = requestRepository.findAll(new PageRequest(0, 10, new Sort(Sort.Direction.ASC, sortBy)));
+            sortBy = sortByNext;
         }
+        Page<Request> pageRequestList = requestRepository.findAll(new PageRequest(0, 5, new Sort(direction, sortByNext)));
+        model.addAttribute("imgBy", imgBy);
+        model.addAttribute("sortBy", sortBy);
+        model.addAttribute("sortByNext", sortByNext);
+        model.addAttribute("requestList", pageRequestList);
+        model.addAttribute("headerTitle", REQUEST_LIST_HEADER_TITLE_LIST);
+        int totalPages = pageRequestList.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+        return "requestList";
+    }
+
+    @GetMapping("/listPagination")
+    public String requestListPagination(Model model,
+                                        @RequestParam("imgBy") String imgBy,
+                                        @RequestParam("sortBy") String sortBy,
+                                        @RequestParam(value = "pageNumber") Integer pageNumber,
+                                        @RequestParam(value = "pageNumbers") List<Integer> pageNumbers) {
+        Page<Request> pageRequestList = requestRepository.findAll(new PageRequest(pageNumber, 5));
         model.addAttribute("imgBy", imgBy);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("requestList", pageRequestList);
+        model.addAttribute("pageNumbers", pageNumbers);
         model.addAttribute("headerTitle", REQUEST_LIST_HEADER_TITLE_LIST);
         return "requestList";
     }
+
 
     @GetMapping("/add")
     public String requestForm(Model model) {
