@@ -6,7 +6,7 @@
     <div th:replace="fragments/header :: header-css">
     </div>
 </head>
-<body>
+<body class="sokol-list-view">
 
 <div th:replace="fragments/header :: header"/>
 
@@ -17,17 +17,6 @@
             <form th:action="@{/login}" method="post">
                 <fieldset>
                     <h1>Please Sign In</h1>
-
-                    <div th:if="${param.error}">
-                        <div class="alert alert-danger">
-                            Invalid username and password.
-                        </div>
-                    </div>
-                    <div th:if="${param.logout}">
-                        <div class="alert alert-info">
-                            You have been logged out.
-                        </div>
-                    </div>
 
                     <div class="form-group">
                         <input type="text" name="username" id="username" class="form-control input-lg"
@@ -42,9 +31,19 @@
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign In"/>
                         </div>
+
                         <div class="col-xs-6 col-sm-6 col-md-6">
                         </div>
                     </div>
+
+                    <div th:if="${param.error}">
+                        Invalid username and password.
+                    </div>
+
+                    <div th:if="${param.logout}">
+                       You have been logged out.
+                    </div>
+
                 </fieldset>
             </form>
         </div>
