@@ -1,4 +1,6 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <div th:fragment="header-css">
         <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
@@ -16,52 +18,112 @@
     </div>
 </head>
 <body>
- <div th:fragment="header">
+<div th:fragment="header">
     <!-- this is header -->
     <nav class="navbar navbar-default navbar-static-top topnav header" role="navigation">
         <div class="container topnav">
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#">Регистрация</a>
-                    </li>
-                    <li>
-                        <a href="#">Вход</a>
-                    </li>
-                    <li class="profile-photo">
-                        <img th:src="@{/img/nophoto.png}"/>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">user
-                            <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">my_profile</a></li>
-                            <li><a href="#">help</a></li>
-                            <li><a href="#">exit</a></li>
-                        </ul>
-                    </li>
-                </ul>
                 <a class="navbar-brand" href="#"><img th:src="@{/img/Logo1.png}"/></a>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/">Главная</a></li>
-                        <li><a th:href="@{/admin/request/list}">Запросы</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Настройки<b
-                                    class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a th:href="@{/admin/department/list}">Департатменты</a></li>
-                                <li><a href="#">Пользователи</a></li>
-                                <li><a th:href="@{/admin/requestType/list}">Типы запросов</a></li>
-                            </ul>
-                        </li>
+
+                <div sec:authorize="isAnonymous()">
+                    <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">EN</a></li>
                         <li><a href="#">RU</a></li>
+                        <li>
+                            <a href="#">Регистрация</a>
+                        </li>
+                        <li>
+                            <a href="#">Вход</a>
+                        </li>
                     </ul>
                 </div>
+
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/">Главная</a></li>
+                            <li><a th:href="@{/admin/request/list}">Запросы</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Настройки<b
+                                        class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a th:href="@{/admin/department/list}">Департатменты</a></li>
+                                    <li><a href="#">Пользователи</a></li>
+                                    <li><a th:href="@{/admin/requestType/list}">Типы запросов</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">EN</a></li>
+                            <li><a href="#">RU</a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="#">Регистрация</a>
+                            </li>
+                            <li>
+                                <a href="#">Вход</a>
+                            </li>
+
+                            <li class="profile-photo">
+                                <img th:src="@{/img/nophoto.png}"/>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">user
+                                    <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">my_profile</a></li>
+                                    <li><a href="#">help</a></li>
+                                    <li><a href="#">exit</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div sec:authorize="hasRole('ROLE_USER')">
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/">Главная</a></li>
+                            <li><a th:href="@{/admin/request/list}">Запросы</a></li>
+                             <li><a href="#">EN</a></li>
+                            <li><a href="#">RU</a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="profile-photo">
+                                <img th:src="@{/img/nophoto.png}"/>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">user
+                                    <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">my_profile</a></li>
+                                    <li><a href="#">help</a></li>
+                                    <li><a href="#">exit</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
-            <!-- /.navbar-collapse -->
         </div>
     </nav>
     <div class="info-line">
@@ -76,6 +138,6 @@
             </ul>
         </div>
     </div>
- </div>
+</div>
 </body>
 </html>
