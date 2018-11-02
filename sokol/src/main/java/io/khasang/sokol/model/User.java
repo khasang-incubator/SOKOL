@@ -30,6 +30,7 @@ import javax.validation.constraints.Size;
 import java.lang.annotation.Documented;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Builder
 @Entity
@@ -44,18 +45,17 @@ public class User extends AbstractBaseEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
-
-    @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "role")
-    @ElementCollection(fetch = FetchType.EAGER)
-
-    private List<Roles> authorities;
-    private String password;
+    private long id;
 
     @Size(min = 3, max = 20)
     private String username;
+
+    private String password;
+
+    @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Roles> authorities;
 
     private boolean accountNonExpired;
     private boolean accountNonLocked;
