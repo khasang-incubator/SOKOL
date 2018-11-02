@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -14,12 +15,19 @@ import javax.validation.constraints.NotNull;
 import java.util.Collections;
 
 
+/*
 @Service
 public class UserService implements UserDetailsService {
 
-    @Autowired
+*/
+/*    @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;*//*
+
+
+*/
 /*    @PostConstruct
     public void init() {
         if (!(userRepository.findByUsername("username") == null)) {
@@ -34,9 +42,11 @@ public class UserService implements UserDetailsService {
                     .build()
             );
         }
-    }*/
+    }*//*
+
 
     public UserDetails loadUserByUsername(@NotNull String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username);
     }
 }
+*/
