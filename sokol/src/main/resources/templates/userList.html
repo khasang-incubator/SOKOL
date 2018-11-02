@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User List</title>
+
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body class="sokol-list-view">
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <div class="table-header">
+        <!--НОВЫЙ-->
+        <a th:href="@{/admin/user/add}" class="create-btn btn-danger">НОВЫЙ </a>
+    </div>
+    <div class="table table-wrapper">
+        <table class="list-table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>ФИО</th>
+                <th>Логин</th>
+                <th>Пароль</th>
+                <th>Удалить</th><!--УДАЛИТЬ-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${userList}">
+                <td th:text="${user.id}" th:name="id"></td>
+                <td>
+                    <a th:title="Редактирование"
+                       th:href="@{/admin/user/edit/{id}(id=${user.id})}"
+                       th:text="${user.username}">
+                    </a>
+                </td>
+
+                <td th:text="${user.fio}">
+                </td>
+
+                <td th:text="${user.password}">
+                </td>
+
+                <td class="del-cell">
+                    <a class="del-btn" th:href="@{/admin/user/delete/{id}(id=${user.id})}"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- /.container -->
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
