@@ -40,6 +40,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 //@PasswordMatcher(payload=Severity.WARNING.class)
 public class User extends AbstractBaseEntity implements UserDetails {
 
