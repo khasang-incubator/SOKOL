@@ -32,7 +32,8 @@ public class RegistrationController {
         }
 
         user.setEnabled(true);
-        user.setAuthorities(Collections.singleton(Roles.USER));
+        user.setAuthorities(Collections.singleton(Roles.ROLE_USER));
+      //  user.setAuthorities(Collections.singleton(Roles.USER));
         userRepository.save(user);
 
         return "redirect:/login";
