@@ -39,7 +39,7 @@
                     </ul>
                 </div>
 
-                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <div sec:authorize="hasRole('ADMIN')">
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li><a href="/">Главная</a></li>
@@ -81,7 +81,7 @@
                     </div>
                 </div>
 
-                <div sec:authorize="hasRole('ROLE_USER')">
+                <div sec:authorize="hasRole('USER')">
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li><a href="/">Главная</a></li>
