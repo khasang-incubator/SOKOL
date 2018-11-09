@@ -2,6 +2,7 @@
 // https://memorynotfound.com/spring-boot-spring-security-thymeleaf-form-login-example/
 //https://github.com/drucoder/sweater https://www.youtube.com/watch?v=WDlifgLS8iQ доступ к приложению через проверку в
 // пользователей в БД через jdbc
+// почему не работает hasRole http://programmerz.ru/questions/17221/spring-security-hasrole-not-working-question
 
 package io.khasang.sokol.config;
 
@@ -25,8 +26,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 /*    @Autowired
     private UserService userService;
+    */
 
-    @Autowired
+/*    @Autowired
     private PasswordEncoder passwordEncoder;*/
 
     @Qualifier("dataSource")
@@ -59,7 +61,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
-//.and().formLogin().defaultSuccessUrl("/", false);
 /*    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
