@@ -30,7 +30,7 @@ public class Department {
     private Long id;
 
     @NotNull
-    private String title;
+    private String name;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE)
     private List<User> users;

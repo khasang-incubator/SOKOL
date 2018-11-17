@@ -21,22 +21,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
-public class User {
+public class Comment {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private String username;
-
-    private String password;
-
-    private String fullName;
+    @NotNull
+    private String name;
 
     @ManyToOne
-    private Department department;
-}
+    private User user;
 
+    @ManyToOne
+    private Request request;
+
+}

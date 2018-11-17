@@ -29,14 +29,9 @@ public class Request {
     @GeneratedValue
     private long id;
 
-    private String title;
-
-    private String description;
-
-    private String createdBy;
+    private String text;
 
     @ManyToOne
-    @JoinColumn(name = "ASSIGNED_TO")
     private User assignedTo;
 
     private Date assignedDate;

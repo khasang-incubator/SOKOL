@@ -17,10 +17,8 @@ package ru.sokol.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -30,10 +28,11 @@ public class RequestType {
     @GeneratedValue
     private Long id;
 
-    private String title;
-
-    private String description;
+    private String name;
 
     @ManyToOne
     private Department department;
+
+    @OneToMany(mappedBy = "requestType", cascade = CascadeType.REMOVE)
+    private List<Request> requests;
 }

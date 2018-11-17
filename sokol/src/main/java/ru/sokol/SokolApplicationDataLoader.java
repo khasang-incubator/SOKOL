@@ -1,10 +1,10 @@
 package ru.sokol;
-
-import io.khasang.sokol.model.RequestStatus;
-import io.khasang.sokol.repository.RequestStatusRepository;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.stereotype.Component;
+//
+//import io.khasang.sokol.model.RequestStatus;
+//import io.khasang.sokol.repository.RequestStatusRepository;
+//import org.springframework.boot.ApplicationArguments;
+//import org.springframework.boot.ApplicationRunner;
+//import org.springframework.stereotype.Component;
 //
 //@Component
 //public class SokolApplicationDataLoader implements ApplicationRunner {
