@@ -17,8 +17,14 @@ package ru.sokol.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.sokol.model.Department;
 import ru.sokol.repository.DepartmentRepository;
 
+import java.util.List;
+
+/**
+ * @author Mikhail Bedritskiy
+ */
 @Service
 public class DepartmentService {
 
@@ -29,4 +35,12 @@ public class DepartmentService {
         this.departmentRepository = departmentRepository;
     }
 
+    public List<Department> findAllDepartments() {
+        return departmentRepository.findAll();
+    }
+
+    public Department createDepartment(Department department) {
+        departmentRepository.save(department);
+        return department;
+    }
 }

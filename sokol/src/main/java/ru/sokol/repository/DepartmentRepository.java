@@ -20,5 +20,8 @@ import org.springframework.stereotype.Repository;
 import ru.sokol.model.Department;
 
 @Repository
-public interface DepartmentRepository extends JpaRepository<Department, Long> {
+public interface DepartmentRepository extends JpaRepository<Department, Integer> {
+
+    Department findFirstByOrderByIdDesc();
+
 }
