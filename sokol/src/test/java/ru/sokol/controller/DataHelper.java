@@ -42,16 +42,6 @@ class DataHelper {
         departmentRepository.deleteAll();
     }
 
-    //    Department createDepartmentByJsonContent(String content, int campaignId) {
-//        try {
-//            mockMvc.perform(post("/api/campaigns/" + campaignId + "/promotions/")
-//                    .content(content)
-//                    .contentType(MediaType.APPLICATION_JSON));
-//        } catch (Exception ex) {
-//            throw new RuntimeException("Unable to create promotion", ex);
-//        }
-//        return promotionRepository.findFirstByOrderByIdDesc();
-//    }
     Department createDepartment(String jsonFile) {
         try {
             String jsonString = readFileAsString(jsonFile);
@@ -63,4 +53,5 @@ class DataHelper {
         }
         return departmentRepository.findFirstByOrderByIdDesc();
     }
+
 }

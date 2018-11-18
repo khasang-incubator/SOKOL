@@ -1,15 +1,20 @@
 package ru.sokol.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import ru.sokol.model.Department;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import ru.sokol.dto.department.CreateDepartmentRequest;
+import ru.sokol.dto.department.DepartmentDto;
+import ru.sokol.dto.department.UpdateDepartmentRequest;
 import ru.sokol.service.DepartmentService;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.util.List;
 
+@Validated
 @RestController
 public class DepartmentController {
 
@@ -20,12 +25,32 @@ public class DepartmentController {
     }
 
     @GetMapping("/api/departments")
-    public List<Department> getDepartments() {
-        return departmentService.findAllDepartments();
+    public ResponseEntity<List<DepartmentDto>> getAllDepartments() {
+        List<DepartmentDto> result = departmentService.findAllDepartments();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/api/departments/{id}")
+    public ResponseEntity<DepartmentDto> getDepartment(@Positive @PathVariable("id") Integer departmentId) {
+        DepartmentDto result = departmentService.findDepartmentById(departmentId);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PostMapping("/api/departments")
-    public Department createDepartment(@Valid @RequestBody Department department) {
-        return departmentService.createDepartment(department);
+    public ResponseEntity<DepartmentDto> createDepartment(@Valid @NotNull @RequestBody CreateDepartmentRequest request) {
+        DepartmentDto result = departmentService.createDepartment(request);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/api/departments")
+    public ResponseEntity<DepartmentDto> updateDepartment(@Valid @NotNull @RequestBody UpdateDepartmentRequest request) {
+        DepartmentDto result = departmentService.updateDepartment(request);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/api/departments/{id}")
+    public ResponseEntity deleteDepartment(@Positive @PathVariable("id") Integer departmentId) {
+        departmentService.deleteDepartmentById(departmentId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
