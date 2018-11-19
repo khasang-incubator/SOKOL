@@ -15,7 +15,6 @@ import java.nio.file.Files;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 /**
- * @author Andrey Burov
  * @author Mikhail Beditskiy
  */
 @Setter
