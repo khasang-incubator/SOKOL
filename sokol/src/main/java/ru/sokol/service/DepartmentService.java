@@ -65,7 +65,7 @@ public class DepartmentService {
         return convert(department);
     }
 
-    private Department findById(Integer departmentId) {
+    Department findById(Integer departmentId) {
         return departmentRepository.findById(departmentId)
                 .orElseThrow(() -> new EntityNotFoundException("Department was not found by id = " + departmentId));
     }
