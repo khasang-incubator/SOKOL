@@ -1,4 +1,4 @@
-package ru.sokol;
+//package ru.sokol;
 //
 //import io.khasang.sokol.model.RequestStatus;
 //import io.khasang.sokol.repository.RequestStatusRepository;

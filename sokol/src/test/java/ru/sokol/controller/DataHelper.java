@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.sokol.model.Department;
 import ru.sokol.repository.DepartmentRepository;
+import ru.sokol.repository.UserRepository;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,11 +23,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 class DataHelper {
 
     private final DepartmentRepository departmentRepository;
+    private final UserRepository userRepository;
     private MockMvc mockMvc;
 
     @Autowired
-    DataHelper(DepartmentRepository departmentRepository) {
+    DataHelper(DepartmentRepository departmentRepository, UserRepository userRepository) {
         this.departmentRepository = departmentRepository;
+        this.userRepository = userRepository;
     }
 
     static String readFileAsString(String filename) throws IOException {
@@ -39,6 +42,10 @@ class DataHelper {
 
     void deleteAllDepartments() {
         departmentRepository.deleteAll();
+    }
+
+    void deleteAllUsers() {
+        userRepository.deleteAll();
     }
 
     Department createDepartment(String jsonFile) {

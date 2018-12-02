@@ -51,7 +51,6 @@ public class DepartmentControllerTest {
         assertEquals(0, dataHelper.countDepartments());
         mockMvc.perform(get("/api/departments/")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
         List<Department> departments = Arrays.asList(
@@ -61,7 +60,6 @@ public class DepartmentControllerTest {
         assertEquals(numberOfDepartments, dataHelper.countDepartments());
         mockMvc.perform(get("/api/departments/")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(numberOfDepartments)))
                 .andExpect(jsonPath("$[0].id", equalTo(departments.get(0).getId())))
