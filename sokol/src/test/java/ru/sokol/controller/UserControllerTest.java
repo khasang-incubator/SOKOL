@@ -1,5 +1,6 @@
 package ru.sokol.controller;
 
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,8 +14,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -39,14 +41,19 @@ public class UserControllerTest {
 
     @Test
     public void createUser() throws Exception {
+        assertEquals(0, dataHelper.countDepartments());
+        assertEquals(0, dataHelper.countUsers());
         int departmentId = dataHelper.createDepartment("UserControllerTest/createDepartment.json").getId();
         String content = DataHelper.readFileAsString("UserControllerTest/createUser.json")
                 .replace("111111", String.valueOf(departmentId));
         mockMvc.perform(post("/api/users")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content))
-//                .andExpect(jsonPath("$.id"))
-                .andDo(print());
+                .andExpect(jsonPath("id", Matchers.any(Integer.class)))
+                .andExpect(jsonPath("username", Matchers.equalTo("TEST USER NAME")))
+                .andExpect(jsonPath("fullName", Matchers.equalTo("TEST FULL USER NAME")));
+        assertEquals(1, dataHelper.countDepartments());
+        assertEquals(1, dataHelper.countUsers());
     }
 
     @After

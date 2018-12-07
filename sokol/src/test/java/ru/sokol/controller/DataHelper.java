@@ -40,6 +40,10 @@ class DataHelper {
         return departmentRepository.count();
     }
 
+    long countUsers() {
+        return userRepository.count();
+    }
+
     void deleteAllDepartments() {
         departmentRepository.deleteAll();
     }

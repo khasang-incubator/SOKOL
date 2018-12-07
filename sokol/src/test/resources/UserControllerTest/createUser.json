@@ -1,5 +1,5 @@
 {
-  "userName": "TEST USER NAME",
-  "fullName": "TEST FULL USER",
+  "username": "TEST USER NAME",
+  "fullName": "TEST FULL USER NAME",
   "departmentId": 111111
 }
