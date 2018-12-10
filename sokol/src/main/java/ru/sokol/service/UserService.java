@@ -28,6 +28,7 @@ public class UserService {
         UserDto result = new UserDto();
         result.setUsername(user.getUsername());
         result.setFullName(user.getFullName());
+        result.setId(user.getId());
         return  result;
     }
 

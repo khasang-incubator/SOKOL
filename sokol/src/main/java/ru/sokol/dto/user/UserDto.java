@@ -11,7 +11,7 @@ public class UserDto {
 
     @NotNull
     @Positive
-    private Long id;
+    private Integer id;
 
     @NotBlank
     private String username;
