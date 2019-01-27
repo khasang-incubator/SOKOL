@@ -30,6 +30,11 @@ public class DepartmentController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping("/")
+    public String Hello() {
+        return "Hello";
+    }
+
     @GetMapping("/api/departments/{id}")
     public ResponseEntity<DepartmentDto> getDepartment(@Positive @PathVariable("id") Integer departmentId) {
         DepartmentDto result = departmentService.findDepartmentById(departmentId);
