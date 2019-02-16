@@ -1,0 +1,18 @@
+ .navbar-default {
+    background-image: none;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0; 
+   /* background-color: #ffffff !important; ; */
+} 
+
+.navbar-brand-sokolit {
+   font-family: Arial;  
+   font-size: 10pt;   
+}
+
+.navbar-sokolit {
+    height: 40pt; 
+   margin-right: 0px;
+   background-color: #3c3c3c; 
+}

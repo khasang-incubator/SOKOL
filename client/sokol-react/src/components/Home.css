@@ -1,0 +1,52 @@
+ .navbar-default {
+    background-image: none;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0; 
+   /* background-color: #ffffff !important; ; */
+} 
+
+.jumbotron {
+   margin-top: 10pt;
+   margin-bottom: 15pt;
+   background-color: #e1def0; 
+}
+
+.grid {
+    background-image: url(/img/sky.jpg);
+    /* border: none;
+    border-radius: 0;
+    margin-bottom: 0;  */
+/* background-color: #d82f2f !important; */
+}
+
+.t1 {
+   /* margin: 0pt; */
+   margin-top: 0pt;
+   /* margin-left: -44pt; */
+   margin-right: -44pt;
+   
+   /* margin-left: -44pt;
+   width: 120% */
+}
+
+.navbar-tt {
+   margin-top: -30pt;
+   margin-left: -44pt;
+   margin-right: -44pt;
+   background-color: #e1def0; 
+   /* background-color: #301b97;  */
+}
+
+.bt {
+   width: 80pt;
+   height: 28pt;
+   margin-top: 2pt;
+   margin-left: 35pt;
+}
+
+.search {
+margin-right: 44pt;
+margin-top: 4pt;
+
+}

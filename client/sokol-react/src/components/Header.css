@@ -1,0 +1,36 @@
+ .navbar-default {
+    background-image: none;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0; 
+   /* background-color: #ffffff !important; ; */
+} 
+
+.navbar-sokol {
+   background-color: #ffffff; 
+}
+
+.navbar-department {
+   height: 40pt;
+   margin-right: 0px;
+   background-color: #3c3c3c; 
+}
+
+.navbar-brand-sokol {
+    margin-top: -5px;
+} 
+
+.navbar-brand-department {
+    margin-top: -2px;
+}
+
+.nophoto {
+   margin-right: 35px;
+}
+
+.wing {
+   margin-top: -10px;
+   margin-bottom: -10px;
+   margin-right: 30px;
+}
+
