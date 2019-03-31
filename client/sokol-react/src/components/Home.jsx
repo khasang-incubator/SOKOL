@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import { Jumbotron, Grid, Row, Col, Image, Button, Table, Navbar, Nav, Form, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import './Home.css';
-
+import Ind from './coin-table/index';
+import data from './data/post.json';
 export default class Home extends Component {
     render() {
         return (
@@ -25,7 +26,8 @@ export default class Home extends Component {
 
 
                         </Navbar>
-
+                        <Ind data={data} />
+                        {/*
                         <Table striped className="t1">
                             <thead>
                                 <tr>
@@ -36,18 +38,28 @@ export default class Home extends Component {
                                     <th>Table heading</th>
                                     <th>Table heading</th>
                                     <th>Table heading</th>
-                                    {/* <th>Table heading</th> */}
+                                    {/* <th>Table heading</th> 
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                {
+                                    props.data.map(row => (
+                                        <tr>
+                                            <td>{row.id}</td>
+                                            <td>{row.name}</td>
+                                            <td>{row.fullname}</td>
+                                        </tr>
+                                    ))
+                                }
+
+                                {/*    <tr>
                                     <td>1</td>
                                     <td>Денис отдыхает в Мексике</td>
                                     <td>Миха живет в Краснодаре</td>
                                     <td>Андрей просто мерзнет</td>
                                     <td>Table cell</td>
                                     <td>Table cell</td>
-                                    {/* <td>Table cell</td> */}
+                                    {/* <td>Table cell</td> 
                                     <td>Table cell</td>
                                 </tr>
                                 <tr>
@@ -105,7 +117,7 @@ export default class Home extends Component {
                                     <td>Table cell</td>
                                 </tr>
                             </tbody>
-                        </Table>
+                        </Table>*/}
                     </Jumbotron>
                     {/* <Link to="/about">
                 <Button bsStyle="primary">About</Button>
