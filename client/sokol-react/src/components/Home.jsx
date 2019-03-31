@@ -9,65 +9,65 @@ export default class Home extends Component {
             <div className="grid">
 
                 <Grid>
-                <Jumbotron className="jumbotron">
+                    <Jumbotron className="jumbotron">
                         <Navbar className="navbar-tt">
                             <Link to="/about">
                                 <Button bsStyle="danger" className="bt">Новый</Button>
                             </Link>
                             <Nav pullRight>
                                 <Form inline className="search">
-                                <FormGroup controlId="formInlineName">
-                                    <FormControl type="text" placeholder="Поиск" />
-                                </FormGroup>{' '}
-                                <Button type="submit">Найти</Button>
-                            </Form>
+                                    <FormGroup controlId="formInlineName">
+                                        <FormControl type="text" placeholder="Поиск" />
+                                    </FormGroup>{' '}
+                                    <Button type="submit">Найти</Button>
+                                </Form>
                             </Nav>
-                            
-                            
+
+
                         </Navbar>
-                  
+
                         <Table striped className="t1">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Table heading</th>
-                                <th>Table heading</th>
-                                <th>Table heading</th>
-                                <th>Table heading</th>
-                                <th>Table heading</th>
-                                <th>Table heading</th>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Table heading</th>
+                                    <th>Table heading</th>
+                                    <th>Table heading</th>
+                                    <th>Table heading</th>
+                                    <th>Table heading</th>
+                                    <th>Table heading</th>
                                     {/* <th>Table heading</th> */}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Денис отдыхает в Мексике</td>
-                                <td>Миха живет в Краснодаре</td>
-                                <td>Андрей просто мерзнет</td>
-                                <td>Table cell</td>
-                                <td>Table cell</td>
-                                {/* <td>Table cell</td> */}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Денис отдыхает в Мексике</td>
+                                    <td>Миха живет в Краснодаре</td>
+                                    <td>Андрей просто мерзнет</td>
                                     <td>Table cell</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Table cell</td>
-                                <td>Table cell</td>
-                                <td>Table cell</td>
-                                <td>Table cell</td>
-                                <td>Table cell</td>
-                                <td>Table cell</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Table cell</td>
-                                <td>Table cell</td>
-                                <td>Table cell</td>
-                                <td>Table cell</td>
-                                <td>Table cell</td>
-                                <td>Table cell</td>
-                            </tr>
+                                    <td>Table cell</td>
+                                    {/* <td>Table cell</td> */}
+                                    <td>Table cell</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Table cell</td>
+                                    <td>Table cell</td>
+                                    <td>Table cell</td>
+                                    <td>Table cell</td>
+                                    <td>Table cell</td>
+                                    <td>Table cell</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Table cell</td>
+                                    <td>Table cell</td>
+                                    <td>Table cell</td>
+                                    <td>Table cell</td>
+                                    <td>Table cell</td>
+                                    <td>Table cell</td>
+                                </tr>
                                 <tr>
                                     <td>4</td>
                                     <td>Table cell</td>
@@ -104,13 +104,13 @@ export default class Home extends Component {
                                     <td>Table cell</td>
                                     <td>Table cell</td>
                                 </tr>
-                        </tbody>
-                    </Table>
-                </Jumbotron>
-                {/* <Link to="/about">
+                            </tbody>
+                        </Table>
+                    </Jumbotron>
+                    {/* <Link to="/about">
                 <Button bsStyle="primary">About</Button>
                 </Link> */}
-            </Grid>
+                </Grid>
             </div>
         )
     }
