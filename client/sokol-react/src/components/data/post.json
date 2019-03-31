@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "name": "Безопасность",
+        "description": "Turubchuk"
+    },
+    {
+        "id": 2,
+        "name": "Информационные технологии",
+        "description": "Kuznecov"
+    }, 
+    {
+        "id": 3,
+        "name": "Иврит",
+        "description": "Bedritsky"
+    }
+]
